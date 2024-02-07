@@ -1,19 +1,10 @@
-# chat-based-financial-gpt
+# Viehub
 
 # description
-
-a chat based financial gpt services
 
 # features
 
 this project has the following features:
-
-- ai chat
-- sharing ai chat
-- drag and drop canvas
-- explore pages
-- authentication and authorization
-- billing, and subscription
 
 # project structures
 
