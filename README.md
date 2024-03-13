@@ -1,7 +1,3 @@
-Sure, here's the updated README without the Docker requirements, focusing on how to run the project with Poetry for the backend and npm for the client-side development.
-
----
-
 # Viehub
 
 Welcome to Viehub! This project combines cutting-edge server and client technologies to deliver an exceptional web application experience. Dive into our comprehensive guide below to get started with development, production setup, and contributing to Viehub.
