@@ -28,7 +28,7 @@ from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI(
     title="Vie Hub",
     description="""
-    Auth routes here are just for debugging
+    Routes here are just for debugging
         """,
 )
 
