@@ -1,0 +1,1 @@
+available scripts to be used on poetry run <scriptname>
