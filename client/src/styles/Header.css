@@ -1,25 +1,26 @@
 .header {
-    height: 50px;
+    height: 44px;
     overflow: hidden;
     /* border-radius: px; */
     background-color: #ffffff;
-    padding: 5px;
+    
     display: flex;
     justify-content: space-between;
     align-items:baseline; /* To vertically center the logo and nav */
   }
   
-  .logo {
-    height: auto; 
-    width: auto;
-    padding: 10px;
+  .logo { 
+    width: 180px;
+    padding: 7px 10px px px;
     margin-left: 80px;
+    margin-left:240px ;
   }
   
   .nav-links {
     display: flex;
-    gap: 20px;
-    margin-right:50% ;
+    gap: 35px;
+    margin-right:25% ;
+
   }
   /* .right{
     margin-left: 00px;
@@ -40,7 +41,8 @@
   .search-bar {
     display: flex;
     align-items: center;
-    margin-right: 100px;
+    margin-right: 200px;
+    gap: 25px;
   }
   
   .search-input {

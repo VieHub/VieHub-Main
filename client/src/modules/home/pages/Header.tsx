@@ -1,11 +1,12 @@
 import React from 'react';
+import logoImage from '../../../assets/Logo.png';
 
 
 const Header = () => {
   return (
     <header className="header">
       <div className="logo-container">
-        <img src=".../assets/Logo.png" alt="Vie Hub Logo" className="logo" />
+        <img src={logoImage} alt="Vie Hub Logo" className="logo" />
       </div>
       <nav className="nav-links">
         <a href="#">Home</a>

@@ -1,6 +1,7 @@
 // import useAuth from "@/hooks/Context";
 // import useAuth from "@/hooks/Context";
 import React, { useEffect, useState } from 'react';
+import Image from '../../../assets/image.jpeg';
 
 import Header from './Header';
 
@@ -34,8 +35,9 @@ const Dashboard = () => {
           <p className='desc'>Explore diverse industry competitions and
           tasks tailored for your skills. From Coding
           and Design to Writing and more, VieHub is 
-          your gateway to showcasing talent.</p>
-        
+          your gateway to showcasing talent.
+          </p>
+          <img src={Image} alt="image" className='image'/>
       </div>
     </div>
   );

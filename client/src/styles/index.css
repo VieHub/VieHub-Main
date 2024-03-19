@@ -8,31 +8,40 @@
 
 .content{
   background-color: #2B6777;
-  height: 340px;
+  height: 400px;
   width: 1920px;
+  
 }
 .tit{
   height: 100px;
-  width: 600px;
+  width: 570px;
   font-family: Arial, sans-serif;
   color: #ffffff;
   font-size: larger;
-  padding: 50px;
+  padding: 55px;
   margin-left: 200px;
-  letter-spacing: 2.5px;
+  letter-spacing: 3px;
   font-weight: bold;
 }
 
 .desc{
   height: 100px;
-  width: 530px;
+  width: 520px;
   margin: 0; 
-  padding: 18px;
-  margin-left: 235px;
+  padding: 45px;
+  margin-left: 210px;
   font-family: Arial, sans-serif;
   color: #ffffff;
-  letter-spacing: 2.8px;
+  letter-spacing: 3px;
   opacity: 0.85;
+}
+.image{
+  height: 320px;
+  width: 500px;
+  border-radius: 25px;
+  margin-left: 1200px;
+  margin-bottom: 300px;
+  
 }
 
 /* ===== general styling =====  */
