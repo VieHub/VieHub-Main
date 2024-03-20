@@ -1,0 +1,72 @@
+.header {
+    height: 44px;
+    overflow: hidden;
+    /* border-radius: px; */
+    background-color: #ffffff;
+    
+    display: flex;
+    justify-content: space-between;
+    align-items:baseline; /* To vertically center the logo and nav */
+  }
+  
+  .logo { 
+    width: 180px;
+    padding: 7px 10px px px;
+    margin-left: 80px;
+    margin-left:240px ;
+  }
+  
+  .nav-links {
+    display: flex;
+    gap: 35px;
+    margin-right:25% ;
+
+  }
+  /* .right{
+    margin-left: 00px;
+  } */
+  
+  .nav-links a {
+    color: #010101;
+    text-decoration: none;
+    transition: color 0.3s;
+    
+  }
+  
+  .nav-links a:hover {
+    color: #5f4646;
+  }
+  
+  
+  .search-bar {
+    display: flex;
+    align-items: center;
+    margin-right: 200px;
+    gap: 25px;
+  }
+  
+  .search-input {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-right: 10px;
+  }
+  
+  .signup-btn {
+    padding: 8px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #52AB98;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .signup-btn:hover {
+    background-color: darkgreen;
+  }
+  .colo{
+    background-color: #000;
+  }
+ 
