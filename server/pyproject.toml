@@ -9,6 +9,10 @@ readme = "README.md"
 python = "^3.10"
 fastapi = "^0.110.0"
 uvicorn = "^0.28.0"
+pydantic = "^2.6.4"
+requests = "^2.29"
+firebase-admin = "^6.5.0"
+pyrebase4 = "^4.7.1"
 
 
 [tool.pyright]
