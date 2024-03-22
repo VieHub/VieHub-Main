@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 from src.routes import (
-    users,
+    users,contests
 
 )
 
@@ -8,3 +8,5 @@ from src.routes import (
 router = APIRouter(prefix="/api")
 
 router.include_router(router=users.router)
+router.include_router(router=contests.router)
+

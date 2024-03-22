@@ -13,6 +13,8 @@ pydantic = "^2.6.4"
 requests = "^2.29"
 firebase-admin = "^6.5.0"
 pyrebase4 = "^4.7.1"
+python-dotenv = "^1.0.1"
+email-validator = "^2.1.1"
 
 
 [tool.pyright]
