@@ -6,43 +6,81 @@
 
 
 
-.content{
+.content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   background-color: #2B6777;
-  height: 400px;
+  height: 370px;
   width: 1920px;
-  
+  padding: 20px; /* Adjust padding as needed */
 }
-.tit{
-  height: 100px;
-  width: 570px;
+
+
+.left-content {
+  width: calc( 700px - 20px); /* Adjust width and padding as needed */
+  padding-right: 40px; /* Adjust padding as needed */
+  margin-left: 230px;
+}
+
+.right-content {
+  width: 900px; /* Adjust width and padding as needed */
+  margin-left:  200px;
+}
+
+.tit {
   font-family: Arial, sans-serif;
   color: #ffffff;
-  font-size: larger;
-  padding: 55px;
-  margin-left: 200px;
+  font-size:x-large;
   letter-spacing: 3px;
   font-weight: bold;
 }
 
-.desc{
-  height: 100px;
-  width: 520px;
-  margin: 0; 
-  padding: 45px;
-  margin-left: 210px;
+.desc {
   font-family: Arial, sans-serif;
   color: #ffffff;
   letter-spacing: 3px;
   opacity: 0.85;
+  font-size:large;
+  padding-top: 10px;
 }
-.image{
+
+.image {
   height: 320px;
-  width: 500px;
+  width: 60%; /* Ensure the image takes full width of its container */
   border-radius: 25px;
-  margin-left: 1200px;
-  margin-bottom: 300px;
-  
 }
+
+
+.cont{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff;
+  height: 390px;
+  width: 1920px;
+  padding: 20px;
+}
+
+.cont img {
+  width: 17%; /* Adjust the width of the image */
+  margin-right: 100px; /* Add some space between the image and the heading */
+  margin-left: 200px;
+}
+
+.cont h1 {
+  font-size: large;
+  font-weight: bold;
+  color: black;
+}
+
+.cont p {
+  font-size: medium;
+  margin-top: 10px; /* Adjust as needed */
+  padding-right: 100px;
+  color: black;
+}
+
 
 /* ===== general styling =====  */
 *::-webkit-scrollbar,
