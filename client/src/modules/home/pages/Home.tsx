@@ -1,4 +1,3 @@
-import React from "react";
 import Image from "../../../assets/image.jpeg";
 import SecondImage from "../../../assets/teamgoals.png";
 

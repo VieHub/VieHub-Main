@@ -17,7 +17,10 @@ const Dropdown = ({ children }: { children: React.ReactNode }) => {
           </li>
         ))}
         <li>
-          <button className="focus:bg-gray-200  w-full rounded-md bg-indigo-600 py-2 text-left text-white shadow hover:bg-indigo-700 ">
+          <button
+            className="signup-btn z-[1]p-2  "
+            style={{ backgroundColor: "#52ab98" }}
+          >
             Sign Up
           </button>
         </li>

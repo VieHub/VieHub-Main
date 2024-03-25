@@ -31,6 +31,23 @@
   transform-origin: bottom left;
 }
 
+.signup-btn {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #52ab98;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition:
+    background-color 0.3s,
+    transform 0.2s ease-out; /* Added transition for background color and transform */
+}
+
+.signup-btn:hover {
+  background-color: darkgreen;
+}
+
 /* Content and .cont container adjustments */
 .content,
 .cont {

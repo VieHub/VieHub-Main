@@ -38,7 +38,7 @@ const Header = () => {
           placeholder="Search"
           className="text-gray-900 placeholder-gray-500 border-gray-300 block rounded-md border py-2 pl-4 pr-3 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm"
         />
-        <button className="rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700">
+        <button className="signup-btn  px-4 py-2 text-sm font-medium text-white shadow-sm ">
           Sign Up
         </button>
       </div>
