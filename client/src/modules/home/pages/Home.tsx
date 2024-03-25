@@ -10,7 +10,7 @@ const Dashboard = () => {
       <Header />
       <div className="content flex max-w-full flex-wrap">
         <div className="left-content w-full p-4 md:flex-1">
-          <TypingAnimation text="Welcome to VieHub - Where Talent Meets Opportunity Discover Your Potential:" />
+          <TypingAnimation text="Welcome to VieHub - Where Talent Meets Opportunity Discover Your Potential" />
           <p className="desc">
             Explore diverse industry competitions and tasks tailored for your
             skills. From Coding and Design to Writing and more, VieHub is your
