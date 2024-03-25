@@ -5,7 +5,6 @@
     "module": "ESNext",
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "skipLibCheck": true,
-
     /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
@@ -13,13 +12,11 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-
     "paths": {
       "@/*": ["./src/*"]
     }
@@ -29,7 +26,12 @@
     "src/**/*.tsx",
     "src/**/*.vue",
     "src/modules/home/components/droppable.jsx",
-    "src/modules/home/components/draggable.jsx"
-, "src/modules/chart/components"  ],
-  "references": [{ "path": "./tsconfig.node.json" }]
+    "src/modules/home/components/draggable.jsx",
+    "src/modules/chart/components"
+  ],
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ]
 }
