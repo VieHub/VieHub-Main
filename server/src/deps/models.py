@@ -1,6 +1,6 @@
 from pydantic import BaseModel, Field, EmailStr
 from typing import List, Optional,Literal
-from datetime import datetime
+from datetime import date, datetime
 
 
 
@@ -56,7 +56,12 @@ class UserProfile(BaseModel):
     skills: List[str] = []
     description: Optional[str] = None
     role: str  # "host" or "participant"
-
+class ProjectSchema(BaseModel):
+    name: str = Field(..., description="The name of the project")
+    description: str = Field(..., description="A brief description of the project")
+    start_date: date = Field(..., description="Project start date")
+    end_date: date = Field(None, description="Project end date, optional")
+    # Add other fields as necessary
 class UserProfileUpdateSchema(BaseModel):
     name: Optional[str] = None
     skills: Optional[List[str]] = None
