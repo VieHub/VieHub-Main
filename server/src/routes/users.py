@@ -1,6 +1,6 @@
 from typing import Annotated
 from fastapi import APIRouter, Depends, HTTPException
-from src.deps.models import Contest, LoginSchema,SignUpSchema, UserModel, UserProfileUpdateSchema
+from src.deps.models import Contest, LoginSchema, ProjectSchema,SignUpSchema, UserModel, UserProfileUpdateSchema
 from fastapi.responses import JSONResponse
 from fastapi.exceptions import HTTPException
 from fastapi.requests import Request
@@ -108,9 +108,26 @@ async def update_user_profile(uid: str, update_data: UserProfileUpdateSchema):
     if not user_profile.exists:
         raise HTTPException(status_code=404, detail="User not found")
     
-    user_ref.update(update_data.dict(exclude_unset=True))
+    user_ref.update(update_data.model_dump(exclude_unset=True))
     return {"message": "User profile updated successfully"}
 
+
+@router.post('/user/{uid}/add-project', response_model=ProjectSchema)
+async def add_project_to_user(uid: str, project_data: ProjectSchema):
+    user_ref = db.collection('users').document(uid)
+    user_doc = user_ref.get()
+
+    if not user_doc.exists:
+        raise HTTPException(status_code=404, detail="User not found")
+
+    # Assuming user's projects are stored in an array field in their document
+    # If the user does not have a 'projects' field, it initializes as an empty list
+    projects = user_doc.to_dict().get('projects', [])
+    projects.append(project_data.model_dump())
+
+    user_ref.update({"projects": projects})
+
+    return {"message": "Project added successfully"}
 
 
 @router.post('/ping')

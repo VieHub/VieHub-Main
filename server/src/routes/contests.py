@@ -28,7 +28,7 @@ async def create_contest(contest: Contest, request: Request):
         raise HTTPException(status_code=403, detail="Only hosts can create contests")
 
     unique_id = str(uuid.uuid4())
-    contest_data = contest.dict()
+    contest_data = contest.model_dump()
     contest_data['host_uid'] = uid  # Set the host UID based on the authenticated user
 
     # Use the unique_id as the document ID in your database
@@ -57,7 +57,7 @@ async def update_contest(contest_id: str, contest_update: ContestUpdateSchema, r
     if contest.to_dict()['host_uid'] != uid:
         raise HTTPException(status_code=403, detail="Only the host can update the contest")
     
-    contest_ref.update(contest_update.dict(exclude_unset=True))
+    contest_ref.update(contest_update.model_dump(exclude_unset=True))
     return {"message": "Contest updated successfully"}
 
 
@@ -96,7 +96,7 @@ async def submit_to_contest(contest_id: str, submission: SubmissionSchema, reque
     participant_uid = decoded_token['uid']
 
     # Logic to submit to the contest
-    submission_data = submission.dict()
+    submission_data = submission.model_dump()
     submission_data['participant_uid'] = participant_uid
     db.collection('submissions').add(submission_data)
     
@@ -111,5 +111,5 @@ async def submit_feedback(contest_id: str, feedback: FeedbackSchema, request: Re
     Returns a success message upon successful feedback submission.
     """
     # FeedbackSchema includes fields like uid, rating, comments
-    db.collection('feedback').add(feedback.dict())
+    db.collection('feedback').add(feedback.model_dump())
     return {"message": "Feedback submitted successfully"}
