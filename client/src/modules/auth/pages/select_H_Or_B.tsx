@@ -23,7 +23,7 @@ function Select() {
               }`}
               onClick={() => handleOptionSelect("provider")}
             >
-              <div className="content">
+              <div className="">
                 <img
                   src="https://picsum.photos/id/237/200/300"
                   alt="Provider Logo"
@@ -41,7 +41,7 @@ function Select() {
               }`}
               onClick={() => handleOptionSelect("participant")}
             >
-              <div className="content">
+              <div className="">
                 <img
                   src="https://picsum.photos/id/237/200/300"
                   alt="Participant Logo"
