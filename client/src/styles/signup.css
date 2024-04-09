@@ -76,10 +76,11 @@
   }
   .custom-button-container {
     margin-top: 50px; /* Increased margin-top for better spacing */
+    margin-bottom: 10px;
 }
 
 .custom-button {
-    background-color: #4285f4;
+  background-color: #4285f4;
     color: white;
     font-size: 16px; /* Increased font size for better readability */
     font-weight: bold;

@@ -1,4 +1,4 @@
-.container {
+.container1 {
     width: 350px; /* Increased container width */
     margin: 90px auto;
     padding: 30px;
@@ -6,7 +6,7 @@
     border-radius: 20px;
     background-color: #ffffff;
     text-align: center;
-    height: 50vh;
+    height: 55vh;
   }
   
   .title {
@@ -43,11 +43,9 @@
     background-color: darkgreen;
   }
   
-  .custom-button-container {
-    margin-top: 50px; /* Increased margin-top for better spacing */
-  }
+ 
   
-  .custom-button {
+  .google-button {
     background-color: #4285f4;
     color: white;
     font-size: 16px; /* Increased font size for better readability */
@@ -60,11 +58,11 @@
     align-items: center;
   }
   
-  .custom-button:hover {
+  .google-button:hover {
     background-color: #2968cb; /* Darker shade on hover for better visual feedback */
   }
   
-  .custom-button:focus {
+  .google-button:focus {
     outline: none;
   }
   

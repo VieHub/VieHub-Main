@@ -68,16 +68,11 @@ const Signup: React.FC = () => {
           <div className="separator-text">or</div>
           <div className="separator-line"></div>
         </div>
-        <div className="px-6 sm:px-0">
-        <button type="button" className="custom-button">
+        <div >
+        <button className="custom-button">
             <svg
             
-            aria-hidden="true"
-            focusable="false"
-            data-prefix="fab"
-            data-icon="google"
-            role="img"
-            xmlns="http://www.w3.org/2000/svg"
+           
             viewBox="0 0 488 512"
             height="20"
             width="40"
