@@ -1,0 +1,91 @@
+.container {
+    width: 350px; /* Increased container width */
+    margin: 90px auto;
+    padding: 30px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    background-color: #ffffff;
+    text-align: center;
+    height: 50vh;
+  }
+  
+  .title {
+    font-size:larger;
+    font-weight: bold;
+    margin-bottom: 20px; /* Maintain consistent margin */
+  }
+  
+  .input-box {
+    margin-bottom: 15px; /* Adjusted margin for consistency */
+  }
+  
+  .input-box input {
+    width: 80%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+  }
+  
+  .login-button {
+    width: 50%;
+    padding: 10px;
+    border-radius: 60px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    background-color: green;
+    color: white;
+    border: none;
+    font-size: medium;
+  }
+  
+  .login-button:hover {
+    background-color: darkgreen;
+  }
+  
+  .custom-button-container {
+    margin-top: 50px; /* Increased margin-top for better spacing */
+  }
+  
+  .custom-button {
+    background-color: #4285f4;
+    color: white;
+    font-size: 16px; /* Increased font size for better readability */
+    font-weight: bold;
+    border: none;
+    border-radius: 60px;
+    padding: 12px 20px; /* Adjusted padding for better button size */
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+  }
+  
+  .custom-button:hover {
+    background-color: #2968cb; /* Darker shade on hover for better visual feedback */
+  }
+  
+  .custom-button:focus {
+    outline: none;
+  }
+  
+  .icon {
+    margin-right: 12px; /* Increased margin for better spacing between icon and text */
+  }
+  .separator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+  }
+  
+  .separator-line {
+    flex-grow: 1;
+    height: 1px;
+    background-color: #ccc;
+  }
+  
+  .separator-text {
+    margin: 0 10px;
+    color: #777;
+    font-weight: bold;
+  }

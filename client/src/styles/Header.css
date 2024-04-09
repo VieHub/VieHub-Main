@@ -44,6 +44,8 @@
     transform 0.2s ease-out; /* Added transition for background color and transform */
 }
 
+
+
 .signup-btn:hover {
   background-color: darkgreen;
 }
@@ -52,7 +54,7 @@
 .content,
 .cont {
   display: flex;
-  flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+  flex-wrap:nowrap; /* Allow items to wrap on smaller screens */
   justify-content: space-between;
   align-items: center;
   background-color: #2b6777;
@@ -68,6 +70,46 @@
   background-color: #ffffff;
 }
 
+.buttons{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end; /* Align items horizontally at center */
+  text-align: center;
+}
+.Host-btn,
+.participant-btn {
+  padding: 8px 20px;
+  width: 25%;
+  margin-top: 30px;
+  border: none;
+  border-radius: 5px;
+  background-color: #52AB98;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  margin-bottom: 20px; /* Add space between buttons */
+  margin-left: 30%;
+}
+.participant-btn {
+  margin-left: 20px; /* Add space between buttons */
+}
+@media (max-width: 768px) {
+  .buttons {
+    flex-direction: column; /* Stack buttons vertically on smaller screens */
+    align-items: center; /* Align items horizontally at center */
+  }
+
+  .Host-btn,
+  .participant-btn {
+    width: 50%; /* Make buttons full width on smaller screens */
+    margin-left: 0; /* Reset margin */
+  }
+
+  .participant-btn {
+    margin-left: 0;
+    margin-top: 10px; /* Add space between buttons */
+  }
+}
 /* Adjustments for text and images */
 .tit,
 .desc,
@@ -90,6 +132,17 @@
   letter-spacing: 3px;
   opacity: 0.85;
   padding-top: 10px;
+}
+.cont h1,
+.cont p {
+  color: #000000;
+  font-size: large;
+  letter-spacing: 3px;
+  opacity: 0.85;
+  padding-top: 35px;
+  padding-left: 50px;
+  width: 80%;
+  
 }
 
 /* Adjustments for images */

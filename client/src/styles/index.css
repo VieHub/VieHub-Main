@@ -1,4 +1,7 @@
 @import "Header.css";
+@import "signup.css";
+@import "Login.css";
+@import "Select_h_p.css";
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";

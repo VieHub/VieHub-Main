@@ -3,6 +3,8 @@ import Dropdown from "@/components/Dropdown";
 import { NAV_ITEMS } from "@/constants";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+
 
 const Header = () => {
   const navigate = useNavigate();
@@ -38,9 +40,11 @@ const Header = () => {
           placeholder="Search"
           className="text-gray-900 placeholder-gray-500 border-gray-300 block rounded-md border py-2 pl-4 pr-3 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm"
         />
+        <Link to="/select">
         <button className="signup-btn  px-4 py-2 text-sm font-medium text-white shadow-sm ">
-          Sign Up
+        Sign up
         </button>
+        </Link>
       </div>
 
       {/* Dropdown for mobile, aligned to the right */}
