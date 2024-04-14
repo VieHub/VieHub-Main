@@ -25,6 +25,11 @@ const Header = () => {
             <a
               key={item.name}
               href={`#${item.section}`}
+              onClick={() => {
+                if (item.name === "Home") {
+                  navigate("/");
+                }
+              }}
               className="nav-item hover:text-gray-300 cursor-pointer transition-colors duration-200 ease-in-out"
             >
               {item.name}
@@ -50,7 +55,7 @@ const Header = () => {
       {/* Dropdown for mobile, aligned to the right */}
       <div className="md:hidden">
         <Dropdown>
-          <button>
+          <button >
             <MoreHorizIcon />
           </button>
         </Dropdown>
