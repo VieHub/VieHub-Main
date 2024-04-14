@@ -23,7 +23,7 @@ const Login: React.FC = () => {
             <div className="separator-text">or</div>
             <div className="separator-line"></div>
           </div>
-          <div >
+          <div className="">
             <button className="google-button">
               <svg
                  viewBox="0 0 488 512"
@@ -38,7 +38,7 @@ const Login: React.FC = () => {
               </svg>
               Sign up with Google
             </button>
-            <p>
+            <p className="p-2">
               Don't have a Viehub account? <Link to="/host">Sign up</Link>
             </p>
           </div>

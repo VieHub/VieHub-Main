@@ -1,6 +1,9 @@
 import { NAV_ITEMS } from "@/constants";
+import { useNavigate } from "react-router-dom";
 
 const Dropdown = ({ children }: { children: React.ReactNode }) => {
+  const navigate = useNavigate();
+
   return (
     <div className="dropdown dropdown-end dropdown-bottom">
       <div tabIndex={0} className="cursor-pointer">
@@ -13,7 +16,12 @@ const Dropdown = ({ children }: { children: React.ReactNode }) => {
         {NAV_ITEMS.map((item) => (
           <li key={item.name}>
             {/* Ensure you add the href attribute to the <a> tag if you have URLs in your NAV_ITEMS */}
-            <a className="text-black">{item.name}</a>
+            <a  href={`#${item.section}`}
+              onClick={() => {
+                if (item.name === "Home") {
+                  navigate("/");
+                }
+              }} className="text-black">{item.name}</a>
           </li>
         ))}
         <li>
