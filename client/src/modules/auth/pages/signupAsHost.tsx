@@ -1,5 +1,7 @@
 import React, { FormEvent } from "react";
 import { Link } from "react-router-dom";
+import Header from "@/layouts/client/components/Header";
+
 //import "./SignUpForm.css"; // Import your CSS file
 
 const SignupAsHost: React.FC = () => {
@@ -9,7 +11,11 @@ const SignupAsHost: React.FC = () => {
   };
 
   return (
+    <div className="h-full w-full">
+      <Header />
     <div className="signup-container">
+      
+
       <div className="signup-form">
         <h2>Sign Up to Host a Contest</h2>
         <form onSubmit={handleSubmit}>
@@ -89,6 +95,7 @@ const SignupAsHost: React.FC = () => {
           Already have an account? <Link to="/login">Log In</Link>
         </p>
       </div>
+    </div>
     </div>
   );
 };

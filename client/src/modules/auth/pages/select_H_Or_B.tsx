@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Header from "@/layouts/client/components/Header";
+import book from "@/assets/icons/guest-book-svgrepo-com (1).svg";
+import email from "@/assets/icons/email-mail-svgrepo-com (1).svg";
+
 
 
 function Select() {
@@ -14,8 +17,8 @@ function Select() {
     <div className="h-full w-full">
       <Header />
       <div className="signup-container">
-        <div className="signup-form">
-          <h2>Join as a Host or a Participant</h2>
+        <div className="select-form">
+          <h2 className="mb-2 text-xl font-bold text-black">Join as a Host or a Participant</h2>
           <div className="options-container">
             <div
               className={`option-box ${
@@ -25,7 +28,7 @@ function Select() {
             >
               <div className="">
                 <img
-                  src="https://picsum.photos/id/237/200/300"
+                  src={email}
                   alt="Provider Logo"
                   className="logo"
                 />
@@ -43,7 +46,7 @@ function Select() {
             >
               <div className="">
                 <img
-                  src="https://picsum.photos/id/237/200/300"
+                  src={book}
                   alt="Participant Logo"
                   className="logo"
                 />
@@ -60,7 +63,7 @@ function Select() {
             </button>
           </div>
           <p>
-            Already have an account? <Link to="/login">Log In</Link>
+            Already have an account? <Link to="/login" className="login-link">Log In</Link>
           </p>
         </div>
       </div>

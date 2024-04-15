@@ -4,6 +4,17 @@
     align-items: center;
     height: 110vh;
   }
+  .select-form{
+     /* Adjusted width */
+    max-width: 600px; /* Added max-width */
+    height: 50%;
+    padding: 40px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    background-color: #fff;
+    text-align: center; /* Center align the content */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
   
   .container {
     width: 700px;
@@ -20,8 +31,12 @@
     display: flex;
     justify-content: center;
     margin-top: 30px;
+    height: 50%;
   }
-  
+  .option-box:hover{
+    border-color: #52ab98; /* Change border color on hover */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
   .option-box {
     display: flex;
     position: relative;
@@ -32,6 +47,7 @@
     cursor: pointer;
     width: 200px;
     border-radius: 30px;
+    transition: border-color 0.3s, box-shadow 0.3s; 
   }
   
   .content1 {
@@ -44,7 +60,8 @@
     height: 30px;
     border-radius: 50%;
     background-color: #ccc;
-    margin-left: 10px; /* Move circle to the left */
+    margin-left: 150px; /* Move circle to the left */
+    margin-bottom: 20px;
   }
   
   .selected .circle {
@@ -52,17 +69,21 @@
   }
   
   .logo {
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 35px;
+    margin-right: 140px;
     position: absolute;
     top: 0;
     right: 0;
+    margin-top: 20px;
   }
   
   .button-container {
     display: flex;
     justify-content: center; /* Center align the buttons */
-    margin-top: 20px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+
   }
   
   .button-container button[type="submit"] {
@@ -98,3 +119,8 @@
     font-style: italic;
   }
   
+  .login-link:hover {
+    color: #357a6b; /* Change text color on hover */
+    text-decoration: underline; /* Add underline on hover */
+    /* Add any other styles you want to apply on hover */
+  }
