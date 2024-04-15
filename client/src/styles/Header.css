@@ -68,6 +68,8 @@
 
 .cont {
   background-color: #ffffff;
+  flex-direction: column;
+
 }
 
 .buttons{
@@ -140,23 +142,26 @@
   letter-spacing: 3px;
   opacity: 0.85;
   padding-top: 35px;
-  padding-left: 50px;
+  padding-left: 10px;
   width: 80%;
   
 }
-
+.image{
+  width: 85%;
+  margin-right: 50px;
+}
 /* Adjustments for images */
 .image,
 .cont img {
   max-width: 100%; /* Ensure images are responsive */
   height: auto;
-  border-radius: 25px;
+  border-radius: 17px;
 }
 
 /* Media Query for smaller screens */
 @media (max-width: 768px) {
   .content,
-  .cont {
+  .cont,.forth-section {
     flex-direction: column; /* Stack content vertically on smaller screens */
     width: auto; /* Adjust width to fit smaller screens */
   }
@@ -169,3 +174,27 @@
     width: auto; /* Ensure content fits within the screen */
   }
 }
+/* .forth-section h1,
+.forth-section p {
+  color: #000000;
+  font-size: large;
+  letter-spacing: 3px;
+  padding-top: 35px;
+  padding-left: 17%;
+  width: 80%;
+  
+}
+.forth-section p {
+  opacity: 0.85;
+} */
+.third-image-container {
+  width: 100%; /* Adjust the width of the container */
+  padding-right: 15%; /* Add left padding to create space between text and image */
+}
+.third-image {
+  width: 100%; /* Adjust the width of the image */
+  height: auto;
+  border-radius: 17px;
+  
+}
+
