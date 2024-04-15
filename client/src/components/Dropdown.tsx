@@ -1,5 +1,7 @@
 import { NAV_ITEMS } from "@/constants";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+
 
 const Dropdown = ({ children }: { children: React.ReactNode }) => {
   const navigate = useNavigate();
@@ -25,12 +27,14 @@ const Dropdown = ({ children }: { children: React.ReactNode }) => {
           </li>
         ))}
         <li>
+          <Link to="/select">
           <button
-            className="signup-btn z-[1]p-2  "
+            className="signup-btn  z-[1]p-2  "
             style={{ backgroundColor: "#52ab98" }}
           >
             Sign Up
           </button>
+          </Link>
         </li>
       </ul>
     </div>
