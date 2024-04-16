@@ -174,6 +174,7 @@
     width: auto; /* Ensure content fits within the screen */
   }
 }
+
 /* .forth-section h1,
 .forth-section p {
   color: #000000;
@@ -197,4 +198,38 @@
   border-radius: 17px;
   
 }
+/* Animation for second div */
+/* Animation for second div */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.cont, .forth-section {
+  opacity: 0;
+  animation: fadeIn 2s ease forwards; /* Apply animation effect */
+}
+@keyframes slideInFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(100%); /* Start from outside the viewport on the right */
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0); /* Slide in to normal position */
+  }
+}
+
+.animate-slide-in {
+  animation: slideInFromRight 0.5s ease forwards;
+}
+
+
+
+
+
 
