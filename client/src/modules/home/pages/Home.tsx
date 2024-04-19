@@ -3,6 +3,7 @@ import SecondImage from "../../../assets/teamgoals.png";
 import ThridImage from "@/assets/images/image 5.jpg";
 import { Link } from "react-router-dom";
 import Header from "@/layouts/client/components/Header";
+import Footer from "@/layouts/client/components/Footer";
 import TypingAnimation from "../components/TypingAnimation";
 import FirstSectionCard from "../components/FirstSectionCard";
 import SecondSectionCard from "../components/SecondSectionCard";
@@ -94,7 +95,7 @@ const Dashboard = () => {
       </div>
       <div className="third-section flex  flex-row items-start p-4 md:flex-row">
         <div className="cards-container flex flex-wrap justify-between">
-          <h2 className="section-title mb-2 text-xl font-bold text-black">Join us as Participant And discover</h2>
+          <h2 className="section-title mb-2 font-bold text-black">Join us as Participant And discover</h2>
           <FirstSectionCard />
          
         </div>
@@ -117,12 +118,13 @@ const Dashboard = () => {
 
       <div className="third-section flex  flex-row items-start p-4 md:flex-row">
         <div className="cards-container flex flex-wrap justify-between">
-          <h2 className="section-title mb-2 text-xl font-bold text-black">Join us as Host And discover</h2>
+          <h2 className="section-title mb-2 font-bold text-black">Join us as Host And discover</h2>
           <SecondSectionCard />
          
         </div>
         
       </div>
+      <Footer />
     </div>
   );
 };
