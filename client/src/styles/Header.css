@@ -4,6 +4,14 @@
 *::after {
   box-sizing: border-box;
 }
+/* Footer css */
+.bg-fotter{
+  background-color: #343A40;
+}
+.foteer-img{
+  width: 25%;
+}
+/* Footer css end */
 
 /* Nav Item Styles */
 .nav-item {

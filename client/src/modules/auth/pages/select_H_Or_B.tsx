@@ -6,6 +6,7 @@ import email from "@/assets/icons/email-mail-svgrepo-com (1).svg";
 
 
 
+
 function Select() {
   const [selectedOption, setSelectedOption] = useState<string>("");
 
@@ -20,7 +21,7 @@ function Select() {
         <div className="select-form">
           <h2 className="mb-2 text-xl font-bold text-black">Join as a Host or a Participant</h2>
           <div className="options-container">
-            <div
+          <Link to={"/host"}>  <div
               className={`option-box ${
                 selectedOption === "provider" ? "selected" : ""
               }`}
@@ -38,6 +39,8 @@ function Select() {
                 </p>
               </div>
             </div>
+            </Link>
+            <Link to={"/host"}>
             <div
               className={`option-box ${
                 selectedOption === "participant" ? "selected" : ""
@@ -56,6 +59,7 @@ function Select() {
                 </p>
               </div>
             </div>
+            </Link>
           </div>
           <div className="button-container">
             <button type="submit" className="button">

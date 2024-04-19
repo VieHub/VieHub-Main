@@ -1,5 +1,5 @@
 .container1 {
-    width: 350px; /* Increased container width */
+    width: 100%; /* Increased container width */
     margin: 90px auto;
     padding: 30px;
     border: 1px solid #ccc;

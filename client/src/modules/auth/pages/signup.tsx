@@ -49,6 +49,11 @@ const Signup: React.FC = () => {
               <input type="text" placeholder="Your field of specialization" />
             </div>
           </div>
+          <div className="form-row">
+            <div className="form-group" style={{ width: "80%" }}>
+              <input type="text" placeholder="skils" />
+            </div>
+          </div>
           <div>
             <label>
               <input type="checkbox" id="agreedToTerms" />

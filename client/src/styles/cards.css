@@ -8,9 +8,11 @@
   .section-title {
     font-family: Arial, sans-serif;
     color: #000000;
-    font-size: larger;
+    font-size: x-large;
+    font-weight: bold;
     letter-spacing: 1.2px;
     text-align: center;
+    margin-left:33%;
   }
 
 .card_img {
