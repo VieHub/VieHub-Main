@@ -11,12 +11,12 @@ export default [
     name: "Login",
   },
   {
-    path: "host",
+    path: "Signupashost",
     element: <Signup />,
     name: "Signup",
   },
   {
-    path: "participant",
+    path: "Signupasparticipant",
     element: <SignupAsHost />,
     name: "SignupAsHost",
   },
