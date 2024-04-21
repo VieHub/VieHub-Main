@@ -1,0 +1,8 @@
+.host-container{
+    display: flex;
+  flex-wrap:nowrap; /* Allow items to wrap on smaller screens */
+ 
+  align-items: center;
+  background-color: #2b6777;
+  padding: 20px;    
+}

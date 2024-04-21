@@ -51,6 +51,12 @@
     background-color 0.3s,
     transform 0.2s ease-out; /* Added transition for background color and transform */
 }
+.profile-img {
+  width: 40px; /* Adjust the width as needed */
+  height: 40px; /* Adjust the height as needed */
+  border-radius: 50%; /* Make it a circle */
+  object-fit: cover; /* Ensure the image covers the container */
+}
 
 
 
