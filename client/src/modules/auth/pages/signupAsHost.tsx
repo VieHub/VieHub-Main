@@ -1,81 +1,119 @@
-import React, { FormEvent } from "react";
+import React, { useState, FormEvent } from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import Header from "@/layouts/client/components/Header";
-
-//import "./SignUpForm.css"; // Import your CSS file
-
+import { useDispatch } from 'react-redux';
+import { setCredentials } from '@/store/authSlice.tsx'; // Import the action to set credentials
 const SignupAsHost: React.FC = () => {
-  const handleSubmit = (e: FormEvent) => {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [companyName, setCompanyName] = useState("");
+  const [companyPhone, setCompanyPhone] = useState("");
+  const [companyAddress, setCompanyAddress] = useState("");
+  const [companyEmail, setCompanyEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [industry, setIndustry] = useState("");
+  const dispatch = useDispatch();
+
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    // Handle form submission
+    // Assuming the role is always "Host" for this form
+    if (password !== confirmPassword) {
+      alert("Passwords do not match");
+      return;
+    }
+    const userData = {
+      email: companyEmail,
+      password: password,
+      role: "Host",
+      first_name: firstName,
+      last_name: lastName,
+      company_name: companyName,
+      company_phone: companyPhone,
+      company_address: companyAddress,
+      industry: industry
+    };
+
+    try {
+      const response = await axios.post('http://localhost:8000/api/users/signup', userData);
+      dispatch(setCredentials({
+        token: response.data.token,
+        user: userData.email  // You can expand this object to include more user details
+      }));
+      // Optionally save the token in localStorage
+
+      localStorage.setItem('token', response.data.token);
+      console.log("Account creation successful:", response.data);
+      // You might want to redirect the user or handle next steps here
+    } catch (error: any) {
+      console.error("Error creating account:", error.response?.data || error.message);
+      // Handle errors here, e.g., display error message to the user
+    }
   };
 
   return (
     <div className="h-full w-full">
-      <Header />
-    <div className="signup-container">
-      
-
-      <div className="signup-form">
-        <h2>Sign Up to Host a Contest</h2>
-        <form onSubmit={handleSubmit}>
-          <div className="form-row">
-            <div className="form-group">
-              <input type="text" placeholder="First Name" />
+      <Header isLoggedin={false} />
+      <div className="signup-container">
+        <div className="signup-form">
+          <h2>Sign Up to Host a Contest</h2>
+          <form onSubmit={handleSubmit}>
+            {/* Input fields updated to include value and onChange */}
+            <div className="form-row">
+              <div className="form-group">
+                <input type="text" placeholder="First Name" value={firstName} onChange={e => setFirstName(e.target.value)} />
+              </div>
+              <div className="form-group">
+                <input type="text" placeholder="Last Name" value={lastName} onChange={e => setLastName(e.target.value)} />
+              </div>
             </div>
-            <div className="form-group">
-              <input type="text" placeholder="Last Name" />
+            <div className="form-row">
+              <div className="form-group">
+                <input type="text" placeholder="Company Name" value={companyName} onChange={e => setCompanyName(e.target.value)} />
+              </div>
+              <div className="form-group">
+                <input type="tel" placeholder="Company Phone" value={companyPhone} onChange={e => setCompanyPhone(e.target.value)} />
+              </div>
             </div>
+            <div className="form-row">
+              <div className="form-group">
+                <input type="text" placeholder="Company Address" value={companyAddress} onChange={e => setCompanyAddress(e.target.value)} />
+              </div>
+              <div className="form-group">
+                <input type="email" placeholder="Company Email" value={companyEmail} onChange={e => setCompanyEmail(e.target.value)} />
+              </div>
+            </div>
+            <div className="form-row">
+              <div className="form-group">
+                <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
+              </div>
+              <div className="form-group">
+                <input type="password" placeholder="Confirm Password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} />
+              </div>
+            </div>
+            <div className="form-row">
+              <div className="form-group" style={{ width: "80%" }}>
+                <input type="text" placeholder="Industry/Field of Operation" value={industry} onChange={e => setIndustry(e.target.value)} />
+              </div>
+            </div>
+            <div>
+              <label>
+                <input type="checkbox" id="agreedToTerms" />
+                <span> Yes, I understand and agree to the Vie hub Terms of Service, including the User Agreement and Privacy Policy.</span>
+              </label>
+            </div>
+            <div className="button-container">
+              <button type="submit">Create my account</button>
+            </div>
+          </form>
+          <div className="separator">
+            <div className="separator-line"></div>
+            <div className="separator-text">or</div>
+            <div className="separator-line"></div>
           </div>
-          <div className="form-row">
-            <div className="form-group">
-              <input type="text" placeholder="Company Name" />
-            </div>
-            <div className="form-group">
-              <input type="tel" placeholder="Company Phone" />
-            </div>
-          </div>
-          <div className="form-row">
-            <div className="form-group">
-              <input type="text" placeholder="Company Address" />
-            </div>
-            <div className="form-group">
-              <input type="email" placeholder="Company Email" />
-            </div>
-          </div>
-          <div className="form-row">
-            <div className="form-group">
-              <input type="password" placeholder="Password" />
-            </div>
-            <div className="form-group">
-              <input type="password" placeholder="Confirm Password" />
-            </div>
-          </div>
-          <div className="form-row">
-            <div className="form-group" style={{ width: "80%" }}>
-              <input type="text" placeholder="Industry/Field of Operation" />
-            </div>
-          </div>
-          <div>
-            <label>
-              <input type="checkbox" id="agreedToTerms" />
-              <span>
-                {" "}
-                Yes, I understand and agree to the Vie hub Terms of Service,
-                including the User Agreement and Privacy Policy.
-              </span>
-            </label>
-          </div>
-          <div className="button-container">
-            <button type="submit">Create my account</button>
-          </div>
-        </form>
-        <div className="separator">
-          <div className="separator-line"></div>
-          <div className="separator-text">or</div>
-          <div className="separator-line"></div>
-        </div>
-        <div >
+       
+  <div >
           <button className="custom-button">
             <svg
               
@@ -90,14 +128,16 @@ const SignupAsHost: React.FC = () => {
             </svg>
             Sign up with Google
           </button>
+      
+          </div>
+          <p className="p-5">
+            Already have an account? <Link to="/login">Log In</Link>
+          </p>
         </div>
-        <p className="p-5">
-          Already have an account? <Link to="/login">Log In</Link>
-        </p>
       </div>
-    </div>
     </div>
   );
 };
 
 export default SignupAsHost;
+

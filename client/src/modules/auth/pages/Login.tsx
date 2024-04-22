@@ -1,30 +1,83 @@
-import React from "react";
-import { Link } from "react-router-dom";
 
-//import "./LoginForm.css";
-import Header from "@/layouts/client/components/Header";
 
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { setCredentials } from '@/store/authSlice.tsx'; // Import the action to set credentials
+import axios from 'axios';
+import { Link } from 'react-router-dom';
+import Header from '@/layouts/client/components/Header';
+import { validateSession } from '@/utils/auth'
 const Login: React.FC = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const dispatch = useDispatch();
+
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      const authData = await validateSession();
+      if (authData.isAuthenticated) {
+        dispatch(setCredentials({ user: authData.user }));
+      } else {
+        // dispatch(clearCredentials());
+      }
+    };
+
+    checkAuth();
+  }, [dispatch]);
+
+  const handleLogin = async (event: { preventDefault: () => void; }) => {
+    event.preventDefault(); // Prevent the default form submission behavior
+    try {
+      const response = await axios.post('http://localhost:8000/api/users/login', { email, password });
+      // Dispatch action to store user and token
+      dispatch(setCredentials({
+        token: response.data.token,
+        user: { email } // You can expand this object to include more user details
+      }));
+      // Optionally save the token in localStorage
+      console.log("User Logged in Successfully");
+
+      localStorage.setItem('token', response.data.token);
+    } catch (error: any) {
+      console.error('Login error:', error.response?.data || error.message);
+      // Optionally handle error, show user a login error
+    }
+  };
+
   return (
     <div className="h-full w-full">
-      <Header />
+      <Header isLoggedin={false} />
       <div className="mx-auto max-w-md">
         <div className="container1">
-          <div className="title">Log In to Vie Hub</div>
-          <div className="input-box">
-            <input type="text" placeholder="Username/Email" />
-          </div>
-          <div className="input-box">
-            <input type="password" placeholder="Password" />
-          </div>
-          <button className="login-button">Log In</button>
+          <form onSubmit={handleLogin}>
+            <div className="title">Log In to Vie Hub</div>
+            <div className="input-box">
+              <input
+                type="text"
+                placeholder="Username/Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            <div className="input-box">
+              <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+            <div className="button-container">
+              <button type="submit" className="login-button">Login</button>
+            </div>          </form>
           <div className="separator">
             <div className="separator-line"></div>
             <div className="separator-text">or</div>
             <div className="separator-line"></div>
           </div>
-          <div className="">
-            <button className="google-button">
+          <div>
+          <button className="google-button">
               <svg
                  viewBox="0 0 488 512"
                  height="20"
@@ -44,9 +97,9 @@ const Login: React.FC = () => {
           </div>
         </div>
       </div>
-      
     </div>
   );
 };
 
 export default Login;
+

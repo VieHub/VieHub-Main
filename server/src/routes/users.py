@@ -1,5 +1,5 @@
 from typing import Annotated
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException,status
 from src.deps.models import Contest, LoginSchema, ProjectSchema,SignUpSchema, UserModel, UserProfileUpdateSchema
 from fastapi.responses import JSONResponse
 from fastapi.exceptions import HTTPException
@@ -8,61 +8,74 @@ from src.deps.auth import   auth , firebase ,db
 
 from fastapi import Security
 router = APIRouter(prefix="/users", tags=["users"])
-
-
+from fastapi import Cookie, HTTPException, status, Response
+from fastapi.responses import JSONResponse
 
 @router.post('/signup')
-async def create_an_account(user_data: SignUpSchema):
-    email = user_data.email
-    password = user_data.password
-    role = user_data.role  # Capture the role from the signup request
-
+async def create_an_account(user_data: SignUpSchema, response: Response):
     try:
-        # Create the user in Firebase Authentication
         user_record = auth.create_user(
-            email=email,
-            password=password
+            email=user_data.email,
+            password=user_data.password
         )
-        # Save the role and any additional user information in your database
+        user_creds = firebase.auth().sign_in_with_email_and_password(user_data.email, user_data.password)
+
         db.collection('users').document(user_record.uid).set({
-            "email": email,
-            "role": role  # Store the user role
+            "email": user_data.email,
+            "role": user_data.role,
+            "first_name": user_data.first_name,
+            "last_name": user_data.last_name,
+            "company_name": user_data.company_name,
+            "company_phone": user_data.company_phone,
+            "company_address": user_data.company_address,
+            "industry": user_data.industry
         })
+
+        # Set HTTP-only cookie with the token
+        response.set_cookie(
+            key="token",
+            value=user_creds['idToken'],
+            httponly=True,
+            secure=False,  # Use secure=True in production
+            samesite='Lax'
+        )
+
         return JSONResponse(
-            content={"message": f"User account created successfully for user {user_record.uid}, with role {role}"},
-            status_code=201
+            content={
+                "message": f"Account created successfully for {user_data.first_name} {user_data.last_name} as a {user_data.role}",
+                "uid": user_record.uid
+            },
+            status_code=status.HTTP_201_CREATED
         )
     except auth.EmailAlreadyExistsError:
         raise HTTPException(
-            status_code=400,
-            detail=f"Account already created for this e-mail {email}"
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Account already created for this e-mail {user_data.email}"
+        )
+@router.post('/login')
+async def login(user_data: LoginSchema, response: Response):
+    try:
+        user = firebase.auth().sign_in_with_email_and_password(email=user_data.email, password=user_data.password)
+
+        # Set HTTP-only cookie with the token
+        response.set_cookie(
+            key="token",
+            value=user["idToken"],
+            httponly=True,
+            secure=False,  # Use secure=True in production
+            samesite='Lax'  # Helps mitigate CSRF
         )
 
-
-@router.post('/login')
-async def create_an_access_token(user_data: LoginSchema):
-   """
-    Authenticates a user with their email and password.
-    On successful authentication, it returns a JSON Web Token (JWT) and the user's UID for further authorization purposes.
-    If authentication fails, it returns an error indicating invalid user credentials.
-   """
-
-   email = user_data.email
-   password = user_data.password
-   try:
-      user = firebase.auth().sign_in_with_email_and_password(email=email, password=password)
-      # Decode the token to get UID (Not necessary if using Firebase SDK as shown, but included for clarity)
-      decoded_token = auth.verify_id_token(user["idToken"])
-      uid = decoded_token["uid"]
-      return JSONResponse(
-        content={
-                "token": user["idToken"],
-                "uid": uid  # Include UID in the response
-            }, status_code=200
-      )
-   except:
-      raise HTTPException(
-            status_code=400, detail="Invalid User"
+        return JSONResponse(
+            content={
+                "uid": user["localId"]  # Include UID in the response
+            }, 
+            status_code=200
+        )
+    except Exception as e:
+        raise HTTPException(
+            status_code=400, 
+            detail="Invalid User Credentials"
         )
 
 
@@ -76,23 +89,49 @@ async def read_user(uid: str):
     except auth.UserNotFoundError:
         raise HTTPException(status_code=404, detail="User not found")
 
+@router.get('/validate_session')
+async def validate_session(request: Request):
+    # Check if user data is available in the request state set by the middleware
+    user_data = getattr(request.state, 'user', None)
+    
+    if user_data:
+        return JSONResponse(
+            content={
+                "isAuthenticated": True,
+                "user": {
+                    "uid": user_data['uid'],  # Assuming 'uid' is stored in the token
+                    "email": user_data.get('email', 'No email provided')
+                }
+            },
+            status_code=200
+        )
+    else:
+        return JSONResponse(
+            content={"isAuthenticated": False},
+            status_code=401
+        )
 
+
+# @router.post('/logout')
+# async def logout(request: Request):
+#    """
+#     Logs out a user by revoking their Firebase refresh token.
+#     It requires the JWT to be passed in the request headers for authorization.
+#     On success, it returns a message indicating the user has been logged out successfully.
+#     If an error occurs during the process, it returns an error message.
+#     """
+#    jwt = request.headers.get('authorization')
+#    decoded_token = auth.verify_id_token(jwt)
+#    uid = decoded_token['uid']
+#    try:
+#       auth.revoke_refresh_tokens(uid)
+#       return {"message": "User logged out successfully"}
+#    except Exception as e:
+#       raise HTTPException(status_code=400, detail="Error logging out")
 @router.post('/logout')
-async def logout(request: Request):
-   """
-    Logs out a user by revoking their Firebase refresh token.
-    It requires the JWT to be passed in the request headers for authorization.
-    On success, it returns a message indicating the user has been logged out successfully.
-    If an error occurs during the process, it returns an error message.
-    """
-   jwt = request.headers.get('authorization')
-   decoded_token = auth.verify_id_token(jwt)
-   uid = decoded_token['uid']
-   try:
-      auth.revoke_refresh_tokens(uid)
-      return {"message": "User logged out successfully"}
-   except Exception as e:
-      raise HTTPException(status_code=400, detail="Error logging out")
+async def logout(response: Response):
+    response.delete_cookie("token")
+    return {"message": "Logged out successfully"}
 
 
 @router.patch("/user/update")
@@ -128,19 +167,5 @@ async def add_project_to_user(uid: str, project_data: ProjectSchema):
     user_ref.update({"projects": projects})
 
     return {"message": "Project added successfully"}
-
-
-@router.post('/ping')
-async def validate_token(request:Request):
-    """
-    Validates a Firebase JWT passed in the request headers.
-    It is used to verify that a token is valid and returns the UID of the user associated with the token.
-    This route can be used to check the validity of a token without performing any user data changes or retrievals.
-    """
-    headers = request.headers
-    jwt = headers.get('authorization')
-    user = auth.verify_id_token(jwt)
-    return user["user_id"]
-   
 
 

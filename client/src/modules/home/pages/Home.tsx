@@ -14,7 +14,7 @@ const Dashboard = () => {
 
   return (
     <div className="h-full w-full">
-      <Header />
+      <Header isLoggedin={false} />
       <div className="content flex max-w-full flex-wrap">
         <div className="left-content w-full p-4 md:flex-1">
           <TypingAnimation text="Welcome to VieHub - Where Talent Meets Opportunity Discover Your Potential" />
