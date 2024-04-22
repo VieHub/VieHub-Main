@@ -11,38 +11,7 @@ import React, { useState, useEffect } from 'react';
 
 
 const Dashboard = () => {
-  const [isImageVisible, setIsImageVisible] = useState(false);
-  const [isContentVisible, setIsContentVisible] = useState(false);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const image = document.querySelector('.third-image-container');
-      const content = document.querySelector('.cont');
-      
-      if (image && content) {
-        const imageTop = image.getBoundingClientRect().top;
-        const contentTop = content.getBoundingClientRect().top;
-        const windowHeight = window.innerHeight;
-        
-        if (imageTop < windowHeight * 0.75 && imageTop > -windowHeight * 0.25) {
-          setIsImageVisible(true);
-        } else {
-          setIsImageVisible(false);
-        }
-        
-        if (contentTop < windowHeight * 0.75 && contentTop > -windowHeight * 0.25) {
-          setIsContentVisible(true);
-        } else {
-          setIsContentVisible(false);
-        }
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
   return (
     <div className="h-full w-full">
       <Header />
@@ -55,18 +24,18 @@ const Dashboard = () => {
             gateway to showcasing talent.
           </p>
           <div className="buttons">
-          <Link className="Host-btn px-4 py-2 text-sm font-medium text-white shadow-sm " to="/host">
+          <Link className="Host-btn px-4 py-2 text-sm font-medium text-white shadow-sm " to="/Signupashost">
             <button>
             Join as Host
             </button>
           </Link>
           
-          <Link className="participant-btn px-4 py-2 text-sm font-medium text-white shadow-sm " to="/participant">
+          <Link className="participant-btn px-4 py-2 text-sm font-medium text-white shadow-sm " to="/Signupasparticipant">
             <button>
             Join as Participant
             </button>
           </Link>
-           
+          
           </div>
 
         </div>
@@ -104,13 +73,13 @@ const Dashboard = () => {
       
       <div className="forth-section flex max-w-full  items-start p-4 md:flex-row">
         
-      <div className={`cont ${isContentVisible ? 'animate-slide-in' : ''}`}>
+      <div className={`cont `}>
         <h1 className="mb-2 text-xl font-bold text-black">Connect with Industry</h1>
         <p className="text-base" style={{ color: 'black' }}>
           Discover the expansive potential of VieHub, extending beyond a conventional platform. It serves as a pivotal hub, linking extraordinary talent with the dynamic needs of diverse industries. Uncover a wealth of collaboration possibilities and pathways for advancing your career.
         </p>
       </div>
-        <div className={`third-image-container flex max-w-full items-start p-4 md:flex-row ${isImageVisible ? 'animate-slide-in' : ''}`}>
+        <div className={`third-image-container flex max-w-full items-start p-4 md:flex-row `}>
         <img src={ThridImage} alt="" className="mb-4 h-auto max-w-full third-image" />
       </div>
 

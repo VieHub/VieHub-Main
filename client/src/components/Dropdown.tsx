@@ -27,7 +27,7 @@ const Dropdown = ({ children }: { children: React.ReactNode }) => {
           </li>
         ))}
         <li>
-          <Link to="/select">
+          <Link to="/Signup">
           <button
             className="signup-btn  z-[1]p-2  "
             style={{ backgroundColor: "#52ab98" }}

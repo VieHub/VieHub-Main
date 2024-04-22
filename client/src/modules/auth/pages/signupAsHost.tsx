@@ -91,7 +91,7 @@ const SignupAsHost: React.FC = () => {
             Sign up with Google
           </button>
         </div>
-        <p>
+        <p className="p-5">
           Already have an account? <Link to="/login">Log In</Link>
         </p>
       </div>

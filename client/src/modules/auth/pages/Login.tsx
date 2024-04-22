@@ -38,7 +38,7 @@ const Login: React.FC = () => {
               </svg>
               Sign up with Google
             </button>
-            <p className="p-2">
+            <p className="p-5">
               Don't have a Viehub account? <Link to="/host">Sign up</Link>
             </p>
           </div>
