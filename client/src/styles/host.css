@@ -1,8 +1,45 @@
-.host-container{
-    display: flex;
-  flex-wrap:nowrap; /* Allow items to wrap on smaller screens */
- 
+.host-container {
+  width: 65%;
+  height: 40%;
+  margin: 5% auto 0;
+  display: flex;
   align-items: center;
   background-color: #2b6777;
-  padding: 20px;    
+  
+  border-radius: 15px;
 }
+
+.carousel-img {
+  width: 45%;
+  border-radius: 15px;
+}
+
+.carousel {
+  
+
+  margin-left: 2%; /* Add margin to create space between the image and text */
+}
+.carousel-item {
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  padding-left: 3%;
+}
+
+.carousel h1 {
+  font-size: 1.5rem;
+  margin-bottom: 10px; /* Add margin between h1 and p */
+  letter-spacing:1.5px;
+}
+
+.carousel p {
+  font-size: 1rem;
+  letter-spacing:2px;
+}
+
+.swap {
+  margin-top: 25%;
+   /* Center vertically */
+}
+
+
+
