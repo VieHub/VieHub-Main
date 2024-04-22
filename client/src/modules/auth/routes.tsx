@@ -11,17 +11,17 @@ export default [
     name: "Login",
   },
   {
-    path: "Signupashost",
+    path: "Signupasparticipant",
     element: <Signup />,
     name: "Signup",
   },
   {
-    path: "Signupasparticipant",
+    path: "Signupashost",
     element: <SignupAsHost />,
     name: "SignupAsHost",
   },
   {
-    path: "select",
+    path: "Signup",
     element: <Select />,
     name: "SignupAsHost",
   },

@@ -58,7 +58,7 @@ const Header: React.FC<HeaderProps> = ({ isLoggedin }) => {
             <img src={account} alt="" className="profile-img "/>
           </Link>
         ) : (
-          <Link to="/select">
+          <Link to="/Signup">
             <button className="signup-btn  px-4 py-2 text-sm font-medium text-white shadow-sm ">
               Sign up
             </button>
