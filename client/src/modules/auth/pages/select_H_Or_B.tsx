@@ -16,7 +16,7 @@ function Select() {
 
   return (
     <div className="h-full w-full">
-      <Header />
+      <Header isLoggedin={false} />
       <div className="signup-container">
         <div className="select-form">
           <h2 className="mb-2 text-xl font-bold text-black">Join as a Host or a Participant</h2>

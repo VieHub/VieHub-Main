@@ -1,23 +1,35 @@
 from pydantic import BaseModel, Field, EmailStr
 from typing import List, Optional,Literal
 from datetime import date, datetime
-
-
+from pydantic import BaseModel, EmailStr
+from typing import Literal
 
 class SignUpSchema(BaseModel):
     email: EmailStr
     password: str
-    role: Literal["Host", "Participant"]  # This enforces role to be either "host" or "participant"
+    role: Literal["Host", "Participant"]
+    first_name: str
+    last_name: str
+    company_name: str
+    company_phone: str
+    company_address: str
+    industry: str
 
     class Config:
         schema_extra = {
             "example": {
                 "email": "sample@gmail.com",
                 "password": "samplepass123",
-                "role": "Participant"  # Example showing allowed value
+                "role": "Host",
+                "first_name": "John",
+                "last_name": "Doe",
+                "company_name": "Acme Inc.",
+                "company_phone": "+1234567890",
+                "company_address": "1234 Street, City",
+                "industry": "Technology"
             }
         }
-      
+
 class UserModel(BaseModel):
     email: str
     uid: str
