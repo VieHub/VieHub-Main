@@ -5,6 +5,7 @@ import App from "./App.tsx";
 // import AuthProvider from "./hooks/AuthProvider.tsx";
 import { store } from './store/store.tsx';
 import { Provider } from 'react-redux';
+import { AuthProvider } from '@/contexts/AuthContext.tsx';
 
 // export const queryClient = new QueryClient({
 //   defaultOptions: {
@@ -15,10 +16,18 @@ import { Provider } from 'react-redux';
 // });
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
+  <AuthProvider>
+
   <React.StrictMode>
+
   <Provider store={store}>
+
       <App />
+
       </Provider>,
 
+
   </React.StrictMode>,
+  </AuthProvider>,
+
 );

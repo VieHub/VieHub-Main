@@ -1,9 +1,10 @@
 import React, { FormEvent } from "react";
 import { Link } from "react-router-dom";
 //import "./SignUpForm.css"; // Import your CSS file
-import Login from "../routes";
+// import Login from "../routes";
 import Header from "@/layouts/client/components/Header";
 
+// import { createParticipantUserData } from '@/constants/signupData';
 
 
 
@@ -15,7 +16,7 @@ const Signup: React.FC = () => {
 
   return (
     <div className="h-full w-full">
-    <Header />
+    <Header isLoggedin={false} />
     <div className="signup-container">
       <div className="signup-form">
         <h2>Sign up to Join a Contest</h2>
