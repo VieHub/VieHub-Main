@@ -1,55 +1,47 @@
 import React, { useState, FormEvent } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import Header from "@/layouts/client/components/Header";
-import { useDispatch } from 'react-redux';
-import { setCredentials } from '@/store/authSlice.tsx'; // Import the action to set credentials
+import { createHostUserData } from '@/constants/signupData';
+import { useAuth } from "@/contexts/AuthContext.tsx"; // Make sure the path is correct
+
 const SignupAsHost: React.FC = () => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [companyName, setCompanyName] = useState("");
-  const [companyPhone, setCompanyPhone] = useState("");
-  const [companyAddress, setCompanyAddress] = useState("");
-  const [companyEmail, setCompanyEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [industry, setIndustry] = useState("");
-  const dispatch = useDispatch();
+
+  const auth = useAuth();  // This might be null or AuthContextType
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    companyName: '',
+    companyPhone: '',
+    companyAddress: '',
+    companyEmail: '',
+    password: '',
+    confirmPassword: '',
+    industry: ''
+  });
+
+  const handleChange = (event: { target: { name: any; value: any; }; }) => {
+    const { name, value } = event.target;
+    setFormData(prevFormData => ({
+      ...prevFormData,
+      [name]: value
+    }));
+  };
+  
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     // Assuming the role is always "Host" for this form
-    if (password !== confirmPassword) {
+    if (formData.password !== formData.confirmPassword) {
       alert("Passwords do not match");
       return;
     }
-    const userData = {
-      email: companyEmail,
-      password: password,
-      role: "Host",
-      first_name: firstName,
-      last_name: lastName,
-      company_name: companyName,
-      company_phone: companyPhone,
-      company_address: companyAddress,
-      industry: industry
-    };
-
-    try {
-      const response = await axios.post('http://localhost:8000/api/users/signup', userData);
-      dispatch(setCredentials({
-        token: response.data.token,
-        user: userData.email  // You can expand this object to include more user details
-      }));
-      // Optionally save the token in localStorage
-
-      localStorage.setItem('token', response.data.token);
-      console.log("Account creation successful:", response.data);
-      // You might want to redirect the user or handle next steps here
-    } catch (error: any) {
-      console.error("Error creating account:", error.response?.data || error.message);
-      // Handle errors here, e.g., display error message to the user
-    }
+    const userData = createHostUserData(formData);
+    // Check if auth and signupAsHost function are available
+    if (auth && await auth.signup(formData, "Host")) {
+      await auth.signup(userData , "Host");
+    } else {
+      console.error("Authentication context is not available or signupAsHost is not a function.");
+    }    
   };
 
   return (
@@ -61,42 +53,43 @@ const SignupAsHost: React.FC = () => {
           <form onSubmit={handleSubmit}>
             {/* Input fields updated to include value and onChange */}
             <div className="form-row">
-              <div className="form-group">
-                <input type="text" placeholder="First Name" value={firstName} onChange={e => setFirstName(e.target.value)} />
-              </div>
-              <div className="form-group">
-                <input type="text" placeholder="Last Name" value={lastName} onChange={e => setLastName(e.target.value)} />
-              </div>
-            </div>
-            <div className="form-row">
-              <div className="form-group">
-                <input type="text" placeholder="Company Name" value={companyName} onChange={e => setCompanyName(e.target.value)} />
-              </div>
-              <div className="form-group">
-                <input type="tel" placeholder="Company Phone" value={companyPhone} onChange={e => setCompanyPhone(e.target.value)} />
-              </div>
-            </div>
-            <div className="form-row">
-              <div className="form-group">
-                <input type="text" placeholder="Company Address" value={companyAddress} onChange={e => setCompanyAddress(e.target.value)} />
-              </div>
-              <div className="form-group">
-                <input type="email" placeholder="Company Email" value={companyEmail} onChange={e => setCompanyEmail(e.target.value)} />
-              </div>
-            </div>
-            <div className="form-row">
-              <div className="form-group">
-                <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
-              </div>
-              <div className="form-group">
-                <input type="password" placeholder="Confirm Password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} />
-              </div>
-            </div>
-            <div className="form-row">
-              <div className="form-group" style={{ width: "80%" }}>
-                <input type="text" placeholder="Industry/Field of Operation" value={industry} onChange={e => setIndustry(e.target.value)} />
-              </div>
-            </div>
+  <div className="form-group">
+    <input type="text" name="firstName" placeholder="First Name" value={formData.firstName} onChange={handleChange} />
+  </div>
+  <div className="form-group">
+    <input type="text" name="lastName" placeholder="Last Name" value={formData.lastName} onChange={handleChange} />
+  </div>
+</div>
+<div className="form-row">
+  <div className="form-group">
+    <input type="text" name="companyName" placeholder="Company Name" value={formData.companyName} onChange={handleChange} />
+  </div>
+  <div className="form-group">
+    <input type="tel" name="companyPhone" placeholder="Company Phone" value={formData.companyPhone} onChange={handleChange} />
+  </div>
+</div>
+<div className="form-row">
+  <div className="form-group">
+    <input type="text" name="companyAddress" placeholder="Company Address" value={formData.companyAddress} onChange={handleChange} />
+  </div>
+  <div className="form-group">
+    <input type="email" name="companyEmail" placeholder="Company Email" value={formData.companyEmail} onChange={handleChange} />
+  </div>
+</div>
+<div className="form-row">
+  <div className="form-group">
+    <input type="password" name="password" placeholder="Password" value={formData.password} onChange={handleChange} />
+  </div>
+  <div className="form-group">
+    <input type="password" name="confirmPassword" placeholder="Confirm Password" value={formData.confirmPassword} onChange={handleChange} />
+  </div>
+</div>
+<div className="form-row">
+  <div className="form-group" style={{ width: "80%" }}>
+    <input type="text" name="industry" placeholder="Industry/Field of Operation" value={formData.industry} onChange={handleChange}/>
+  </div>
+</div>
+
             <div>
               <label>
                 <input type="checkbox" id="agreedToTerms" />

@@ -31,19 +31,12 @@ async def create_an_account(user_data: SignUpSchema, response: Response):
             "industry": user_data.industry
         })
 
-        # Set HTTP-only cookie with the token
-        response.set_cookie(
-            key="token",
-            value=user_creds['idToken'],
-            httponly=True,
-            secure=False,  # Use secure=True in production
-            samesite='Lax'
-        )
-
+   
         return JSONResponse(
             content={
                 "message": f"Account created successfully for {user_data.first_name} {user_data.last_name} as a {user_data.role}",
-                "uid": user_record.uid
+                "uid": user_record.uid,
+                "token": user_creds["idToken"]
             },
             status_code=status.HTTP_201_CREATED
         )
@@ -53,22 +46,17 @@ async def create_an_account(user_data: SignUpSchema, response: Response):
             detail=f"Account already created for this e-mail {user_data.email}"
         )
 @router.post('/login')
-async def login(user_data: LoginSchema, response: Response):
+async def login(user_data: LoginSchema):
     try:
         user = firebase.auth().sign_in_with_email_and_password(email=user_data.email, password=user_data.password)
 
-        # Set HTTP-only cookie with the token
-        response.set_cookie(
-            key="token",
-            value=user["idToken"],
-            httponly=True,
-            secure=False,  # Use secure=True in production
-            samesite='Lax'  # Helps mitigate CSRF
-        )
 
         return JSONResponse(
             content={
-                "uid": user["localId"]  # Include UID in the response
+                "uid": user["localId"],  # Include UID in the response
+                "token": user["idToken"]
+
+
             }, 
             status_code=200
         )
@@ -88,30 +76,17 @@ async def read_user(uid: str):
         return UserModel(email=user_record.email, uid=user_record.uid)
     except auth.UserNotFoundError:
         raise HTTPException(status_code=404, detail="User not found")
-
-@router.get('/validate_session')
-async def validate_session(request: Request):
-    # Check if user data is available in the request state set by the middleware
-    user_data = getattr(request.state, 'user', None)
-    
-    if user_data:
-        return JSONResponse(
-            content={
-                "isAuthenticated": True,
-                "user": {
-                    "uid": user_data['uid'],  # Assuming 'uid' is stored in the token
-                    "email": user_data.get('email', 'No email provided')
-                }
-            },
-            status_code=200
-        )
-    else:
-        return JSONResponse(
-            content={"isAuthenticated": False},
-            status_code=401
-        )
-
-
+@router.post('/ping')
+async def validate_token(request: Request):
+    headers = request.headers
+    jwt = headers.get('authorization')
+    if jwt and jwt.startswith("Bearer "):
+        jwt = jwt[7:]  # Strip "Bearer " prefix
+    try:
+        user = auth.verify_id_token(jwt)
+        return {"user_id": user["uid"]}  # Ensure this matches your expected format
+    except Exception as e:
+        raise HTTPException(status_code=401, detail=str(e))
 # @router.post('/logout')
 # async def logout(request: Request):
 #    """

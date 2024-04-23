@@ -1,43 +1,19 @@
 
 
-import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { setCredentials } from '@/store/authSlice.tsx'; // Import the action to set credentials
+import React, {  useState } from 'react';
+
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Header from '@/layouts/client/components/Header';
-import { validateSession } from '@/utils/auth'
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const dispatch = useDispatch();
-
-
-  useEffect(() => {
-    const checkAuth = async () => {
-      const authData = await validateSession();
-      if (authData.isAuthenticated) {
-        dispatch(setCredentials({ user: authData.user }));
-      } else {
-        // dispatch(clearCredentials());
-      }
-    };
-
-    checkAuth();
-  }, [dispatch]);
-
+ 
   const handleLogin = async (event: { preventDefault: () => void; }) => {
     event.preventDefault(); // Prevent the default form submission behavior
     try {
       const response = await axios.post('http://localhost:8000/api/users/login', { email, password });
-      // Dispatch action to store user and token
-      dispatch(setCredentials({
-        token: response.data.token,
-        user: { email } // You can expand this object to include more user details
-      }));
-      // Optionally save the token in localStorage
-      console.log("User Logged in Successfully");
-
+      
       localStorage.setItem('token', response.data.token);
     } catch (error: any) {
       console.error('Login error:', error.response?.data || error.message);
