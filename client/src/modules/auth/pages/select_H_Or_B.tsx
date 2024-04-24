@@ -9,10 +9,11 @@ import email from "@/assets/icons/email-mail-svgrepo-com (1).svg";
 
 function Select() {
   const [selectedOption, setSelectedOption] = useState<string>("");
-
+  const [isHost, setIsHost] = useState(false);
   const handleOptionSelect = (option: string) => {
     setSelectedOption(option);
   };
+ 
 
   return (
     <div className="h-full w-full">
@@ -63,9 +64,11 @@ function Select() {
             {/* </Link> */}
           </div>
           <div className="button-container">
+          <Link to={isHost ? "/Signupashost" : "/Signupasparticipant"}>
             <button type="submit" className="button">
               Create My Account
             </button>
+          </Link>
           </div>
           <p>
             Already have an account? <Link to="/login" className="login-link">Log In</Link>

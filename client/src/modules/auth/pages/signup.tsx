@@ -1,18 +1,53 @@
-import React, { FormEvent } from "react";
+import React, { useState, FormEvent } from "react";
 import { Link } from "react-router-dom";
 //import "./SignUpForm.css"; // Import your CSS file
 // import Login from "../routes";
 import Header from "@/layouts/client/components/Header";
+import { createParticipantUserData } from '@/constants/signupData';
+import { useAuth } from "@/contexts/AuthContext.tsx";
 
 // import { createParticipantUserData } from '@/constants/signupData';
 
+  // This might be null or AuthContextType
 
 
 const Signup: React.FC = () => {
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    // Handle form submission
-  };
+
+const auth = useAuth();  // This might be null or AuthContextType
+const [formData, setFormData] = useState({
+  firstName:'',
+  lastName:'',
+  phone:'',
+  email:'',
+  password:'',
+  confirmPassword:'',
+  specialization:'',
+  skills:''
+});
+const handleChange = (event: { target: { name: any; value: any; }; }) => {
+  const { name, value } = event.target;
+  setFormData(prevFormData => ({
+    ...prevFormData,
+    [name]: value
+  }));
+};
+
+
+const handleSubmit = async (e: FormEvent) => {
+  e.preventDefault();
+  // Assuming the role is always "Host" for this form
+  if (formData.password !== formData.confirmPassword) {
+    alert("Passwords do not match");
+    return;
+  }
+  const userData = createParticipantUserData(formData);
+  // Check if auth and signupAsHost function are available
+  if (auth && await auth.signup(formData, "Participant")) {
+    await auth.signup(userData , "Participant");
+  } else {
+    console.error("Authentication context is not available or signupAsHost is not a function.");
+  }    
+};
 
   return (
     <div className="h-full w-full">
@@ -23,36 +58,36 @@ const Signup: React.FC = () => {
         <form onSubmit={handleSubmit}>
           <div className="form-row">
             <div className="form-group">
-              <input type="text" placeholder="First Name" />
+              <input type="text" name="firstName" placeholder="First Name" value={formData.firstName} onChange={handleChange}/>
             </div>
             <div className="form-group">
-              <input type="text" placeholder="Last Name" />
+              <input type="text" name="lastName" placeholder="Last Name" value={formData.lastName} onChange={handleChange}/>
             </div>
           </div>
           <div className="form-row">
             <div className="form-group">
-              <input type="text" placeholder="Phone number" />
+              <input type="text" name="phone" placeholder="Phone number" value={formData.phone} onChange={handleChange}/>
             </div>
             <div className="form-group">
-              <input type="email" placeholder="Email" />
+              <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange}/>
             </div>
           </div>
           <div className="form-row">
             <div className="form-group">
-              <input type="password" placeholder="Password" />
+              <input type="password" name="password" placeholder="Password" value={formData.password} onChange={handleChange}/>
             </div>
             <div className="form-group">
-              <input type="password" placeholder="Confirm Password" />
-            </div>
-          </div>
-          <div className="form-row">
-            <div className="form-group" style={{ width: "80%" }}>
-              <input type="text" placeholder="Your field of specialization" />
+              <input type="password" name="confirmPassword" placeholder="Confirm Password" value={formData.confirmPassword} onChange={handleChange}/>
             </div>
           </div>
           <div className="form-row">
             <div className="form-group" style={{ width: "80%" }}>
-              <input type="text" placeholder="skils" />
+              <input type="text" name="specialization" placeholder="Your field of specialization" value={formData.specialization} onChange={handleChange}/>
+            </div>
+          </div>
+          <div className="form-row">
+            <div className="form-group" style={{ width: "80%" }}>
+              <input type="text" name="skills" placeholder="skils" value={formData.skills} onChange={handleChange}/>
             </div>
           </div>
           <div>
