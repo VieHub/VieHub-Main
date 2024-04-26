@@ -1,20 +1,34 @@
 
 
-import React, {  useState } from 'react';
+import React, { useState, FormEvent } from "react";
 
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Header from '@/layouts/client/components/Header';
+import { useAuth } from "@/contexts/AuthContext.tsx";
+
 const Login: React.FC = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+
+const auth = useAuth();  
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
+  });
+
+  const handleChange = (event: { target: { name: any; value: any; }; }) => {
+    const { name, value } = event.target;
+    setFormData(prevFormData => ({
+      ...prevFormData,
+      [name]: value
+    }));
+  };
  
-  const handleLogin = async (event: { preventDefault: () => void; }) => {
-    event.preventDefault(); // Prevent the default form submission behavior
+  const handleLogin = async (e: FormEvent) => {
+    e.preventDefault(); // Prevent the default form submission behavior
     try {
-      const response = await axios.post('http://localhost:8000/api/users/login', { email, password });
-      
-      localStorage.setItem('token', response.data.token);
+      // Use the login method from AuthContext
+      await auth?.login(formData.email, formData.password);
+      console.log("you have logged in successfully")
     } catch (error: any) {
       console.error('Login error:', error.response?.data || error.message);
       // Optionally handle error, show user a login error
@@ -31,17 +45,22 @@ const Login: React.FC = () => {
             <div className="input-box">
               <input
                 type="text"
+                name="email"
                 placeholder="Username/Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={formData.email}
+                onChange={handleChange}
+                required
+
               />
             </div>
             <div className="input-box">
               <input
                 type="password"
+                name="password"
                 placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                value={formData.password}
+                onChange={handleChange}
+                required
               />
             </div>
             <div className="button-container">

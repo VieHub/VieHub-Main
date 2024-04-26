@@ -2,7 +2,7 @@ import React, { useState, FormEvent } from "react";
 import { Link } from "react-router-dom";
 import Header from "@/layouts/client/components/Header";
 import { createHostUserData } from '@/constants/signupData';
-import { useAuth } from "@/contexts/AuthContext.tsx"; // Make sure the path is correct
+import { useAuth } from "@/contexts/AuthContext.tsx"; 
 
 const SignupAsHost: React.FC = () => {
 
