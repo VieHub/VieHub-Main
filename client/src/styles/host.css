@@ -22,7 +22,7 @@
 .carousel-item {
   display: flex;
   flex-direction: column; /* Stack items vertically */
-  padding-left: 3%;
+  /* padding-left: 3%; */
 }
 
 .carousel h1 {
@@ -36,10 +36,88 @@
   letter-spacing:2px;
 }
 
-.swap {
-  margin-top: 25%;
-   /* Center vertically */
+
+
+.host-btn{
+  padding: 8px 20px;
+  width: 15%;
+  align-items: center;
+  margin-left: 78%;
+  margin-top: %;
+  border: none;
+  border-radius: 5px;
+  background-color: #52ab98;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
 }
+
+.swap {
+  margin-top: 20px; /* Adjust margin as needed */
+  display: flex;
+  justify-content: center; /* Center horizontally */
+}
+
+.btn-circle {
+  display: inline-block;
+  width: 10px; /* Reduce width */
+  height: 10px; /* Reduce height */
+  margin: 0 5px; /* Add margin between buttons */
+  border-radius: 50%;
+  background-color: #007bff; /* Adjust color as needed */
+  color: white;
+  text-decoration: none;
+  font-size: 0.8rem; /* Adjust font size */
+}
+.circles {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  bottom: -20px; /* Adjust this value to position the circles properly */
+  left: 0;
+  width: 100%;
+}
+.circle {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: white;
+  margin: 0;
+  padding: 0 5px; /* Adjust spacing between circles */
+}
+
+
+@media screen and (max-width: 768px) {
+  .host-container {
+    flex-direction: column;
+    height: auto;
+    padding: 5%;
+  }
+
+  .carousel-img {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+
+  .carousel {
+    text-align: center;
+    margin-left: 0;
+  }
+
+  .host-btn {
+    width: 100%;
+    margin-left: 0;
+    margin-bottom: 35%;
+  }
+
+  .swap {
+    margin-top: 0; /* Adjust margin as needed */
+    right: 20px;
+
+  }
+}
+
+
 
 
 
