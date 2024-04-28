@@ -84,7 +84,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="border-y border-y-[#555177] bg-[#343A40] px-3 py-8 text-white md:px-20">
-        <p>© 2022 VieHub. All rights reserved.</p>
+        <p>© 2024 VieHub. All rights reserved.</p>
       </div>
     </>
   );
