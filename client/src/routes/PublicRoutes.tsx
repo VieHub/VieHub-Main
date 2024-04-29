@@ -3,6 +3,7 @@ import Dashboard from "@/layouts/dashboard/Index";
 import loginRoutes from "@/modules/auth/routes";
 import dashboardRoutes from "@/modules/home/routes";
 import hostRoutes from "@/modules/host/routes";
+import PublicHostRoutes from "@/modules/host/routes";
 import AuthRoutes from "./AuthRoutes";
 import PrivateRoutes from "./PrivateRoutes";
 const router = createBrowserRouter([
@@ -13,7 +14,12 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Dashboard />,
-    children: [...dashboardRoutes, ...loginRoutes, ...hostRoutes],
+    children: [...dashboardRoutes, ...loginRoutes],
+  },
+  {
+    path: "/host",
+    element: <Dashboard />,
+    children: [...PublicHostRoutes],
   },
 ]);
 export default router;
