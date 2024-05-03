@@ -2,7 +2,7 @@ import Header from "@/layouts/client/components/Header";
 import Footer from "@/layouts/client/components/Footer";
 // import icon from "@/assets/icons/icons8-sort-right-50 (1).png";
 import right from "@/assets/icons/icons8-right-arrow-48.png";
-// import left from "@/assets/icons/icons8-left-arrow-48.png";
+import left from "@/assets/icons/icons8-left-arrow-48.png";
 import community from "@/assets/images/graphic global community.svg";
 import Image from "@/assets/images/image 4.avif";
 import React, { useState } from "react";

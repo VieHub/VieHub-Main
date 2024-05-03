@@ -1,5 +1,5 @@
 import React, { useState, FormEvent } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 //import "./SignUpForm.css"; // Import your CSS file
 // import Login from "../routes";
 import Header from "@/layouts/client/components/Header";
@@ -15,6 +15,9 @@ import { getErrorMessage } from "@/utils/errorHandling";
 const Signup: React.FC = () => {
   const auth = useAuth(); // This might be null or AuthContextType
   const [feedback, setFeedback] = useState({ message: "", type: "" }); // For feedback messages
+  const navigate = useNavigate();
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -49,12 +52,32 @@ const Signup: React.FC = () => {
     try {
       const userData = createParticipantUserData(formData);
       console.log(userData);
+      setIsLoading(true); // Set loading state to true when login starts
+
       await auth.signup(userData);
       setFeedback({
         message: "You have signed up successfully",
         type: "success",
       });
+      setIsLoading(false); // Set loading state to true when login starts
+      navigate("/host");
     } catch (error: any) {
+      setIsLoading(false); // Set loading state to true when login starts
+
+      console.error("Signup error:", error);
+      const friendlyMessage = getErrorMessage(error.code);
+      setFeedback({ message: friendlyMessage, type: "error" });
+    }
+  };
+
+  const handleSignUpWithGoogle = async () => {
+    try {
+      setIsLoading(true);
+      await auth?.signupWithGoogle("Participant");
+      setIsLoading(false);
+      navigate("/host");
+    } catch (error: any) {
+      setIsLoading(false);
       console.error("Signup error:", error);
       const friendlyMessage = getErrorMessage(error.code);
       setFeedback({ message: friendlyMessage, type: "error" });
@@ -163,6 +186,9 @@ const Signup: React.FC = () => {
             <div className="button-container">
               <button type="submit">Create my account</button>
             </div>
+            {isLoading && (
+              <span className="loading loading-spinner loading-sm"></span>
+            )}
           </form>
           {feedback.message && (
             <div
@@ -177,7 +203,7 @@ const Signup: React.FC = () => {
             <div className="separator-line"></div>
           </div>
           <div>
-            <button className="custom-button">
+            <button className="custom-button" onClick={handleSignUpWithGoogle}>
               <svg viewBox="0 0 488 512" height="20" width="40">
                 <path
                   fill="currentColor"
