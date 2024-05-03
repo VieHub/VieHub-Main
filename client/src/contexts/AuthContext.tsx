@@ -21,6 +21,7 @@ interface AuthContextValue {
   login: (email: string, password: string) => Promise<User>;
   signup: (formData: any) => Promise<User>;
   logout: () => Promise<void>;
+  isAuthInitialized: boolean; // This state will track if the auth check is completed
 }
 
 const AuthContext = createContext<AuthContextValue | null>(null); // Provide the initial value type
@@ -31,10 +32,19 @@ interface AuthProviderProps {
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useState<User | null>(null);
+  const [isAuthInitialized, setIsAuthInitialized] = useState(false);
 
+  console.log("AUTH : ", user);
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => setUser(user));
-    return () => unsubscribe();
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setUser(user);
+      setIsAuthInitialized(true); // Set true once Firebase finishes checking auth state
+    });
+
+    return () => {
+      unsubscribe();
+      setIsAuthInitialized(false); // Optional: Reset on unmount if needed
+    };
   }, []);
 
   const signup = async (userData: any) => {
@@ -92,7 +102,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, signup, logout }}>
+    <AuthContext.Provider
+      value={{ user, isAuthInitialized, login, signup, logout }}
+    >
       {children}
     </AuthContext.Provider>
   );

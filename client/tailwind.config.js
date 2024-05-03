@@ -10,22 +10,6 @@ export default {
   themes: ["light", "dark"],
   daisyui: {
     darkTheme: "light",
-    // if you want to customize your colors, you can do it here
-    // override on daisyui colors
-    // check [https://daisyui.com/docs/colors, https://daisyui.com/docs/themes] for more information
-    // themes: [
-    //   {
-    //     light: {
-    //       ...require("daisyui/src/theming/themes")["light"],
-    //       primary: "blue",
-    //       secondary: "teal",
-    //       ".btn-twitter": {
-    //         "background-color": "#1EA1F1",
-    //         "border-color": "#1EA1F1",
-    //       },
-    //     },
-    //   }
-    // ],
   },
   theme: {
     extend: {
@@ -44,7 +28,10 @@ export default {
         green: "#039f52",
         "shadow-color": "#0000008f",
       },
-
+      transitionProperty: {
+        height: "height",
+        spacing: "margin, padding",
+      },
       spacing: {
         xss: ".25rem",
         xs: "0.5rem",

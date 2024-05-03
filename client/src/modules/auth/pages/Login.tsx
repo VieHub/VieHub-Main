@@ -1,7 +1,6 @@
 import React, { useState, FormEvent } from "react";
 
-import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Header from "@/layouts/client/components/Header";
 import { useAuth } from "@/contexts/AuthContext.tsx";
 import { getErrorMessage } from "@/utils/errorHandling"; // Assuming this function is properly exported from the utilities
@@ -13,6 +12,8 @@ const Login: React.FC = () => {
     password: "",
   });
   const [feedback, setFeedback] = useState({ message: "", type: "" }); // For feedback messages
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (event: { target: { name: any; value: any } }) => {
     const { name, value } = event.target;
@@ -24,6 +25,7 @@ const Login: React.FC = () => {
 
   const handleLogin = async (e: FormEvent) => {
     e.preventDefault(); // Prevent the default form submission behavior
+
     if (!auth) {
       console.error("Authentication context is not available.");
       setFeedback({
@@ -35,12 +37,16 @@ const Login: React.FC = () => {
 
     try {
       // Use the login method from AuthContext
+      setIsLoading(true); // Set loading state to true when login starts
+
       await auth.login(formData.email, formData.password);
       console.log("You have logged in successfully");
       setFeedback({
         message: "You have logged in successfully",
         type: "success",
       });
+
+      navigate("/host");
     } catch (error: any) {
       console.error("Login error:", error.response?.data || error.message);
       const friendlyMessage = getErrorMessage(error.code || error.message);
@@ -79,7 +85,12 @@ const Login: React.FC = () => {
               <button type="submit" className="login-button">
                 Login
               </button>
+
+              {/* <span className="loading loading-spinner loading-sm"></span> */}
             </div>{" "}
+            {isLoading && (
+              <span className="loading loading-spinner loading-sm"></span>
+            )}
           </form>
           {feedback.message && (
             <div
