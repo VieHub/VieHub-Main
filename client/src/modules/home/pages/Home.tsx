@@ -7,11 +7,8 @@ import Footer from "@/layouts/client/components/Footer";
 import TypingAnimation from "../components/TypingAnimation";
 import FirstSectionCard from "../components/FirstSectionCard";
 import SecondSectionCard from "../components/SecondSectionCard";
-import React, { useState, useEffect } from 'react';
-
 
 const Dashboard = () => {
-
   return (
     <div className="h-full w-full">
       <Header isLoggedin={false} />
@@ -24,27 +21,26 @@ const Dashboard = () => {
             gateway to showcasing talent.
           </p>
           <div className="buttons">
-          <Link className="Host-btn px-4 py-2 text-sm font-medium text-white shadow-sm " to="/Signupashost">
-            <button>
-            Join as Host
-            </button>
-          </Link>
-          
-          <Link className="participant-btn px-4 py-2 text-sm font-medium text-white shadow-sm " to="/Signupasparticipant">
-            <button>
-            Join as Participant
-            </button>
-          </Link>
-          
-          </div>
+            <Link
+              className="Host-btn px-4 py-2 text-sm font-medium text-white shadow-sm "
+              to="/Signupashost"
+            >
+              <button>Join as Host</button>
+            </Link>
 
+            <Link
+              className="participant-btn px-4 py-2 text-sm font-medium text-white shadow-sm "
+              to="/Signupasparticipant"
+            >
+              <button>Join as Participant</button>
+            </Link>
+          </div>
         </div>
         <div className="right-content flex w-full items-center justify-end p-4 md:flex-1">
           <img src={Image} alt="image" className="image h-auto max-w-full" />
         </div>
       </div>
       <div className="cont flex max-w-full  items-start p-4 md:flex-row">
-        
         <img
           src={SecondImage}
           alt=""
@@ -64,34 +60,44 @@ const Dashboard = () => {
       </div>
       <div className="third-section flex  flex-row items-start p-4 md:flex-row">
         <div className="cards-container flex flex-wrap justify-between">
-          <h2 className="section-title mb-2 font-bold text-black">Join us as Participant And discover</h2>
+          <h2 className="section-title mb-2 font-bold text-black">
+            Join us as Participant And discover
+          </h2>
           <FirstSectionCard />
-         
         </div>
-        
-      </div>
-      
-      <div className="forth-section flex max-w-full  items-start p-4 md:flex-row">
-        
-      <div className={`cont `}>
-        <h1 className="mb-2 text-xl font-bold text-black">Connect with Industry</h1>
-        <p className="text-base" style={{ color: 'black' }}>
-          Discover the expansive potential of VieHub, extending beyond a conventional platform. It serves as a pivotal hub, linking extraordinary talent with the dynamic needs of diverse industries. Uncover a wealth of collaboration possibilities and pathways for advancing your career.
-        </p>
-      </div>
-        <div className={`third-image-container flex max-w-full items-start p-4 md:flex-row `}>
-        <img src={ThridImage} alt="" className="mb-4 h-auto max-w-full third-image" />
       </div>
 
+      <div className="forth-section flex max-w-full  items-start p-4 md:flex-row">
+        <div className={`cont `}>
+          <h1 className="mb-2 text-xl font-bold text-black">
+            Connect with Industry
+          </h1>
+          <p className="text-base" style={{ color: "black" }}>
+            Discover the expansive potential of VieHub, extending beyond a
+            conventional platform. It serves as a pivotal hub, linking
+            extraordinary talent with the dynamic needs of diverse industries.
+            Uncover a wealth of collaboration possibilities and pathways for
+            advancing your career.
+          </p>
+        </div>
+        <div
+          className={`third-image-container flex max-w-full items-start p-4 md:flex-row `}
+        >
+          <img
+            src={ThridImage}
+            alt=""
+            className="third-image mb-4 h-auto max-w-full"
+          />
+        </div>
       </div>
 
       <div className="third-section flex  flex-row items-start p-4 md:flex-row">
         <div className="cards-container flex flex-wrap justify-between">
-          <h2 className="section-title mb-2 font-bold text-black">Join us as Host And discover</h2>
+          <h2 className="section-title mb-2 font-bold text-black">
+            Join us as Host And discover
+          </h2>
           <SecondSectionCard />
-         
         </div>
-        
       </div>
       <Footer />
     </div>

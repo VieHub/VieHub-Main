@@ -5,7 +5,8 @@ import { NAV_ITEMS } from "@/constants";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import PersonIcon from "@mui/icons-material/Person";
+import ProfileDropdown from "@/modules/host/components/profileDropDown";
+import { useState } from "react";
 
 interface HeaderProps {
   isLoggedin: boolean;
@@ -13,6 +14,8 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ isLoggedin }) => {
   const navigate = useNavigate();
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
 
   return (
     <header className="flex items-center justify-between bg-white px-3 py-3 text-black md:px-20">
@@ -40,7 +43,6 @@ const Header: React.FC<HeaderProps> = ({ isLoggedin }) => {
               {item.name}
             </a>
           ))}
-          
         </nav>
       </div>
 
@@ -53,13 +55,17 @@ const Header: React.FC<HeaderProps> = ({ isLoggedin }) => {
         />
         {/* Conditionally render the signup button or profile icon based on prop value */}
         {isLoggedin ? (
-          <Link to="/profile">
-            {/* <PersonIcon className="text-gray-900" /> */}
-            <img src={account} alt="" className="profile-img "/>
-          </Link>
+          <div onClick={toggleDropdown} className="relative cursor-pointer ">
+            <img
+              src={account}
+              alt="Profile"
+              className="profile-img h-8 w-8 rounded-full"
+            />
+            {dropdownOpen && <ProfileDropdown />}
+          </div>
         ) : (
           <Link to="/Signup">
-            <button className="signup-btn  px-4 py-2 text-sm font-medium text-white shadow-sm ">
+            <button className="signup-btn px-4 py-2 text-sm font-medium text-white shadow-sm ">
               Sign up
             </button>
           </Link>
@@ -69,7 +75,7 @@ const Header: React.FC<HeaderProps> = ({ isLoggedin }) => {
       {/* Dropdown for mobile, aligned to the right */}
       <div className="md:hidden">
         <Dropdown>
-          <button >
+          <button>
             <MoreHorizIcon />
           </button>
         </Dropdown>
