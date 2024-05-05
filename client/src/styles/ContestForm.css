@@ -1,0 +1,82 @@
+.signup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .signup-form {
+    width: 40%; /* Adjusted width */
+    max-width: 500px; /* Added max-width */
+    padding: 40px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    background-color: #fff;
+    text-align: center; /* Center align the content */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Added box shadow for a professional look */
+  }
+  
+  .signup-form h2 {
+    margin-bottom: 20px;
+  }
+  
+  .form-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px; /* Added margin bottom for spacing */
+  }
+  
+  .form-group {
+    width: 100%;
+    margin-right: 30px;
+  }
+  
+  .form-group input,
+  .form-group label {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    letter-spacing: 1px;
+  }
+  
+  .checkbox-label {
+    display: flex;
+    align-items: center;
+  }
+  
+  .checkbox-label input {
+    margin-right: 10px;
+  }
+  
+  .file-drop-zone {
+    margin-top: 20px; /* Adjust margin as needed */
+  }
+  
+  .button-row {
+    display: flex;
+    margin-left: 250px;
+  }
+  
+  .button {
+    padding: 10px 40px;
+    border: none;
+    border-radius: 60px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    margin-right: 10px;
+    margin-top: 20px;
+  }
+  
+  .file-drop-area {
+    border: 2px dashed #ccc; /* Dotted rectangle */
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .file-msg {
+    color: #888;
+  }
