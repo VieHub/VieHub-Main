@@ -1,0 +1,119 @@
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+li {
+  margin: 0;
+  padding: 0;
+}
+
+/* Apply Sitka Display font to all text */
+body {
+  font-family: "Sitka Display", serif;
+}
+
+/* Center align text */
+.App {
+    
+  text-align: center;
+}
+.host-logo{
+    margin-bottom: 20px;
+    margin-left: 20%;
+  
+}
+
+/* Header styling */
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 100px;
+}
+
+.header p {
+  font-size: 1.5em;
+  margin-bottom: 30px;
+}
+
+
+/* Button styling */
+.host-button {
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  padding: 10px 60px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 30px;
+}
+
+.host-button:hover {
+  background-color: #45a049;
+}
+
+/* Section styling */
+.section {
+  display: flex;
+  justify-content: center;
+  padding: 1px;
+  background-color: #F2F2F2;
+}
+
+.section-container {
+  border-radius: 10px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 80px;
+}
+
+/* Add new CSS for the text under Competition Crafters */
+.section p.multi-line {
+  font-size: 18px;
+  font-family: "Sitka Display", serif;
+  white-space: pre-line; /* Allow line breaks */
+}
+
+.section h2 {
+  font-size: 33px; /* Set the size to 33px */
+  font-weight: bold; /* Make it bold */
+  margin-bottom: 10px;
+}
+
+.section p {
+  font-size: 1em;
+  margin-bottom: 20px;
+}
+
+/* Right-align button in section */
+.section button {
+  margin-left: auto;
+}
+
+/* App.css */
+
+/* Add margin to the images within section-left divs */
+.section-left img {
+  margin-right: 20px; /* Adjust as needed */
+}
+
+/* Adjust padding for section-container to create space between sections */
+.section-container {
+  padding: 80px 0; /* Maintain top and bottom padding only */
+}
+
+.section-left {
+  flex: 1;
+}
+
+.section-right {
+  flex: 1;
+}

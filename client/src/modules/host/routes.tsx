@@ -1,6 +1,6 @@
 // import Host from "./pages/host";
-import PublicHost from "./pages/PublicHost";
-import Privatehost from "./pages/Privatehost";
+import PublicHost from "./pages/PublicContest/PublicHost";
+import Privatehost from "./pages/PrivateContest/Privatehost";
 export default [
   
   {

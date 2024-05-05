@@ -4,6 +4,10 @@
 @import "cards.css";
 @import "host.css";
 @import "Select_h_p.css";
+@import "PublicAndPrivateHost.css";
+@import "ContestForm.css";
+@import "ContestForm2.css";
+@import "payment.css";
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";

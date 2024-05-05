@@ -1,0 +1,56 @@
+.container-pay {
+    width: 350px;
+    margin: 200px auto;
+    padding: 30px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    background-color: #ffffff;
+    text-align: center;
+    height: 42vh;
+  }
+  .h {
+    margin-bottom: 2%;
+  }
+  
+  .icon {
+    margin-right: 5px;
+    margin-bottom: 20px; /* Decreased margin-bottom */
+  }
+  
+  .title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 25px; /* Decreased margin-bottom */
+  }
+  
+  .input-box {
+    margin-bottom: 15px;
+  }
+  
+  .input-box input {
+    width: 80%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+  }
+  
+  .input-row {
+    display: flex;
+    margin-left: 20px;
+    margin-bottom: 15px;
+  }
+  
+  .button-row {
+    display: flex;
+    margin-left: 110px;
+  }
+  
+  .button {
+    padding: 10px 40px;
+    border: none;
+    border-radius: 60px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    margin-right: 10px;
+  }

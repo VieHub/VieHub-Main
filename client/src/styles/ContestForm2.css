@@ -1,0 +1,101 @@
+.signup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .signup-form {
+    width: 80%; /* Adjusted width */
+    max-width: 600px; /* Added max-width */
+    padding: 40px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    background-color: #fff;
+    text-align: center; /* Center align the content */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Added box shadow for a professional look */
+  }
+  
+  .signup-form h2 {
+    margin-bottom: 20px;
+  }
+  
+  .form-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px; /* Added margin bottom for spacing */
+  }
+  
+  .form-group {
+    width: 48%; /* Adjusted width */
+    margin-right: 30px;
+  }
+  
+  .form-group input,
+  .form-group label {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+  
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    letter-spacing: 1px; /* Added letter spacing */
+  }
+  
+  /* PublicCompetitionForm.css */
+  
+  .custom-select {
+    width: 100%; /* Ensure the select element takes up the full width of its container */
+    padding: 8px; /* Adjust padding to match other form elements */
+    border: 1px solid #ccc; /* Add border */
+    border-radius: 10px; /* Add border radius */
+    background-color: #fff; /* Set background color */
+    font-size: 16px; /* Set font size */
+    cursor: pointer; /* Change cursor on hover */
+    margin-left: 10px;
+  }
+  
+  .custom-select:focus {
+    outline: none; /* Remove default focus outline */
+    border-color: #007bff; /* Change border color on focus */
+    box-shadow: 0 0 0 2px #007bff; /* Add box shadow on focus */
+  }
+  
+  .button-container {
+    display: flex;
+    margin-left: 450px; /* Center align the buttons */
+    margin-top: 20px;
+  }
+  
+  .button-container button[type="submit"] {
+    padding: 10px 40px; /* Adjusted padding */
+    border-radius: 60px;
+    border: none;
+    background-color: #aaf2c2;
+    color: #fff;
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
+    cursor: pointer;
+  }
+  
+  .separator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 30px 0;
+  }
+  
+  .separator-line {
+    flex-grow: 1;
+    height: 1px;
+    background-color: #ccc;
+  }
+  
+  .separator-text {
+    margin: 0 10px;
+    color: #777;
+    font-weight: bold;
+  }
