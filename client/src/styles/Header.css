@@ -5,20 +5,19 @@
   box-sizing: border-box;
 }
 /* Footer css */
-.bg-fotter{
-  background-color: #343A40;
+.bg-fotter {
+  background-color: #343a40;
 }
-.foteer-img{
+.foteer-img {
   width: 25%;
 }
 /* Footer css end */
-
 /* Nav Item Styles */
 .nav-item {
   position: relative;
   overflow: hidden;
   cursor: pointer;
-  transition: color 0.2s ease-in-out;
+  transition: color 0.5s ease-out;
 }
 
 .nav-item::after {
@@ -27,11 +26,12 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 2px;
+  height: 2.6px; /* Increased from 2px to 4px for thicker line */
   background-color: #000;
+  border-radius: 2px;
   transform: scaleX(0);
-  transform-origin: bottom right;
-  transition: transform 0.25s ease-out;
+  transform-origin: bottom left;
+  transition: transform 0.35s ease-out; /* Slowed down from 0.55s to 0.75s */
 }
 
 .nav-item:hover::after {
@@ -58,8 +58,6 @@
   object-fit: cover; /* Ensure the image covers the container */
 }
 
-
-
 .signup-btn:hover {
   background-color: darkgreen;
 }
@@ -68,7 +66,7 @@
 .content,
 .cont {
   display: flex;
-  flex-wrap:nowrap; /* Allow items to wrap on smaller screens */
+  flex-wrap: nowrap; /* Allow items to wrap on smaller screens */
   justify-content: space-between;
   align-items: center;
   background-color: #2b6777;
@@ -83,10 +81,9 @@
 .cont {
   background-color: #ffffff;
   flex-direction: column;
-
 }
 
-.buttons{
+.buttons {
   display: flex;
   flex-direction: row;
   align-items: flex-end; /* Align items horizontally at center */
@@ -99,7 +96,7 @@
   margin-top: 30px;
   border: none;
   border-radius: 5px;
-  background-color: #52AB98;
+  background-color: #52ab98;
   color: #fff;
   font-weight: bold;
   cursor: pointer;
@@ -158,9 +155,8 @@
   padding-top: 35px;
   padding-left: 10px;
   width: 80%;
-  
 }
-.image{
+.image {
   width: 85%;
   margin-right: 50px;
 }
@@ -175,7 +171,8 @@
 /* Media Query for smaller screens */
 @media (max-width: 768px) {
   .content,
-  .cont,.forth-section {
+  .cont,
+  .forth-section {
     flex-direction: column; /* Stack content vertically on smaller screens */
     width: auto; /* Adjust width to fit smaller screens */
   }
@@ -210,7 +207,6 @@
   width: 100%; /* Adjust the width of the image */
   height: auto;
   border-radius: 17px;
-  
 }
 /* Animation for second div */
 /* Animation for second div */
@@ -223,14 +219,17 @@
   }
 }
 
-.cont, .forth-section {
+.cont,
+.forth-section {
   opacity: 0;
   animation: fadeIn 2s ease forwards; /* Apply animation effect */
 }
 @keyframes slideInFromRight {
   from {
     opacity: 0;
-    transform: translateX(100%); /* Start from outside the viewport on the right */
+    transform: translateX(
+      100%
+    ); /* Start from outside the viewport on the right */
   }
   to {
     opacity: 1;
@@ -241,9 +240,3 @@
 .animate-slide-in {
   animation: slideInFromRight 0.5s ease forwards;
 }
-
-
-
-
-
-
