@@ -1,3 +1,5 @@
+import base64
+import json
 import uvicorn
 from fastapi import FastAPI
 import firebase_admin
@@ -6,13 +8,20 @@ from pyrebase import pyrebase
 import os
 from dotenv import load_dotenv
 from firebase_admin import firestore
+from google.oauth2 import service_account
 
 # Load environment variables
 load_dotenv()
 
 if not firebase_admin._apps:
-    cred = credentials.Certificate(os.environ["FIREBASE_SERVICE_ACCOUNT_KEY_JSON"])
-    firebase_admin.initialize_app(cred)
+    encoded_creds = os.environ.get('FIREBASE_SERVICE_ACCOUNT_KEY_JSON')
+    decoded_creds = base64.b64decode(encoded_creds)
+# Load it as a JSON object
+    service_account_info = json.loads(decoded_creds)
+# Use this object to create a credential object
+    credentials =credentials.Certificate(service_account_info)
+# Use the credentials to authenticate the Firebase Admin SDK
+    firebase_admin.initialize_app(credentials)
 
 firebaseConfig = {
     "apiKey": os.environ["FIREBASE_API_KEY"],
