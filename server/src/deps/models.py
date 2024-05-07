@@ -33,6 +33,17 @@ class SignUpSchema(BaseModel):
 class UserModel(BaseModel):
     email: str
     uid: str
+    firstName : str
+    lastName : str
+    phone : str
+    role: str
+    specialization: str
+    email: str
+    skills: str
+
+class Participant(BaseModel):
+    user_id: str
+
 
 
 class LoginSchema(BaseModel):
@@ -54,6 +65,14 @@ class Contest(BaseModel):
     skill_level: str
     location: str
     host_uid: Optional[str] = None  # Make host_uid optional as it will be filled in by the application logic
+    participants: List[Participant] = []
+
+class ContestModel(BaseModel):
+    title: str
+    description: str
+    start_date: datetime
+    end_date: datetime
+    user_id: str  # Reference to the user who created the contest
 
 class Submission(BaseModel):
     contest_id: str
@@ -62,23 +81,38 @@ class Submission(BaseModel):
     description: Optional[str] = None
 
 class UserProfile(BaseModel):
-    uid: str
     email: str
-    name: Optional[str] = None
-    skills: List[str] = []
-    description: Optional[str] = None
-    role: str  # "host" or "participant"
+    uid: str
+    role:str
+    firstName: str
+    lastName: str
+    phone:str
+    skills:str
+    specialization:str
+
+
 class ProjectSchema(BaseModel):
     name: str = Field(..., description="The name of the project")
     description: str = Field(..., description="A brief description of the project")
     start_date: date = Field(..., description="Project start date")
-    end_date: date = Field(None, description="Project end date, optional")
+    end_date: Optional[date] = Field(None, description="Project end date, optional")
+
+    def model_dump(self):
+        # Convert the model to a dictionary suitable for Firestore
+        return {
+            "name": self.name,
+            "description": self.description,
+            "start_date": self.start_date.isoformat(),
+            "end_date": self.end_date.isoformat() if self.end_date else None
+        }
     # Add other fields as necessary
 class UserProfileUpdateSchema(BaseModel):
-    name: Optional[str] = None
-    skills: Optional[List[str]] = None
-    description: Optional[str] = None
-    role: Optional[str] = Field(None, description="Can be 'host' or 'participant'")
+    email:Optional[str] = None
+    firstName: Optional[str] = None
+    lastName: Optional[str] = None
+    phone:Optional[str] = None
+    skills:Optional[str] = None
+    specialization:Optional[str] = None
 
 class ContestUpdateSchema(BaseModel):
     name: Optional[str] = None

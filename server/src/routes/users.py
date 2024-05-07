@@ -5,108 +5,25 @@ from fastapi.responses import JSONResponse
 from fastapi.exceptions import HTTPException
 from fastapi.requests import Request
 from src.deps.auth import   auth , firebase ,db
+import logging
 
 from fastapi import Security
 router = APIRouter(prefix="/users", tags=["users"])
 from fastapi import Cookie, HTTPException, status, Response
 from fastapi.responses import JSONResponse
-
-@router.post('/signup')
-async def create_an_account(user_data: SignUpSchema, response: Response):
-    try:
-        user_record = auth.create_user(
-            email=user_data.email,
-            password=user_data.password
-        )
-        user_creds = firebase.auth().sign_in_with_email_and_password(user_data.email, user_data.password)
-
-        db.collection('users').document(user_record.uid).set({
-            "email": user_data.email,
-            "role": user_data.role,
-            "first_name": user_data.first_name,
-            "last_name": user_data.last_name,
-            "company_name": user_data.company_name,
-            "company_phone": user_data.company_phone,
-            "company_address": user_data.company_address,
-            "industry": user_data.industry
-        })
-
-   
-        return JSONResponse(
-            content={
-                "message": f"Account created successfully for {user_data.first_name} {user_data.last_name} as a {user_data.role}",
-                "uid": user_record.uid,
-                "token": user_creds["idToken"]
-            },
-            status_code=status.HTTP_201_CREATED
-        )
-    except auth.EmailAlreadyExistsError:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail=f"Account already created for this e-mail {user_data.email}"
-        )
-@router.post('/login')
-async def login(user_data: LoginSchema):
-    try:
-        user = firebase.auth().sign_in_with_email_and_password(email=user_data.email, password=user_data.password)
-
-
-        return JSONResponse(
-            content={
-                "uid": user["localId"],  # Include UID in the response
-                "token": user["idToken"]
-
-
-            }, 
-            status_code=200
-        )
-    except Exception as e:
-        raise HTTPException(
-            status_code=400, 
-            detail="Invalid User Credentials"
-        )
+logging.basicConfig(level=logging.DEBUG)
 
 
 
-@router.get('/user/{uid}', response_model=UserModel)
+
+@router.get('/user/{uid}')
 async def read_user(uid: str):
     try:
-        user_record = auth.get_user(uid)
+        user_record = db.collection('users').document(uid).get().to_dict()
         # Adjust the UserModel fields based on what you want to return
-        return UserModel(email=user_record.email, uid=user_record.uid)
+        return user_record
     except auth.UserNotFoundError:
         raise HTTPException(status_code=404, detail="User not found")
-@router.post('/ping')
-async def validate_token(request: Request):
-    headers = request.headers
-    jwt = headers.get('authorization')
-    if jwt and jwt.startswith("Bearer "):
-        jwt = jwt[7:]  # Strip "Bearer " prefix
-    try:
-        user = auth.verify_id_token(jwt)
-        return {"user_id": user["uid"]}  # Ensure this matches your expected format
-    except Exception as e:
-        raise HTTPException(status_code=401, detail=str(e))
-# @router.post('/logout')
-# async def logout(request: Request):
-#    """
-#     Logs out a user by revoking their Firebase refresh token.
-#     It requires the JWT to be passed in the request headers for authorization.
-#     On success, it returns a message indicating the user has been logged out successfully.
-#     If an error occurs during the process, it returns an error message.
-#     """
-#    jwt = request.headers.get('authorization')
-#    decoded_token = auth.verify_id_token(jwt)
-#    uid = decoded_token['uid']
-#    try:
-#       auth.revoke_refresh_tokens(uid)
-#       return {"message": "User logged out successfully"}
-#    except Exception as e:
-#       raise HTTPException(status_code=400, detail="Error logging out")
-@router.post('/logout')
-async def logout(response: Response):
-    response.delete_cookie("token")
-    return {"message": "Logged out successfully"}
 
 
 @router.patch("/user/update")
@@ -126,7 +43,7 @@ async def update_user_profile(uid: str, update_data: UserProfileUpdateSchema):
     return {"message": "User profile updated successfully"}
 
 
-@router.post('/user/{uid}/add-project', response_model=ProjectSchema)
+@router.post('/user/{uid}/add-project')
 async def add_project_to_user(uid: str, project_data: ProjectSchema):
     user_ref = db.collection('users').document(uid)
     user_doc = user_ref.get()
@@ -137,10 +54,11 @@ async def add_project_to_user(uid: str, project_data: ProjectSchema):
     # Assuming user's projects are stored in an array field in their document
     # If the user does not have a 'projects' field, it initializes as an empty list
     projects = user_doc.to_dict().get('projects', [])
-    projects.append(project_data.model_dump())
-
+    new_project = project_data.model_dump()
+    projects.append(new_project)
     user_ref.update({"projects": projects})
 
+ 
     return {"message": "Project added successfully"}
 
 
