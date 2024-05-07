@@ -31,6 +31,7 @@ firebaseConfig = {
     "messagingSenderId": os.environ["FIREBASE_MESSAGING_SENDER_ID"],
     "appId": os.environ["FIREBASE_APP_ID"],
     "measurementId": os.environ["FIREBASE_MEASUREMENT_ID"],
+    "databaseURL": ""
 }
 
 firebase = pyrebase.initialize_app(firebaseConfig)
