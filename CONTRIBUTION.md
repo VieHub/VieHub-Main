@@ -1,89 +1,82 @@
-# Starting dev server
+Here's a `CONTRIBUTION.md` file for your project, Viehub, detailing how contributors can get involved:
 
-```bash
-docker compose -f compose.dev.yml up
-```
+---
 
-client will be up on http://localhost:4173
+# Contributing to Viehub
 
-server will be up on http://localhost:8000
+We are thrilled to have you interested in contributing to Viehub! This document provides guidelines for making contributions to the project. By participating, you agree to abide by our standards and collaborate constructively with our community.
 
-# On how to start the server / client only (not both), look into the respective CONTRIBUTION guide on the folder:
+## Code of Conduct
 
-- server [server CONTRIBUTION.md](./server/CONTRIBUTION.md)
-- client [client CONTRIBUTION.md](./client/CONTRIBUTION.md)
+Viehub is committed to fostering a welcoming and inclusive environment. All contributors are expected to adhere to our Code of Conduct. Please read the [Code of Conduct](CODE_OF_CONDUCT.md) thoroughly before participating.
 
-# On testing
+## How to Contribute
 
-Testing done individually on each folder (./client or ./server). Please refer to respective CONTRIBUTION.md (server or client)
+Contributions to Viehub can be made in various forms, including bug reports, feature requests, documentation improvements, and code updates. Here’s how you can contribute:
 
-# Issue on github
+### Reporting Bugs
 
-Here's a quick step by step on what to do for making a contribution
+Bugs are tracked as GitHub issues. When you are creating a bug report, please include:
 
-1. Create / find an issue you would like to solve [here](https://github.com/orgs/FINGU-GRINDA/projects/11)
+- A clear and descriptive title.
+- A detailed description of the issue with specific details to help us replicate the problem.
+- Suggest a step-by-step reproduction method if applicable.
+- Explain the behavior you observed after following the steps and what you expected to happen.
+- Include screenshots and animated GIFs if they help demonstrate the issue.
 
-   ![Alt text](./docs/image.png)
-   ![Alt text](./docs/image2.png)
+### Suggesting Enhancements
 
-2. Drag the issue to 'in progress' and assign the issue to yourself
+Enhancement suggestions are also tracked as GitHub issues. If you wish to suggest a new feature or a change to an existing one, please:
 
-   ![Alt text](./docs/image3.png)
+- Use a clear and descriptive title.
+- Provide a step-by-step description of the suggested enhancement in as many details as possible.
+- Include examples to illustrate how the enhancement would function ideally.
+- Explain why this enhancement would be useful to Viehub users and the broader community.
 
-3. Create a branch, by clicking on the 'create a branch' button
+### Pull Requests
 
-   ![Alt text](./docs/image4.png)
-   ![Alt text](./docs/image5.png)
+We actively welcome your pull requests:
 
-4. Checkout the branch you just created in your local git
+1. Fork the repo and create your branch from `main`.
+2. If you've added code that should be tested, add tests.
+3. Ensure the test suite passes.
+4. Make sure your code lints.
+5. Issue that pull request!
 
-   ![Alt text](./docs/image6.png)
-   ![Alt text](./docs/image7.png)
+### Your First Code Contribution
 
-5. Code your contribution, add some test if needed (probably won't be needed for this project, just make sure it's running fine)
+Unsure where to begin contributing to Viehub? You can start by looking through the `beginner` and `help-wanted` tags in our issues:
 
-6. Commit your changes, can be once or multiple commit refer to [semantic commit](https://gist.github.com/joshbuchea/6f47e86d2510bce28f8e7f42ae84c716) on how to write your commit message. Or you can use write the following in your terminal.
+- **Beginner issues** - issues which should only require a few lines of code, and a test or two.
+- **Help wanted issues** - issues which should be a bit more involved than `beginner` issues.
 
-```bash
-npx czg
-```
+Both issue lists are great for getting started.
 
-7. Push your changes to your branch upstream
+## Development Setup
 
-8. Create a pull request
+Please follow the steps in our README.md to set up your development environment. Once you have set up and tested your development environment, you are ready to contribute and send your fixes or enhancements to Viehub.
 
-   ![Alt text](./docs/image8.png)
+## Styleguides
 
-9. Tag everyone as reviewers, and assign yourself as assignee
+### Git Commit Messages
 
-   ![Alt text](./docs/image9.png)
+- Use the present tense ("Add feature" not "Added feature")
+- Use the imperative mood ("Move cursor to..." not "Moves cursor to...")
+- Limit the first line to 72 characters or less
+- Reference issues and pull requests liberally after the first line
+- Consider starting the commit message with an applicable emoji:
+    - :art: `:art:` when improving the format/structure of the code
+    - :racehorse: `:racehorse:` when improving performance
+    - :memo: `:memo:` when writing docs
+    - :bug: `:bug:` when fixing a bug
 
-10. Wait for the CI to run, if it's all green merge your branch to alpha branch
+### Coding Standards
 
-    - In case of failing CI, click to check the details, and try to fix it, tag other people or message in slack if needing help
-      ![Alt text](./docs/image10.png)
-    - In this case apparently the linting failed on client side, we need to fix that
-      ![Alt text](./docs/image11.png)
+- Use camelCase for variable names and function names.
+- Use PascalCase for class names.
+- Use 4 spaces for indentation.
+- Keep your code clean and well-commented.
 
-11. After all checks have been satisfied (green), merge and squash the pull request
-    ![Alt text](./docs/image12.png)
+## Recognition
 
-12. Make sure the title of the commit adheres to [semantic commit](https://gist.github.com/joshbuchea/6f47e86d2510bce28f8e7f42ae84c716) or
-
-```bash
-npx czg
-```
-
-    ![Alt text](./docs/image13.png)
-
-13. Congratz you're done! 🎉
-
-## Thank you for contributing!
-
-1. Edge cases:
-   - when you added a new env, CI will fail because you need to add the env to the github where the CI is performed
-     - in repo secrets, check and update CLIENT_ENVFILE_DEV and SERVER_ENVFILE_DEV for the env values
-   - sometimes check will always fail due to we running out of free runner quota for the month from github
-2. Sometimes a single issue need to be solved through several branches merge. You can reopen issue, and attach additional branch to the issue.
-3. These contribution.md are not a hard rule, but it's good to be organized. Feel free to change the rules or suggest a better approach :D.
-4. Happy dev ing and good luck !
+Contributors who significantly improve Viehub or demonstrate high commitment can be recognized as Core Contributors in our community. We value your contributions and want to ensure you receive the recognition you deserve.
