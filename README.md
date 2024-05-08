@@ -1,6 +1,3 @@
-Here's an expanded and detailed version of your app description for Viehub:
-
----
 
 # Viehub
 
