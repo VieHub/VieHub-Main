@@ -6,14 +6,14 @@
   }
   
   .signup-form {
-    width: 80%; /* Adjusted width */
-    max-width: 600px; /* Added max-width */
+    width: 80%; 
+    max-width: 600px; 
     padding: 40px;
     border: 1px solid #ccc;
     border-radius: 20px;
     background-color: #fff;
-    text-align: center; /* Center align the content */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Added box shadow for a professional look */
+    text-align: center; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
   }
   
   .signup-form h2 {
@@ -23,11 +23,11 @@
   .form-row {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 15px; /* Added margin bottom for spacing */
+    margin-bottom: 15px; 
   }
   
   .form-group {
-    width: 48%; /* Adjusted width */
+    width: 48%; 
     margin-right: 30px;
   }
   
@@ -40,36 +40,35 @@
   
     border-radius: 10px;
     border: 1px solid #ccc;
-    letter-spacing: 1px; /* Added letter spacing */
+    letter-spacing: 1px; 
   }
   
-  /* PublicCompetitionForm.css */
   
   .custom-select {
-    width: 100%; /* Ensure the select element takes up the full width of its container */
-    padding: 8px; /* Adjust padding to match other form elements */
-    border: 1px solid #ccc; /* Add border */
-    border-radius: 10px; /* Add border radius */
-    background-color: #fff; /* Set background color */
-    font-size: 16px; /* Set font size */
-    cursor: pointer; /* Change cursor on hover */
+    width: 100%; 
+    padding: 8px;
+    border: 1px solid #ccc; 
+    border-radius: 10px; 
+    background-color: #fff; 
+    font-size: 16px; 
+    cursor: pointer; 
     margin-left: 10px;
   }
   
   .custom-select:focus {
-    outline: none; /* Remove default focus outline */
-    border-color: #007bff; /* Change border color on focus */
-    box-shadow: 0 0 0 2px #007bff; /* Add box shadow on focus */
+    outline: none; 
+    border-color: #007bff; 
+    box-shadow: 0 0 0 2px #007bff; 
   }
   
   .button-container {
     display: flex;
-    margin-left: 450px; /* Center align the buttons */
+    margin-left: 450px; 
     margin-top: 20px;
   }
   
   .button-container button[type="submit"] {
-    padding: 10px 40px; /* Adjusted padding */
+    padding: 10px 40px; 
     border-radius: 60px;
     border: none;
     background-color: #aaf2c2;

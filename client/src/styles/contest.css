@@ -38,6 +38,14 @@
   .sorting-option:hover {
     text-decoration: underline;
   }
+  .filter-section-title{
+    font-weight: 600;
+  }
+  .filter-title{
+    font-weight: bold;
+    font-size: large;
+    margin-bottom: 20px;
+  }
   
   
   @media (max-width: 767px) {
