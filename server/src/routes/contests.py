@@ -9,9 +9,10 @@ from src.deps.auth import   auth , firebase ,db
 import uuid
 
 from fastapi import Security
+from src.middlewares.authentication import oauth2_authentication
 router = APIRouter(prefix="/contest", tags=["contests"])
 @router.post("/contest/create", response_model=Contest)
-async def create_contest(uid: str, contest: Contest, request: Request):
+async def create_contest(uid: str, contest: Contest, request: Request , current_user: dict = Depends(oauth2_authentication)):
     user_ref = db.collection('users').document(uid)
     user_doc = user_ref.get()
 
@@ -42,7 +43,7 @@ async def get_contests():
     return contests
 
 @router.get('/contests/{uid}' ,response_model=List[Contest])
-async def get_contests_by_id( uid: str):
+async def get_contests_by_id( uid: str , current_user: dict = Depends(oauth2_authentication)):
     contests_query = db.collection('contests').where('host_uid', '==', uid).stream()
 
     contests = []
@@ -66,7 +67,7 @@ async def get_contests_by_id( uid: str):
     return contests
 
 @router.patch("/contest/{contest_id}/update")
-async def update_contest(contest_id: str, contest_update: ContestUpdateSchema, request: Request):
+async def update_contest(contest_id: str, contest_update: ContestUpdateSchema, request: Request , current_user: dict = Depends(oauth2_authentication)):
     """
     Updates an existing contest's details. Only the host who created the contest can update it.
     Contest ID is passed as a path parameter, and updated fields are provided in the request body as a ContestUpdateSchema model.
@@ -86,7 +87,7 @@ async def update_contest(contest_id: str, contest_update: ContestUpdateSchema, r
     contest_ref.update(contest_update.model_dump(exclude_unset=True))
     return {"message": "Contest updated successfully"}
 @router.post("/contest/{contest_id}/enroll")
-async def enroll_in_contest(participant_uid:str,contest_id: str):
+async def enroll_in_contest(participant_uid:str,contest_id: str , current_user: dict = Depends(oauth2_authentication)):
  
     # Fetch participant details from the users collection
     user_ref = db.collection('users').document(participant_uid)
@@ -120,7 +121,7 @@ async def enroll_in_contest(participant_uid:str,contest_id: str):
 
 
 @router.post("/contest/{contest_id}/submit")
-async def submit_to_contest(contest_id: str, submission: SubmissionSchema, request: Request):
+async def submit_to_contest(contest_id: str, submission: SubmissionSchema, request: Request , current_user: dict = Depends(oauth2_authentication)):
     """
     Allows participants to submit their work for a contest they are enrolled in.
     The contest ID is passed as a path parameter, and submission details are provided in the request body as a SubmissionSchema model.
@@ -139,7 +140,7 @@ async def submit_to_contest(contest_id: str, submission: SubmissionSchema, reque
 
 
 @router.post("/feedback/{contest_id}")
-async def submit_feedback(contest_id: str, feedback: FeedbackSchema, request: Request):
+async def submit_feedback(contest_id: str, feedback: FeedbackSchema, request: Request , current_user: dict = Depends(oauth2_authentication)):
     """
     Allows users to submit feedback for a specific contest.
     The contest ID is passed as a path parameter, and feedback details are provided in the request body as a FeedbackSchema model.

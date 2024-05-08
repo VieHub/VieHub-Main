@@ -8,6 +8,7 @@ from src.deps.auth import   auth , firebase ,db
 import logging
 
 from fastapi import Security
+from src.middlewares.authentication import oauth2_authentication
 router = APIRouter(prefix="/users", tags=["users"])
 from fastapi import Cookie, HTTPException, status, Response
 from fastapi.responses import JSONResponse
@@ -17,7 +18,7 @@ logging.basicConfig(level=logging.DEBUG)
 
 
 @router.get('/user/{uid}')
-async def read_user(uid: str):
+async def read_user(uid: str, current_user: dict = Depends(oauth2_authentication)):
     try:
         user_record = db.collection('users').document(uid).get().to_dict()
         # Adjust the UserModel fields based on what you want to return
@@ -27,7 +28,7 @@ async def read_user(uid: str):
 
 
 @router.patch("/user/update")
-async def update_user_profile(uid: str, update_data: UserProfileUpdateSchema):
+async def update_user_profile(uid: str, update_data: UserProfileUpdateSchema , current_user: dict = Depends(oauth2_authentication)):
     """
     Updates a user's profile information based on the provided UID and update data.
     Allows updating fields like name, skills, and description.
@@ -44,7 +45,7 @@ async def update_user_profile(uid: str, update_data: UserProfileUpdateSchema):
 
 
 @router.post('/user/{uid}/add-project')
-async def add_project_to_user(uid: str, project_data: ProjectSchema):
+async def add_project_to_user(uid: str, project_data: ProjectSchema , current_user: dict = Depends(oauth2_authentication)):
     user_ref = db.collection('users').document(uid)
     user_doc = user_ref.get()
 

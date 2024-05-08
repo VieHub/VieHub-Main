@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 from src.routes import (
-    users,contests
+    users,contests, workflows
 
 )
 
@@ -10,3 +10,4 @@ router = APIRouter(prefix="/api")
 router.include_router(router=users.router)
 router.include_router(router=contests.router)
 
+router.include_router(router=workflows.router)
