@@ -129,17 +129,17 @@
 .info {
   width: 28%; /* Adjust as needed */
 }
-.info-container,.info  ul {
+.info  ul {
   list-style-type: none;
   padding-left: 0;
 }
 
-.info-container,.infoul li {
+.info li {
   margin-bottom: 10px;
   margin-left: 4%;
 }
 
-.info-container,.info ul li:before {
+.info ul li:before {
   content: "•";
   display: inline-block;
   width: 1em;
