@@ -1,6 +1,3 @@
-Here's a `CONTRIBUTION.md` file for your project, Viehub, detailing how contributors can get involved:
-
----
 
 # Contributing to Viehub
 
