@@ -19,12 +19,20 @@ const Host: React.FC = () => {
     if (direction === "next") {
       const nextItemId = currentItemId === "item1" ? "item2" : "item1";
       const nextItem = document.getElementById(nextItemId);
-      nextItem?.scrollIntoView({ behavior: "smooth" });
+      nextItem?.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+        inline: "start",
+      });
       setActiveItemId(nextItemId);
     } else {
       const prevItemId = currentItemId === "item1" ? "item2" : "item1";
       const prevItem = document.getElementById(prevItemId);
-      prevItem?.scrollIntoView({ behavior: "smooth" });
+      prevItem?.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+        inline: "start",
+      });
       setActiveItemId(prevItemId);
     }
   };

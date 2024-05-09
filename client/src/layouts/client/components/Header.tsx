@@ -7,16 +7,22 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import ProfileDropdown from "@/modules/host/components/profileDropDown";
 import { useState } from "react";
+import { useAuth } from "@/contexts/AuthContext";
 
 interface HeaderProps {
   isLoggedin: boolean;
 }
 
-const Header: React.FC<HeaderProps> = ({ isLoggedin }) => {
-  const navigate = useNavigate();
+const Header: React.FC<HeaderProps> = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
+  const auth = useAuth();
+  const navigate = useNavigate();
 
+  let isUserLoggedIn = auth?.isAuthInitialized && auth.user;
+  // if (!auth?.isAuthInitialized) {
+  //   return <div></div>; // Display a loading spinner or placeholder here
+  // }
   return (
     <header className="flex items-center justify-between bg-white px-3 py-3 text-black md:px-20">
       {/* Flex container for logo and nav items */}
@@ -54,21 +60,26 @@ const Header: React.FC<HeaderProps> = ({ isLoggedin }) => {
           className="text-gray-900 placeholder-gray-500 border-gray-300 block rounded-md border py-2 pl-4 pr-3 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm"
         />
         {/* Conditionally render the signup button or profile icon based on prop value */}
-        {isLoggedin ? (
-          <div onClick={toggleDropdown} className="relative cursor-pointer ">
-            <img
-              src={account}
-              alt="Profile"
-              className="profile-img h-8 w-8 rounded-full"
-            />
-            {dropdownOpen && <ProfileDropdown />}
-          </div>
+        {auth?.isAuthInitialized ? (
+          isUserLoggedIn ? (
+            <div onClick={toggleDropdown} className="relative cursor-pointer">
+              <img
+                src={account}
+                alt="Profile"
+                className="profile-img h-8 w-8 rounded-full"
+              />
+              {dropdownOpen && <ProfileDropdown />}
+            </div>
+          ) : (
+            <Link to="/Signup">
+              <button className="signup-btn px-4 py-2 text-sm font-medium text-white shadow-sm">
+                Sign up
+              </button>
+            </Link>
+          )
         ) : (
-          <Link to="/Signup">
-            <button className="signup-btn px-4 py-2 text-sm font-medium text-white shadow-sm ">
-              Sign up
-            </button>
-          </Link>
+          // Render empty space or minimal placeholder if not initialized
+          <div style={{ width: 82 }}></div> // Adjust width as necessary to match the button or profile image
         )}
       </div>
 
