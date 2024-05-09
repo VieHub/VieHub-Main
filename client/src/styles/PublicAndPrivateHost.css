@@ -18,7 +18,7 @@ body {
 }
 
 /* Center align text */
-.App {
+.App1 {
     
   text-align: center;
 }
@@ -29,14 +29,14 @@ body {
 }
 
 /* Header styling */
-.header {
+.header1 {
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 100px;
 }
 
-.header p {
+.header1 p {
   font-size: 1.5em;
   margin-bottom: 30px;
 }
@@ -102,12 +102,13 @@ body {
 
 /* Add margin to the images within section-left divs */
 .section-left img {
-  margin-right: 20px; /* Adjust as needed */
+  margin-right: 90px; /* Adjust as needed */
+  margin-left: 220px;
 }
 
 /* Adjust padding for section-container to create space between sections */
 .section-container {
-  padding: 80px 0; /* Maintain top and bottom padding only */
+  padding: 80px; /* Maintain top and bottom padding only */
 }
 
 .section-left {
