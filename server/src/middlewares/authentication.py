@@ -17,7 +17,7 @@ async def oauth2_authentication(token: str = Depends(oauth2_scheme)):
     if not token:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Not authenticated")
     try:
-
+        
         # Decode the token using Firebase Admin SDK
         decoded_token = firebase_auth.verify_id_token(token)
         return decoded_token
