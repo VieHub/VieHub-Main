@@ -1,28 +1,42 @@
-// withAuth.tsx
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
+import { useUserData } from "@/hooks/useUserData";
 
-// Extend T with JSX.IntrinsicAttributes to allow for keys, refs, etc.
 function withAuth<T extends JSX.IntrinsicAttributes>(
   Component: React.ComponentType<T>,
 ) {
   return (props: T) => {
     const auth = useAuth();
     const navigate = useNavigate();
+    const {
+      data: user,
+      isLoading,
+      isError,
+    } = useUserData(auth?.user?.uid ?? "default-user-id");
 
     useEffect(() => {
-      // Redirect if auth is initialized and no user is logged in
-
-      if (auth?.isAuthInitialized && auth.user === null) {
-        console.log("Redirecting to /");
-        navigate("/");
+      if (auth?.isAuthInitialized && !auth.user) {
+        // No user logged in
+        console.log("Redirecting to login because no auth user");
+        navigate("/login");
+      } else if (auth?.user && !isLoading && !isError) {
+        // User is logged in and user data has been fetched
+        if (user && user.role === "Host") {
+          navigate("/host");
+        } else if (user && user.role === "Participant") {
+          navigate("/contest");
+        }
       }
-    }, [auth?.user, auth?.isAuthInitialized, navigate]);
+    }, [auth, navigate, user, isLoading, isError]);
 
-    // Render nothing or a minimal loading screen until auth is initialized
-    // if (!auth?.isAuthInitialized) {
-    //   return <div>Loading...</div>;
+    // Render nothing or a minimal loading screen until auth is initialized and user data is loaded
+    if (!auth?.isAuthInitialized || isLoading) {
+      return <div></div>;
+    }
+
+    // if (isError) {
+    //   return <div>Error loading user data.</div>;
     // }
 
     // Render the wrapped component with all its props
