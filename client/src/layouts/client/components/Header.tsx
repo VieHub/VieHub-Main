@@ -32,7 +32,7 @@ const Header: React.FC<HeaderProps> = ({ isLoggedin }) => {
           {NAV_ITEMS.map((item) => (
             <a
               key={item.name}
-              href={`#${item.section}`}
+              href={`${item.section}`}
               onClick={() => {
                 if (item.name === "Home") {
                   navigate("/");

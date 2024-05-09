@@ -1,7 +1,7 @@
 export const NAV_ITEMS = [
   {
     name: "Home",
-    section: "Home",
+    section: "/",
   },
   {
     name: "Contest",
@@ -9,6 +9,6 @@ export const NAV_ITEMS = [
   },
   {
     name: "Host Contest",
-    section: "Host Contest",
+    section: "host/PublicHost",
   },
 ];
