@@ -8,10 +8,12 @@ import TypingAnimation from "../components/TypingAnimation";
 import FirstSectionCard from "../components/FirstSectionCard";
 import SecondSectionCard from "../components/SecondSectionCard";
 
+
 const Dashboard = () => {
+
   return (
     <div className="h-full w-full">
-      <Header isLoggedin={false} />
+      <Header isLoggedin={true} />
       <div className="content flex max-w-full flex-wrap">
         <div className="left-content w-full p-4 md:flex-1">
           <TypingAnimation text="Welcome to VieHub - Where Talent Meets Opportunity Discover Your Potential" />

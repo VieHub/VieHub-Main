@@ -130,7 +130,7 @@ const Login: React.FC = () => {
               Login with Google
             </button>
             <p className="p-5">
-              Don't have a Viehub account? <Link to="/host">Sign up</Link>
+              Don't have a Viehub account? <Link to="/signup">Sign up</Link>
             </p>
           </div>
         </div>
