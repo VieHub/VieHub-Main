@@ -2,6 +2,8 @@ import Header from "@/layouts/client/components/Header";
 import Footer from "@/layouts/client/components/Footer";
 import image from "@/assets/images/publicImage.png";
 import React, { useState } from 'react';
+import { Link } from "react-router-dom";
+
 
 const ContestForm: React.FC = () => {
     
@@ -9,61 +11,79 @@ const ContestForm: React.FC = () => {
         //   e.preventDefault();
         //   // Handle form submission
         // };
-    return (
-        <div className="signup3-container">
-      <div className="signup3-form">
-        <h2>Sign up to Join a Contest</h2>
-        <form >
-        {/* onSubmit={handleSubmit} */}
-          <div className="form3-row">
-            <div className="form3-group">
-              <input
-                type="text"
-                placeholder="Preferences for Customizing Contest Templates"
-              />
+        return (
+          <div className="h-full w-full">
+              <Header isLoggedin={true} />
+              <div className="signupc-container">
+        <div className="signupc-form">
+          <h2>Public Competition Form</h2>
+          <form >
+            <div className="formc-row">
+              <div className="formc-group">
+                <select className="customc-select">
+                  <option value="">Select Type of Competition</option>
+                  <option value="Coding">Coding</option>
+                  <option value="Design">Design</option>
+                  <option value="Art">Art</option>
+                  <option value="Writing">Writing </option>
+                  <option value="Photography">Photography </option>
+                  <option value="Video">Video and Animation Challenges</option>
+                  <option value="Start up">Start up </option>
+                  <option value="Task">Task </option>
+                  {/* Add more options as needed */}
+                </select>
+              </div>
+        
+              <div className="formc-group">
+                <input type="text" placeholder="Title of the competition" />
+              </div>
             </div>
-          </div>
-          <div className="form3-row">
-            <div className="form3-group">
-              <input
-                type="text"
-                placeholder="Criteria for Evaluating Submissions"
-              />
+            <div className="formc-row">
+              <div className="formc-group">
+                <input type="text" placeholder="Description of the competition" />
+              </div>
+              <div className="formc-group">
+                <input type="tel" placeholder="Start and End Dates" />
+              </div>
             </div>
-          </div>
-          <div className="form3-row">
-            <div className="form3-group">
-              <input
-                type="text"
-                placeholder="Terms and Conditions of the competition"
-              />
+            <div className="formc-row">
+              <div className="form-group" style={{ width: "80%" }}>
+                <input type="text" placeholder="Number of participant" />
+              </div>
             </div>
-          </div>
-          <div>
-            <label>
-              <input type="checkbox" id="agreedToTerms" />
-              <span> I agree to the platform's terms of service</span>
-            </label>
-          </div>
-          <div className="file-drop-zone">
-            <p>Upload image for your contest:</p>
-            <div className="file-drop-area">
-              <span className="file-msg">Drag and drop files here</span>
+            <div className="formc-row">
+              <div className="form-group" style={{ width: "80%" }}>
+                <input
+                  type="text"
+                  placeholder="Details of Prizes or Recognition for Winners"
+                />
+              </div>
             </div>
-          </div>
-          <div className="button3-row">
-            <button className="button3">Back</button>
-            <button className="button3">Submit</button>
-          </div>
-        </form>
-      </div>
-    
-            {/* <Footer /> */}
+            <div className="formc-row">
+              <div className="formc-group" style={{ width: "80%" }}>
+                <input type="text" placeholder="Details of Prizes or Recognition for Winners" />
+              </div>
+            </div>
+        
+            <div className="buttonc-container">
+            <Link to="/host/PublicHost/SecondPage">
+              <button type="submit" style={{ backgroundColor: '#52AB98' }}>Next</button>
+              </Link>
+            </div>
+          </form>
         </div>
-    );
+        </div>
+              <Footer />
+          </div>
+        );
+
 };
 
 export default ContestForm;
+
+
+
+
 
 
 

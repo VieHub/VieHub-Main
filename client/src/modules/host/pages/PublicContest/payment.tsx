@@ -39,8 +39,9 @@ const payment: React.FC = () => {
           </div>
         </div>
         <div className="button-pay-row">
-          <button className="button-pay">Back</button>
-          <button className="button-pay">Submit</button>
+          
+          <button className="button-pay" style={{ backgroundColor: '#C4C4C4' }}>Back</button>
+          <button className="button-pay" style={{ backgroundColor: '#52AB98' }}>Submit</button>
         </div>
       </div>
     </div>

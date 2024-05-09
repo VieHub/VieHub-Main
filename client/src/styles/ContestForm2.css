@@ -1,13 +1,14 @@
-.signupc-container {
+  .signup3-container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    /* margin-left:450px; */
   }
   
-  .signupc-form {
-    width: 80%; 
-    max-width: 600px; 
+  .signup3-form {
+    width: 100%; 
+    max-width: 500px; 
     padding: 40px;
     border: 1px solid #ccc;
     border-radius: 20px;
@@ -16,85 +17,69 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
   }
   
-  .signupc-form h2 {
+  .signup3-form h2 {
     margin-bottom: 20px;
   }
   
-  .formc-row {
+  .form3-row {
     display: flex;
     justify-content: space-between;
     margin-bottom: 15px; 
   }
   
-  .formc-group {
-    width: 200%; 
+  .form3-group {
+    width: 100%;
     margin-right: 30px;
   }
   
-  .formc-group input,
-  .formc-group label {
+  .form3-group input,
+  .form3-group label {
     display: block;
-    width: 100%;
+    width: 110%;
     padding: 10px;
-    margin-bottom: 10px;
-  
     border-radius: 10px;
     border: 1px solid #ccc;
-    letter-spacing: 1px; 
+    letter-spacing: 1px;
   }
   
-  
-  .customc-select {
-    width: 100%; 
-    padding: 8px;
-    border: 1px solid #ccc; 
-    border-radius: 10px; 
-    background-color: #fff; 
-    font-size: 16px; 
-    cursor: pointer; 
-    margin-left: 10px;
-  }
-  
-  .customc-select:focus {
-    outline: none; 
-    border-color: #007bff; 
-    box-shadow: 0 0 0 2px #007bff; 
-  }
-  
-  .buttonc-container {
+  .checkbox3-label {
     display: flex;
-    margin-left: 400px; 
+    align-items: center;
+  }
+  
+  .checkbox3-label input {
+    margin-right: 200px;
+  }
+  
+  .file-drop-zone {
+    margin-top: 20px; 
+    
+  }
+  
+  .button3-row {
+    display: flex;
+    margin-left: 150px;
+  }
+  
+  .button3 {
+    padding: 10px 40px;
+    border: none;
+    border-radius: 60px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    margin-right: 20px;
     margin-top: 20px;
   }
   
-  .buttonc-container button[type="submit"] {
-    padding: 10px 40px; 
-    border-radius: 60px;
-    border: none;
-    background-color: #aaf2c2;
-    color: #fff;
-    font-family: "Roboto", sans-serif;
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 20px;
-    cursor: pointer;
+  .file-drop-area {
+    border: 2px dashed #ccc; 
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    
   }
   
-  .separator {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 30px 0;
-  }
-  
-  .separator-line {
-    flex-grow: 1;
-    height: 1px;
-    background-color: #ccc;
-  }
-  
-  .separator-text {
-    margin: 0 10px;
-    color: #777;
-    font-weight: bold;
+  .file-msg {
+    color: #888;
   }

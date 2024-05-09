@@ -46,7 +46,34 @@
     font-size: large;
     margin-bottom: 20px;
   }
+  .contest-card {
+    position: relative;
+  }
   
+  .contest-card:hover::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 20px; /* Adjust the width as needed */
+    background-color: rgba(0, 60, 95, 0.7); /* Specify the color with opacity */
+    transition: width 0.3s ease; /* Add a smooth transition */
+  }
+  
+  .contest-card:hover::before {
+    content: "";
+    position: absolute;
+    right: 100%;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: rgba(43, 103, 119, 0.7); /* Specify the color with opacity */
+    transition: right 0.3s ease; /* Add a smooth transition */
+  }
+  
+  
+ 
   
   @media (max-width: 767px) {
     .search-container {
@@ -75,6 +102,12 @@
       .sorting-bar, .sorting-label {
         display: none; /* Hide sorting container on small screens */
       }
+      /* .filter-card{
+        width: 70%;
+      }
+      .card-cont{
+        max-width: 100%;
+      } */
       /* .sorting-container {
         flex-direction: row;
         align-items: center;
