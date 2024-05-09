@@ -1,12 +1,13 @@
-.signup-container {
+.signup3-container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    margin-left:450px;
   }
   
-  .signup-form {
-    width: 40%; 
+  .signup3-form {
+    width: 100%; 
     max-width: 500px; 
     padding: 40px;
     border: 1px solid #ccc;
@@ -16,57 +17,58 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
   }
   
-  .signup-form h2 {
+  .signup3-form h2 {
     margin-bottom: 20px;
   }
   
-  .form-row {
+  .form3-row {
     display: flex;
     justify-content: space-between;
     margin-bottom: 15px; 
   }
   
-  .form-group {
+  .form3-group {
     width: 100%;
     margin-right: 30px;
   }
   
-  .form-group input,
-  .form-group label {
+  .form3-group input,
+  .form3-group label {
     display: block;
-    width: 100%;
+    width: 110%;
     padding: 10px;
     border-radius: 10px;
     border: 1px solid #ccc;
     letter-spacing: 1px;
   }
   
-  .checkbox-label {
+  .checkbox3-label {
     display: flex;
     align-items: center;
   }
   
-  .checkbox-label input {
-    margin-right: 10px;
+  .checkbox3-label input {
+    margin-right: 200px;
   }
   
   .file-drop-zone {
     margin-top: 20px; 
+    
   }
   
-  .button-row {
+  .button3-row {
     display: flex;
-    margin-left: 250px;
+    margin-left: 150px;
   }
   
-  .button {
+  .button3 {
     padding: 10px 40px;
     border: none;
     border-radius: 60px;
     background-color: #007bff;
     color: #fff;
     cursor: pointer;
-    margin-right: 10px;
+    margin-right: 20px;
     margin-top: 20px;
   }
   
@@ -75,6 +77,7 @@
     border-radius: 10px;
     padding: 20px;
     text-align: center;
+    
   }
   
   .file-msg {

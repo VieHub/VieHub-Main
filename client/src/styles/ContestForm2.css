@@ -1,11 +1,11 @@
-.signup-container {
+.signupc-container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
   }
   
-  .signup-form {
+  .signupc-form {
     width: 80%; 
     max-width: 600px; 
     padding: 40px;
@@ -16,23 +16,23 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
   }
   
-  .signup-form h2 {
+  .signupc-form h2 {
     margin-bottom: 20px;
   }
   
-  .form-row {
+  .formc-row {
     display: flex;
     justify-content: space-between;
     margin-bottom: 15px; 
   }
   
-  .form-group {
-    width: 48%; 
+  .formc-group {
+    width: 200%; 
     margin-right: 30px;
   }
   
-  .form-group input,
-  .form-group label {
+  .formc-group input,
+  .formc-group label {
     display: block;
     width: 100%;
     padding: 10px;
@@ -44,7 +44,7 @@
   }
   
   
-  .custom-select {
+  .customc-select {
     width: 100%; 
     padding: 8px;
     border: 1px solid #ccc; 
@@ -55,19 +55,19 @@
     margin-left: 10px;
   }
   
-  .custom-select:focus {
+  .customc-select:focus {
     outline: none; 
     border-color: #007bff; 
     box-shadow: 0 0 0 2px #007bff; 
   }
   
-  .button-container {
+  .buttonc-container {
     display: flex;
-    margin-left: 450px; 
+    margin-left: 400px; 
     margin-top: 20px;
   }
   
-  .button-container button[type="submit"] {
+  .buttonc-container button[type="submit"] {
     padding: 10px 40px; 
     border-radius: 60px;
     border: none;

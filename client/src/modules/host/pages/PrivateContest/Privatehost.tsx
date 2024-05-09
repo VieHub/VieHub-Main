@@ -7,11 +7,11 @@ const PrivateHost: React.FC = () => {
     return (
         <div className="h-full w-full">
             <Header isLoggedin={true} />
-            <div className="App">
-      <div className="header">
-        <div className="header-center">
+            <div className="App1">
+      <div className="header1">
+        <div className="header1-center">
         <img className="host-logo" src={image} alt="" />
-          <p className="header-text">
+          <p className="header1-text">
             <span style={{ fontWeight: "bold" }}>
               private competition that hosts a discreet and exclusive
               environment

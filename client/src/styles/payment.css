@@ -1,18 +1,23 @@
 .container-pay {
-    width: 350px;
+    width: 450px;
     margin: 200px auto;
     padding: 30px;
     border: 1px solid #ccc;
     border-radius: 20px;
     background-color: #ffffff;
     text-align: center;
-    height: 42vh;
+    height: 55vh;
   }
   .h {
     margin-bottom: 2%;
   }
-  
+  .icons {
+    display: flex; /* Use flexbox */
+    justify-content: center; /* Center the icons horizontally */
+  }
   .icon {
+    width: 50px; /* Set the width */
+  height: 50px; 
     margin-right: 5px;
     margin-bottom: 20px; 
   }
@@ -23,29 +28,29 @@
     margin-bottom: 25px;
   }
   
-  .input-box {
+  .input-pay-box {
     margin-bottom: 15px;
   }
   
-  .input-box input {
-    width: 80%;
+  .input-pay-box input {
+    width: 90%;
     padding: 10px;
     border-radius: 10px;
     border: 1px solid #ccc;
   }
   
-  .input-row {
+  .input-pay-row {
     display: flex;
-    margin-left: 20px;
+    margin-left: 5px;
     margin-bottom: 15px;
   }
   
-  .button-row {
+  .button-pay-row {
     display: flex;
     margin-left: 110px;
   }
   
-  .button {
+  .button-pay {
     padding: 10px 40px;
     border: none;
     border-radius: 60px;

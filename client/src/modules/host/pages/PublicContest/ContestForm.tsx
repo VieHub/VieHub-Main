@@ -10,29 +10,29 @@ const ContestForm: React.FC = () => {
         //   // Handle form submission
         // };
     return (
-        <div className="signup-container">
-      <div className="signup-form">
+        <div className="signup3-container">
+      <div className="signup3-form">
         <h2>Sign up to Join a Contest</h2>
         <form >
         {/* onSubmit={handleSubmit} */}
-          <div className="form-row">
-            <div className="form-group">
+          <div className="form3-row">
+            <div className="form3-group">
               <input
                 type="text"
                 placeholder="Preferences for Customizing Contest Templates"
               />
             </div>
           </div>
-          <div className="form-row">
-            <div className="form-group">
+          <div className="form3-row">
+            <div className="form3-group">
               <input
                 type="text"
                 placeholder="Criteria for Evaluating Submissions"
               />
             </div>
           </div>
-          <div className="form-row">
-            <div className="form-group">
+          <div className="form3-row">
+            <div className="form3-group">
               <input
                 type="text"
                 placeholder="Terms and Conditions of the competition"
@@ -51,9 +51,9 @@ const ContestForm: React.FC = () => {
               <span className="file-msg">Drag and drop files here</span>
             </div>
           </div>
-          <div className="button-row">
-            <button className="button">Back</button>
-            <button className="button">Submit</button>
+          <div className="button3-row">
+            <button className="button3">Back</button>
+            <button className="button3">Submit</button>
           </div>
         </form>
       </div>
