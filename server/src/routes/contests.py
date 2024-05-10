@@ -60,6 +60,8 @@ async def create_contest(
     bucket = storage.bucket(name='fastapiauth-d3407.appspot.com')
     blob = bucket.blob(f'contests/{unique_id}/{contest_image.filename}')
     blob.upload_from_string(contest_image.file.read(), content_type=contest_image.content_type)
+    blob.make_public()  # Make the file publicly accessible
+
     contest_data['image_url'] = blob.public_url
 
     db.collection('contests').document(unique_id).set(contest_data)
