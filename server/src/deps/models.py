@@ -59,14 +59,15 @@ class LoginSchema(BaseModel):
 class Contest(BaseModel):
     name: str = Field(..., example="Art Competition")
     description: str = Field(..., example="Monthly art competition.")
-    start_date: str = Field(..., example="2024-01-01T00:00:00")
-    end_date: str = Field(..., example="2024-01-31T23:59:59")
+    start_date: str = Field(..., example="2024-01-01")
+    end_date: str = Field(..., example="2024-01-31")
     skill_level: str = Field(..., example="Intermediate")
-    location: str = Field(..., example="New York")
     host_uid: Optional[str] = None
     rules: str = Field(..., example="No plagiarism allowed.")
     participants: List[str] = []
+    prize: str = Field(..., example="1000 USD")
     image_url: Optional[str] = None
+    company: str = Field(..., example="Acme Inc.")
 
 class ContestModel(BaseModel):
     title: str

@@ -18,10 +18,11 @@ async def create_contest(
     name: str = Form(...),
     description: str = Form(...),
     start_date: str = Form(...),
+    prize: str = Form(...),
     end_date: str = Form(...),
     skill_level: str = Form(...),
-    location: str = Form(...),
     rules: str = Form(...),
+    company: str = Form(...),
     contest_image: UploadFile = File(...),
     current_user: dict = Depends(oauth2_authentication)
 ):
@@ -39,7 +40,8 @@ async def create_contest(
         "start_date": start_date,
         "end_date": end_date,
         "skill_level": skill_level,
-        "location": location,
+        "company": company,  # Add the company field to the contest model
+        "prize": prize,
         "rules": rules,
         "host_uid": uid,  # Set the host UID based on the authenticated user
         "participants": []
@@ -90,7 +92,6 @@ async def get_contests_by_id( uid: str , current_user: dict = Depends(oauth2_aut
             name=contest_dict['name'],
             description=contest_dict['description'],
             skill_level=contest_dict['skill_level'],
-            location=contest_dict['location'],
             start_date=(contest_dict['start_date']),
             end_date=(contest_dict['end_date']),
             host_uid=contest_dict['host_uid']

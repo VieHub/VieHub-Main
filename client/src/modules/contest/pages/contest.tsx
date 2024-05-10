@@ -1,38 +1,21 @@
 // import Sort from "@mui/icons-material/Sort"; // Import the Sort icon
 import ContestCard from "../components/CreateCard";
-import image from "@/assets/images/image 2.png";
-
+// import image from "@/assets/images/image 2.png";
+import { getContestData } from "@/hooks/getContestData";
+import { Key } from "react";
 const Contest = () => {
   // const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   // const toggleDropdown = () => {
   //   setIsDropdownOpen(!isDropdownOpen);
   // };
+  // isError
+  const { data: listOfcontests, isLoading } = getContestData();
+  if (isLoading) {
+    return <div></div>;
+  }
 
-  const contests = [
-    {
-      name: "Contest 1",
-      description: "Description of Contest 1",
-      image: image,
-      prize: "1000$",
-      participants: "20",
-      companyNamee: "Alex",
-      startDate: "nov 02 2023 ",
-      endDate: "nov 02 2024 ",
-    },
-    {
-      name: "Contest 2",
-      description: "Description of Contest 2",
-      image: "https://via.placeholder.com/300",
-      prize: "1000$",
-      participants: "20",
-      companyNamee: "Alex",
-      startDate: "nov 02 2023 ",
-      endDate: "nov 02 2024 ",
-    },
-    // Add more contests as needed
-  ];
-
+  console.log("list of contests", listOfcontests);
   return (
     <div className="flex h-full w-full flex-col">
       <div className="content flex max-w-full flex-wrap">
@@ -61,7 +44,10 @@ const Contest = () => {
         </div>
       </div>
       <div className="sorting-container mt-4 flex justify-center">
-        <span className="sorting-label mr-20">Showing 4 Contests</span>
+        <span className="sorting-label mr-20">
+          {" "}
+          Showing {listOfcontests ? listOfcontests.length : 0} Contests
+        </span>
         <span className="sorting-label">Sort:</span>
         <div className="sorting-bar">
           <div className="sorting-options">
@@ -184,19 +170,33 @@ const Contest = () => {
         </div>
         <div className=" mt-4 flex flex-col items-center md:ml-8 md:mr-24 md:flex-1 ">
           {/* Render ContestCards */}
-          {contests.map((contest, index) => (
-            <ContestCard
-              key={index}
-              name={contest.name}
-              description={contest.description}
-              image={contest.image}
-              prize={contest.prize}
-              participants={contest.participants}
-              companyName={contest.companyNamee}
-              startDate={contest.startDate}
-              endDate={contest.endDate}
-            />
-          ))}
+          {listOfcontests.map(
+            (
+              contest: {
+                name: string;
+                description: string;
+                image: string;
+                prize: string;
+                participants: string;
+                companyNamee: string;
+                startDate: string;
+                endDate: string;
+              },
+              index: Key | null | undefined,
+            ) => (
+              <ContestCard
+                key={index}
+                name={contest.name}
+                description={contest.description}
+                image={contest.image}
+                prize={contest.prize}
+                participants={contest.participants}
+                companyName={contest.companyNamee}
+                startDate={contest.startDate}
+                endDate={contest.endDate}
+              />
+            ),
+          )}
         </div>
       </div>
     </div>
