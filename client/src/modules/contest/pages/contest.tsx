@@ -2,6 +2,7 @@ import Header from "@/layouts/client/components/Header";
 // import Sort from "@mui/icons-material/Sort"; // Import the Sort icon
 import ContestCard from "../components/CreateCard";
 import image from "@/assets/images/image 2.png";
+import Footer from "@/layouts/client/components/Footer";
 
 const Contest = () => {
   // const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -201,6 +202,7 @@ const Contest = () => {
           ))}
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
