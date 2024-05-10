@@ -185,6 +185,7 @@ const Contest = () => {
                 company: string;
                 start_date: string;
                 end_date: string;
+                image_url: string;
               },
               index: Key | null | undefined,
             ) => (
@@ -192,7 +193,7 @@ const Contest = () => {
                 key={index}
                 name={contest.name}
                 description={contest.description}
-                image={contest.image}
+                image={contest.image_url}
                 prize={contest.prize}
                 participants={contest.participants}
                 companyName={contest.company}
