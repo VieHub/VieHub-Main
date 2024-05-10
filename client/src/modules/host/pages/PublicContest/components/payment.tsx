@@ -1,11 +1,13 @@
+// import Header from "@/layouts/client/components/Header";
 import React from "react";
 import mastercard from "@/assets/images/pay3.png";
 import paypal from "@/assets/icons/paypal-svgrepo-com.svg";
 import visa from "@/assets/icons/visa-svgrepo-com.svg";
 
-const payment: React.FC = () => {
+const Payment: React.FC<{ onPrevStep: () => void }> = ({ onPrevStep }) =>  {
   return (
     <div className="h-full w-full">
+      {/* <Header /> */}
       <div className="">
         <div>
           {/* Adding icons with space */}
@@ -32,12 +34,9 @@ const payment: React.FC = () => {
               </div>
             </div>
             <div className="button-pay-row">
-              <button
-                className="button-pay"
-                style={{ backgroundColor: "#C4C4C4" }}
-              >
-                Back
-              </button>
+            <button className="button-pay" onClick={onPrevStep} style={{ backgroundColor: "#C4C4C4" }}>
+              Back
+            </button>
               <button
                 className="button-pay"
                 style={{ backgroundColor: "#52AB98" }}
@@ -48,8 +47,9 @@ const payment: React.FC = () => {
           </div>
         </div>
       </div>
+      {/* <Footer /> */}
     </div>
   );
 };
 
-export default payment;
+export default Payment;
