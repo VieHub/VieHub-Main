@@ -1,9 +1,9 @@
-
+// import Header from "@/layouts/client/components/Header";
+// import Footer from "@/layouts/client/components/Footer";
 // import image from "@/assets/images/publicImage.png";
 import React from "react";
-import { Link } from "react-router-dom";
 
-const ContestForm: React.FC = () => {
+const ContestForm: React.FC<{ onNextStep: () => void }> = ({ onNextStep }) =>{
   // const handleSubmit = (e) => {
   //   e.preventDefault();
   //   // Handle form submission
@@ -68,11 +68,11 @@ const ContestForm: React.FC = () => {
             </div>
 
             <div className="buttonc-container">
-              <Link to="/host/PublicHost/SecondPage">
-                <button type="submit" style={{ backgroundColor: "#52AB98" }}>
+              {/* <Link to="/host/PublicHost/SecondPage"> */}
+                <button type="submit" onClick={onNextStep} style={{ backgroundColor: "#52AB98" }}>
                   Next
                 </button>
-              </Link>
+              {/* </Link> */}
             </div>
           </form>
         </div>

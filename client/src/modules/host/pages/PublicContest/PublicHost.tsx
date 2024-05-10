@@ -1,11 +1,18 @@
-
+// import Header from "@/layouts/client/components/Header";
+// import Footer from "@/layouts/client/components/Footer";
 import image from "@/assets/images/publicImage.png";
 import React from "react";
 import { Link } from "react-router-dom";
+import worldImage from "@/assets/images/graphic global community.svg";
+import teamWork from "@/assets/images/teamwork-removebg-preview.png"
+
+
+
 
 const PublicHost: React.FC = () => {
   return (
     <div className="h-full w-full">
+      {/* <Header /> */}
       <div className="App1">
         <div className="header1">
           <div className="header1-center">
@@ -18,7 +25,7 @@ const PublicHost: React.FC = () => {
                 effortlessly with our platform. <br /> Start hosting now!
               </span>
             </p>
-            <Link to="/host/PublicHost/ContestForm">
+            <Link to="/host/PublicHost/multi-step-form">
               <button className="host-button">Host public competitions</button>
             </Link>
           </div>
@@ -27,7 +34,7 @@ const PublicHost: React.FC = () => {
         <section className="section">
           <div className="section-container">
             <div className="section-left">
-              <img src="https://picsum.photos/id/237/200/300" alt="image" />
+              <img src={worldImage} alt="image" />
             </div>
             <div className="section-right">
               <h2>Igniting Innovation in Every Competition</h2>
@@ -51,7 +58,7 @@ const PublicHost: React.FC = () => {
             style={{ flexDirection: "row-reverse" }}
           >
             <div className="section-left">
-              <img src="https://picsum.photos/id/238/200/300" alt="image" />
+              <img src={teamWork} alt="image" />
             </div>
             <div className="section-right">
               <h2>Competition Crafters</h2>
@@ -70,6 +77,7 @@ const PublicHost: React.FC = () => {
           </div>
         </section>
       </div>
+      {/* <Footer /> */}
     </div>
   );
 };
