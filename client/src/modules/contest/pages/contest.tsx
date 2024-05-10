@@ -1,8 +1,6 @@
-import Header from "@/layouts/client/components/Header";
 // import Sort from "@mui/icons-material/Sort"; // Import the Sort icon
 import ContestCard from "../components/CreateCard";
 import image from "@/assets/images/image 2.png";
-import Footer from "@/layouts/client/components/Footer";
 
 const Contest = () => {
   // const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -37,7 +35,6 @@ const Contest = () => {
 
   return (
     <div className="flex h-full w-full flex-col">
-      <Header />
       <div className="content flex max-w-full flex-wrap">
         <div className="w-full p-12 md:flex-1">
           <p className="desc p-6 text-center text-2xl opacity-100">
@@ -202,7 +199,6 @@ const Contest = () => {
           ))}
         </div>
       </div>
-      <Footer />
     </div>
   );
 };

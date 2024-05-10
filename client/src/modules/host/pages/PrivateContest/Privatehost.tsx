@@ -1,12 +1,10 @@
-import Header from "@/layouts/client/components/Header";
-import Footer from "@/layouts/client/components/Footer";
+
 import image from "@/assets/images/publicImage.png";
 import React from 'react';
 
 const PrivateHost: React.FC = () => {
     return (
         <div className="h-full w-full">
-            <Header />
             <div className="App1">
       <div className="header1">
         <div className="header1-center">
@@ -69,7 +67,6 @@ const PrivateHost: React.FC = () => {
 
       
     </div>
-            <Footer />
         </div>
     );
 };
