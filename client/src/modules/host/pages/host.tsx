@@ -31,7 +31,7 @@ const Host: React.FC = () => {
 
   return (
     <div className="h-full w-full">
-      <Header  />
+      <Header />
       <div className="host-container relative">
         <img src={Image} alt="" className="carousel-img" />
         <div className="carousel text-white">
@@ -165,4 +165,4 @@ const Host: React.FC = () => {
   );
 };
 
-export default withAuth(Host);
+export default withAuth(Host, ["Host"]);

@@ -6,9 +6,10 @@ import email from "@/assets/icons/email-mail-svgrepo-com (1).svg";
 
 function Select() {
   const [selectedOption, setSelectedOption] = useState<string>("");
-  const [isHost] = useState(false);
+  const [isHost, setIsHost] = useState(false);
   const handleOptionSelect = (option: string) => {
     setSelectedOption(option);
+    setIsHost(option === "provider"); // Set isHost based on whether the selected option is 'provider'
   };
 
   return (

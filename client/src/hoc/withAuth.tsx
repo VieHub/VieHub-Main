@@ -5,6 +5,7 @@ import { useUserData } from "@/hooks/useUserData";
 
 function withAuth<T extends JSX.IntrinsicAttributes>(
   Component: React.ComponentType<T>,
+  allowedRoles: string[], // Add this parameter to specify which roles are allowed
 ) {
   return (props: T) => {
     const auth = useAuth();
@@ -16,30 +17,44 @@ function withAuth<T extends JSX.IntrinsicAttributes>(
     } = useUserData(auth?.user?.uid ?? "default-user-id");
 
     useEffect(() => {
-      if (auth?.isAuthInitialized && !auth.user) {
-        // No user logged in
-        console.log("Redirecting to login because no auth user");
-        navigate("/login");
-      } else if (auth?.user && !isLoading && !isError) {
-        // User is logged in and user data has been fetched
-        if (user && user.role === "Host" && auth.user) {
-          navigate("/host");
-        } else if (user && user.role === "Participant") {
-          navigate("/contest");
-        }
+      if (!auth?.isAuthInitialized || isLoading) {
+        // Wait until auth is initialized and loading is done to make any decision
+        return;
       }
-    }, [auth, navigate, user, isLoading, isError]);
 
-    // Render nothing or a minimal loading screen until auth is initialized and user data is loaded
-    // if (!auth?.isAuthInitialized || isLoading) {
-    //   return <div></div>;
-    // }
+      if (!auth.user || isError) {
+        // If no user is logged in or there's an error in loading user data, redirect to login
+        console.log("Redirecting to login because no auth user or error");
+        navigate("/login");
+        return;
+      }
+      console.log("ROLE", user.role);
+
+      if (user && !allowedRoles.includes(user.role)) {
+        // Check user role against allowedRoles
+        console.log(
+          "Unauthorized access attempt by user with role:",
+          user.role,
+        );
+        navigate("/contest"); // Redirect to a safe default page
+        return;
+      }
+    }, [auth, navigate, user, isLoading, isError, allowedRoles]);
+
+    if (
+      !auth?.isAuthInitialized ||
+      isLoading ||
+      (user && !allowedRoles.includes(user.role))
+    ) {
+      // Do not render the component until we are sure user has a correct role
+      return;
+    }
 
     // if (isError) {
     //   return <div>Error loading user data.</div>;
     // }
 
-    // Render the wrapped component with all its props
+    // User is authenticated and authorized
     return <Component {...props} />;
   };
 }
