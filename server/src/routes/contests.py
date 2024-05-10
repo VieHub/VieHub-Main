@@ -1,18 +1,30 @@
 import datetime
 from typing import Annotated, List
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, File, Form, HTTPException, UploadFile
 from src.deps.models import Contest, ContestUpdateSchema, FeedbackSchema, LoginSchema, Participant,SignUpSchema, SubmissionSchema, UserModel, UserProfileUpdateSchema
 from fastapi.responses import JSONResponse
 from fastapi.exceptions import HTTPException
 from fastapi.requests import Request
 from src.deps.auth import   auth , firebase ,db
 import uuid
+from firebase_admin import storage
 
 from fastapi import Security
 from src.middlewares.authentication import oauth2_authentication
 router = APIRouter(prefix="/contest", tags=["contests"])
 @router.post("/contest/create", response_model=Contest)
-async def create_contest(uid: str, contest: Contest, request: Request , current_user: dict = Depends(oauth2_authentication)):
+async def create_contest(
+    uid: str = Form(...),
+    name: str = Form(...),
+    description: str = Form(...),
+    start_date: str = Form(...),
+    end_date: str = Form(...),
+    skill_level: str = Form(...),
+    location: str = Form(...),
+    rules: str = Form(...),
+    contest_image: UploadFile = File(...),
+    current_user: dict = Depends(oauth2_authentication)
+):
     user_ref = db.collection('users').document(uid)
     user_doc = user_ref.get()
 
@@ -20,7 +32,18 @@ async def create_contest(uid: str, contest: Contest, request: Request , current_
         raise HTTPException(status_code=403, detail="Only hosts can create contests")
 
     unique_id = str(uuid.uuid4())
-    contest_data = contest.model_dump()
+    # contest_data = contest.model_dump()
+    contest_data = {
+        "name": name,
+        "description": description,
+        "start_date": start_date,
+        "end_date": end_date,
+        "skill_level": skill_level,
+        "location": location,
+        "rules": rules,
+        "host_uid": uid,  # Set the host UID based on the authenticated user
+        "participants": []
+    }
     contest_data['host_uid'] = uid  # Set the host UID based on the authenticated user
 
     # Set the contest in the contests collection with a unique ID
@@ -31,6 +54,19 @@ async def create_contest(uid: str, contest: Contest, request: Request , current_
     existing_contests = user_doc.to_dict().get('contests', [])
     existing_contests.append(unique_id)
     user_ref.update({'contests': existing_contests})
+    # Upload the image to Firebase Storage
+    bucket = storage.bucket(name='fastapiauth-d3407.appspot.com')
+    blob = bucket.blob(f'contests/{unique_id}/{contest_image.filename}')
+    blob.upload_from_string(contest_image.file.read(), content_type=contest_image.content_type)
+    contest_data['image_url'] = blob.public_url
+
+    db.collection('contests').document(unique_id).set(contest_data)
+
+    # Update the user's document to include this contest ID
+    existing_contests = user_doc.to_dict().get('contests', [])
+    existing_contests.append(unique_id)
+    user_ref.update({'contests': existing_contests})
+
 
     # Return the contest data, including the generated ID
     return {**contest_data, "id": unique_id}
