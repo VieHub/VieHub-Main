@@ -1,4 +1,4 @@
-import logo from "@/assets/logo.png";
+// import logo from "@/assets/Logo.png";
 import FacebookSharpIcon from "@mui/icons-material/FacebookSharp";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import SendSharpIcon from "@mui/icons-material/SendSharp";
@@ -8,11 +8,11 @@ const Footer = () => {
     <>
       <div className="bg-fotter bg-lb-black flex flex-col justify-between px-3 py-3 text-white md:flex-row md:p-20">
         <div className="flex flex-col gap-5 lg:w-2/5">
-          <img src={logo} className="foteer-img" alt="" />
+          {/* <img src={logo} className="foteer-img" alt="" /> */}
           <p>
-          VieHub platform is your gateway to elevating contests, 
-          showcasing your talent, and bridging the gap between 
-          service providers and seekers
+            VieHub platform is your gateway to elevating contests, showcasing
+            your talent, and bridging the gap between service providers and
+            seekers
           </p>
           <div className="flex flex-row gap-5 py-5">
             <div className="border-lb-lightPurple flex h-8 w-8 items-center justify-center rounded-full border bg-[#252525]">
@@ -41,27 +41,41 @@ const Footer = () => {
           </ul> */}
           <ul className="font-semibold">
             <li className="pb-2">For Host:</li>
-            {["Create a New Competition", "Customization Options", "Entry Submission Management", "Judging Panel Setup", "Participant Management","Prizes and Rewards","Security and Fairness"].map(
-              (item) => {
-                return (
-                 <Link to={"/"}><li className="pb-2 text-gray opacity-70" key={item}> 
+            {[
+              "Create a New Competition",
+              "Customization Options",
+              "Entry Submission Management",
+              "Judging Panel Setup",
+              "Participant Management",
+              "Prizes and Rewards",
+              "Security and Fairness",
+            ].map((item) => {
+              return (
+                <Link to={"/"}>
+                  <li className="pb-2 text-gray opacity-70" key={item}>
                     {item}
-                  </li></Link>
-                );
-              },
-            )}
+                  </li>
+                </Link>
+              );
+            })}
           </ul>
           <ul className="font-semibold">
             <li className="pb-2">For Participant :</li>
-            {["Browse Competitions", "Registration and Profile", "Competition Details", "Submission Interface", "Prize Claiming"].map(
-              (item) => {
-                return (
-                  <Link to={"/"}><li className="pb-2 text-gray opacity-70" key={item}>
+            {[
+              "Browse Competitions",
+              "Registration and Profile",
+              "Competition Details",
+              "Submission Interface",
+              "Prize Claiming",
+            ].map((item) => {
+              return (
+                <Link to={"/"}>
+                  <li className="pb-2 text-gray opacity-70" key={item}>
                     {item}
-                  </li></Link>
-                );
-              },
-            )}
+                  </li>
+                </Link>
+              );
+            })}
           </ul>
           <ul className="font-semibold">
             <li className="pb-2">Competition</li>
@@ -75,9 +89,12 @@ const Footer = () => {
               "Task Challenges",
             ].map((item) => {
               return (
-                <Link to={"/"}>  <li className="pb-2 text-gray opacity-70" key={item}>
-                  {item}
-                </li></Link>
+                <Link to={"/"}>
+                  {" "}
+                  <li className="pb-2 text-gray opacity-70" key={item}>
+                    {item}
+                  </li>
+                </Link>
               );
             })}
           </ul>
