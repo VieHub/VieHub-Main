@@ -23,8 +23,6 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           <App />
         </Provider>
       </QueryClientProvider>
-      ,
     </React.StrictMode>
-    ,
   </AuthProvider>,
 );
