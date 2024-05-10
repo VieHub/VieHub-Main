@@ -63,3 +63,8 @@
 
 }
 
+@media (max-width: 768px) {
+ .section-title{
+  margin: 10px ;
+ }
+}

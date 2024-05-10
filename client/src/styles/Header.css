@@ -184,6 +184,10 @@
     padding: 10px 0; /* Add vertical padding for spacing */
     width: auto; /* Ensure content fits within the screen */
   }
+  .cards-container{
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 /* .forth-section h1,

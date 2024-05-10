@@ -1,10 +1,10 @@
-import Header from "@/layouts/client/components/Header";
+// import Header from "@/layouts/client/components/Header";
 import React from 'react';
 
-const ContestForm2: React.FC = () => {
+const ContestForm2: React.FC<{ onNextStep: () => void; onPrevStep: () => void }> = ({ onNextStep, onPrevStep }) => {
     return (
         <div className="h-full w-full">
-            <Header  />
+            {/* <Header  /> */}
             <div className="signup3-container">
           
           <div className="signup3-form">
@@ -48,8 +48,8 @@ const ContestForm2: React.FC = () => {
                 </div>
               </div>
               <div className="button3-row">
-                <button className="button3" style={{ backgroundColor: '#C4C4C4' }}>Back</button>
-                <button className="button3" style={{ backgroundColor: '#52AB98' }}>Submit</button>
+              <button className="button3" onClick={onPrevStep} style={{ backgroundColor: '#C4C4C4' }}>Back</button>
+        <button className="button3" onClick={onNextStep} style={{ backgroundColor: '#52AB98' }}>Next</button>
               </div>
             </form>
           </div>
