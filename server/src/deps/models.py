@@ -56,16 +56,17 @@ class LoginSchema(BaseModel):
                "password": "samplepass123"
             }
         }
-
 class Contest(BaseModel):
-    name: str
-    description: str
-    start_date: datetime
-    end_date: datetime
-    skill_level: str
-    location: str
-    host_uid: Optional[str] = None  # Make host_uid optional as it will be filled in by the application logic
-    participants: List[Participant] = []
+    name: str = Field(..., example="Art Competition")
+    description: str = Field(..., example="Monthly art competition.")
+    start_date: str = Field(..., example="2024-01-01T00:00:00")
+    end_date: str = Field(..., example="2024-01-31T23:59:59")
+    skill_level: str = Field(..., example="Intermediate")
+    location: str = Field(..., example="New York")
+    host_uid: Optional[str] = None
+    rules: str = Field(..., example="No plagiarism allowed.")
+    participants: List[str] = []
+    image_url: Optional[str] = None
 
 class ContestModel(BaseModel):
     title: str
