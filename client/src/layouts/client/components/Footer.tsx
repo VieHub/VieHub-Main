@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <>
-      <div className="bg-fotter bg-lb-black flex flex-col justify-between px-3 py-3 text-white md:flex-row md:p-20">
+      <div className="bg-fotter bg-lb-black flex flex-col justify-between px-3 py-3 text-white md:flex-row md:p-20 ">
         <div className="flex flex-col gap-5 lg:w-2/5">
           {/* <img src={logo} className="foteer-img" alt="" /> */}
           <p>
