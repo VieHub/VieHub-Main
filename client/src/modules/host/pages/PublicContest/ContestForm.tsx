@@ -1,5 +1,4 @@
-import Header from "@/layouts/client/components/Header";
-import Footer from "@/layouts/client/components/Footer";
+
 // import image from "@/assets/images/publicImage.png";
 import React from "react";
 import { Link } from "react-router-dom";
@@ -11,7 +10,6 @@ const ContestForm: React.FC = () => {
   // };
   return (
     <div className="h-full w-full">
-      <Header />
       <div className="signupc-container">
         <div className="signupc-form">
           <h2>Public Competition Form</h2>
@@ -79,7 +77,6 @@ const ContestForm: React.FC = () => {
           </form>
         </div>
       </div>
-      <Footer />
     </div>
   );
 };

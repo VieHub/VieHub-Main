@@ -1,6 +1,5 @@
 import React, { useState, FormEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Header from "@/layouts/client/components/Header";
 import { createHostUserData } from "@/constants/signupData";
 import { useAuth } from "@/contexts/AuthContext.tsx";
 import { getErrorMessage } from "@/utils/errorHandling";
@@ -78,7 +77,6 @@ const SignupAsHost: React.FC = () => {
   };
   return (
     <div className="h-full w-full">
-      <Header />
       <div className="signup-container">
         <div className="signup-form">
           <h2>Sign Up to Host a Contest</h2>

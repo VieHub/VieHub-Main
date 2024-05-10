@@ -1,4 +1,3 @@
-import Header from "@/layouts/client/components/Header";
 import React from "react";
 import mastercard from "@/assets/images/pay3.png";
 import paypal from "@/assets/icons/paypal-svgrepo-com.svg";
@@ -7,7 +6,6 @@ import visa from "@/assets/icons/visa-svgrepo-com.svg";
 const payment: React.FC = () => {
   return (
     <div className="h-full w-full">
-      <Header />
       <div className="">
         <div>
           {/* Adding icons with space */}
@@ -50,7 +48,6 @@ const payment: React.FC = () => {
           </div>
         </div>
       </div>
-      {/* <Footer /> */}
     </div>
   );
 };

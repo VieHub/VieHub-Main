@@ -1,5 +1,4 @@
-import Header from "@/layouts/client/components/Header";
-import Footer from "@/layouts/client/components/Footer";
+
 // import icon from "@/assets/icons/icons8-sort-right-50 (1).png";
 import right from "@/assets/icons/icons8-right-arrow-48.png";
 // import left from "@/assets/icons/icons8-left-arrow-48.png";
@@ -31,7 +30,6 @@ const Host: React.FC = () => {
 
   return (
     <div className="h-full w-full">
-      <Header />
       <div className="host-container relative">
         <img src={Image} alt="" className="carousel-img" />
         <div className="carousel text-white">
@@ -160,7 +158,6 @@ const Host: React.FC = () => {
         <img src={community} alt="" />
       </div>
 
-      <Footer />
     </div>
   );
 };

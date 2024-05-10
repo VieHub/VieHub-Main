@@ -1,7 +1,6 @@
 import React, { useState, FormEvent } from "react";
 
 import { Link, useNavigate } from "react-router-dom";
-import Header from "@/layouts/client/components/Header";
 import { useAuth } from "@/contexts/AuthContext.tsx";
 import { getErrorMessage } from "@/utils/errorHandling"; // Assuming this function is properly exported from the utilities
 
@@ -71,7 +70,6 @@ const Login: React.FC = () => {
 
   return (
     <div className="h-full w-full">
-      <Header  />
       <div className="mx-auto max-w-md">
         <div className="container1">
           <form onSubmit={handleLogin}>

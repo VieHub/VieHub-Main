@@ -1,5 +1,4 @@
-import Header from "@/layouts/client/components/Header";
-import Footer from "@/layouts/client/components/Footer";
+
 import image from "@/assets/images/publicImage.png";
 import React from "react";
 import { Link } from "react-router-dom";
@@ -7,7 +6,6 @@ import { Link } from "react-router-dom";
 const PublicHost: React.FC = () => {
   return (
     <div className="h-full w-full">
-      <Header />
       <div className="App1">
         <div className="header1">
           <div className="header1-center">
@@ -72,7 +70,6 @@ const PublicHost: React.FC = () => {
           </div>
         </section>
       </div>
-      <Footer />
     </div>
   );
 };

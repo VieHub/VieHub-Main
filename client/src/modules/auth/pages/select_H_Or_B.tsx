@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import Header from "@/layouts/client/components/Header";
 import book from "@/assets/icons/guest-book-svgrepo-com (1).svg";
 import email from "@/assets/icons/email-mail-svgrepo-com (1).svg";
 
@@ -14,7 +13,6 @@ function Select() {
 
   return (
     <div className="h-full w-full">
-      <Header />
       <div className="signup-container">
         <div className="select-form">
           <h2 className="mb-2 text-xl font-bold text-black">
