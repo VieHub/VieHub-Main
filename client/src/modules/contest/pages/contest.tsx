@@ -10,9 +10,13 @@ const Contest = () => {
   //   setIsDropdownOpen(!isDropdownOpen);
   // };
   // isError
-  const { data: listOfcontests, isLoading } = getContestData();
+  const { data: listOfcontests, isLoading, isError } = getContestData();
   if (isLoading) {
     return <div></div>;
+  }
+
+  if (isError) {
+    return;
   }
 
   console.log("list of contests", listOfcontests);
@@ -177,10 +181,10 @@ const Contest = () => {
                 description: string;
                 image: string;
                 prize: string;
-                participants: string;
-                companyNamee: string;
-                startDate: string;
-                endDate: string;
+                participants: any;
+                company: string;
+                start_date: string;
+                end_date: string;
               },
               index: Key | null | undefined,
             ) => (
@@ -191,9 +195,9 @@ const Contest = () => {
                 image={contest.image}
                 prize={contest.prize}
                 participants={contest.participants}
-                companyName={contest.companyNamee}
-                startDate={contest.startDate}
-                endDate={contest.endDate}
+                companyName={contest.company}
+                startDate={contest.start_date}
+                endDate={contest.end_date}
               />
             ),
           )}
