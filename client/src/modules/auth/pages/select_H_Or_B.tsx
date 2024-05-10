@@ -1,40 +1,34 @@
-import  { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import Header from "@/layouts/client/components/Header";
 import book from "@/assets/icons/guest-book-svgrepo-com (1).svg";
 import email from "@/assets/icons/email-mail-svgrepo-com (1).svg";
 
-
-
-
 function Select() {
   const [selectedOption, setSelectedOption] = useState<string>("");
-  const [isHost, setIsHost] = useState(false);
+  const [isHost] = useState(false);
   const handleOptionSelect = (option: string) => {
     setSelectedOption(option);
   };
- 
 
   return (
     <div className="h-full w-full">
-      <Header isLoggedin={false} />
+      <Header />
       <div className="signup-container">
         <div className="select-form">
-          <h2 className="mb-2 text-xl font-bold text-black">Join as a Host or a Participant</h2>
+          <h2 className="mb-2 text-xl font-bold text-black">
+            Join as a Host or a Participant
+          </h2>
           <div className="options-container">
-          {/* <Link to={"/Signupashost"}>  */}
-           <div
+            {/* <Link to={"/Signupashost"}>  */}
+            <div
               className={`option-box ${
                 selectedOption === "provider" ? "selected" : ""
               }`}
               onClick={() => handleOptionSelect("provider")}
             >
               <div className="">
-                <img
-                  src={email}
-                  alt="Provider Logo"
-                  className="logo"
-                />
+                <img src={email} alt="Provider Logo" className="logo" />
                 <div className="circle"></div>
                 <p className="option-text">
                   <i>I'm a Provider, Hosting a competition</i>
@@ -50,11 +44,7 @@ function Select() {
               onClick={() => handleOptionSelect("participant")}
             >
               <div className="">
-                <img
-                  src={book}
-                  alt="Participant Logo"
-                  className="logo"
-                />
+                <img src={book} alt="Participant Logo" className="logo" />
                 <div className="circle"></div>
                 <p className="option-text">
                   <i>I'm a Participant, joining a competition</i>
@@ -64,14 +54,17 @@ function Select() {
             {/* </Link> */}
           </div>
           <div className="button-container">
-          <Link to={isHost ? "/Signupashost" : "/Signupasparticipant"}>
-            <button type="submit" className="button">
-              Create My Account
-            </button>
-          </Link>
+            <Link to={isHost ? "/Signupashost" : "/Signupasparticipant"}>
+              <button type="submit" className="button">
+                Create My Account
+              </button>
+            </Link>
           </div>
           <p>
-            Already have an account? <Link to="/login" className="login-link">Log In</Link>
+            Already have an account?{" "}
+            <Link to="/login" className="login-link">
+              Log In
+            </Link>
           </p>
         </div>
       </div>

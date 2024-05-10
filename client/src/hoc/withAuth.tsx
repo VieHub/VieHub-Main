@@ -22,7 +22,7 @@ function withAuth<T extends JSX.IntrinsicAttributes>(
         navigate("/login");
       } else if (auth?.user && !isLoading && !isError) {
         // User is logged in and user data has been fetched
-        if (user && user.role === "Host") {
+        if (user && user.role === "Host" && auth.user) {
           navigate("/host");
         } else if (user && user.role === "Participant") {
           navigate("/contest");
@@ -31,9 +31,9 @@ function withAuth<T extends JSX.IntrinsicAttributes>(
     }, [auth, navigate, user, isLoading, isError]);
 
     // Render nothing or a minimal loading screen until auth is initialized and user data is loaded
-    if (!auth?.isAuthInitialized || isLoading) {
-      return <div></div>;
-    }
+    // if (!auth?.isAuthInitialized || isLoading) {
+    //   return <div></div>;
+    // }
 
     // if (isError) {
     //   return <div>Error loading user data.</div>;

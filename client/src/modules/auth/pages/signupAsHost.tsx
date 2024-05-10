@@ -78,7 +78,7 @@ const SignupAsHost: React.FC = () => {
   };
   return (
     <div className="h-full w-full">
-      <Header isLoggedin={false} />
+      <Header />
       <div className="signup-container">
         <div className="signup-form">
           <h2>Sign Up to Host a Contest</h2>

@@ -9,11 +9,9 @@ import ProfileDropdown from "@/modules/host/components/profileDropDown";
 import { useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 
-interface HeaderProps {
-  isLoggedin: boolean;
-}
 
-const Header: React.FC<HeaderProps> = () => {
+
+const Header: React.FC = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
   const auth = useAuth();

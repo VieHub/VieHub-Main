@@ -19,27 +19,19 @@ const Host: React.FC = () => {
     if (direction === "next") {
       const nextItemId = currentItemId === "item1" ? "item2" : "item1";
       const nextItem = document.getElementById(nextItemId);
-      nextItem?.scrollIntoView({
-        behavior: "smooth",
-        block: "nearest",
-        inline: "start",
-      });
+      nextItem?.scrollIntoView({ behavior: "smooth" });
       setActiveItemId(nextItemId);
     } else {
       const prevItemId = currentItemId === "item1" ? "item2" : "item1";
       const prevItem = document.getElementById(prevItemId);
-      prevItem?.scrollIntoView({
-        behavior: "smooth",
-        block: "nearest",
-        inline: "start",
-      });
+      prevItem?.scrollIntoView({ behavior: "smooth" });
       setActiveItemId(prevItemId);
     }
   };
 
   return (
     <div className="h-full w-full">
-      <Header isLoggedin={true} />
+      <Header  />
       <div className="host-container relative">
         <img src={Image} alt="" className="carousel-img" />
         <div className="carousel text-white">
