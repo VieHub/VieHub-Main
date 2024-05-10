@@ -1,12 +1,12 @@
 import Header from "@/layouts/client/components/Header";
 import Footer from "@/layouts/client/components/Footer";
 import image from "@/assets/images/publicImage.png";
-import React, { useState } from 'react';
+import React from 'react';
 
 const PrivateHost: React.FC = () => {
     return (
         <div className="h-full w-full">
-            <Header isLoggedin={true} />
+            <Header />
             <div className="App1">
       <div className="header1">
         <div className="header1-center">

@@ -71,7 +71,7 @@ const Login: React.FC = () => {
 
   return (
     <div className="h-full w-full">
-      <Header isLoggedin={false} />
+      <Header  />
       <div className="mx-auto max-w-md">
         <div className="container1">
           <form onSubmit={handleLogin}>

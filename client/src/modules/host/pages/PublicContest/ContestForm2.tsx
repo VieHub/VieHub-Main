@@ -1,13 +1,10 @@
 import Header from "@/layouts/client/components/Header";
-import Footer from "@/layouts/client/components/Footer";
-import image from "@/assets/images/publicImage.png";
-import React, { useState } from 'react';
-import { Link } from "react-router-dom";
+import React from 'react';
 
 const ContestForm2: React.FC = () => {
     return (
         <div className="h-full w-full">
-            <Header isLoggedin={true} />
+            <Header  />
             <div className="signup3-container">
           
           <div className="signup3-form">
