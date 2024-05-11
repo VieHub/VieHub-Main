@@ -1,4 +1,5 @@
-
+import Header from "@/layouts/client/components/Header";
+import Footer from "@/layouts/client/components/Footer";
 // import icon from "@/assets/icons/icons8-sort-right-50 (1).png";
 import right from "@/assets/icons/icons8-right-arrow-48.png";
 // import left from "@/assets/icons/icons8-left-arrow-48.png";
@@ -18,12 +19,20 @@ const Host: React.FC = () => {
     if (direction === "next") {
       const nextItemId = currentItemId === "item1" ? "item2" : "item1";
       const nextItem = document.getElementById(nextItemId);
-      nextItem?.scrollIntoView({ behavior: "smooth" });
+      nextItem?.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+        inline: "start",
+      });
       setActiveItemId(nextItemId);
     } else {
       const prevItemId = currentItemId === "item1" ? "item2" : "item1";
       const prevItem = document.getElementById(prevItemId);
-      prevItem?.scrollIntoView({ behavior: "smooth" });
+      prevItem?.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+        inline: "start",
+      });
       setActiveItemId(prevItemId);
     }
   };
@@ -158,6 +167,7 @@ const Host: React.FC = () => {
         <img src={community} alt="" />
       </div>
 
+      <Footer />
     </div>
   );
 };

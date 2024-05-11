@@ -5,7 +5,7 @@ export const NAV_ITEMS = [
   },
   {
     name: "Contest",
-    section: "Contest",
+    section: "contest",
   },
   {
     name: "Host Contest",

@@ -11,13 +11,6 @@ const Contest = () => {
   // };
   // isError
   const { data: listOfcontests, isLoading, isError } = getContestData();
-  if (isLoading) {
-    return <div></div>;
-  }
-
-  if (isError) {
-    return;
-  }
 
   console.log("list of contests", listOfcontests);
   return (
@@ -174,34 +167,37 @@ const Contest = () => {
         </div>
         <div className=" mt-4 flex flex-col items-center md:ml-8 md:mr-24 md:flex-1 ">
           {/* Render ContestCards */}
-          {listOfcontests.map(
-            (
-              contest: {
-                name: string;
-                description: string;
-                image: string;
-                prize: string;
-                participants: any;
-                company: string;
-                start_date: string;
-                end_date: string;
-                image_url: string;
-              },
-              index: Key | null | undefined,
-            ) => (
-              <ContestCard
-                key={index}
-                name={contest.name}
-                description={contest.description}
-                image={contest.image_url}
-                prize={contest.prize}
-                participants={contest.participants}
-                companyName={contest.company}
-                startDate={contest.start_date}
-                endDate={contest.end_date}
-              />
-            ),
-          )}
+          {listOfcontests &&
+            !isError &&
+            !isLoading &&
+            listOfcontests.map(
+              (
+                contest: {
+                  name: string;
+                  description: string;
+                  image: string;
+                  prize: string;
+                  participants: any;
+                  company: string;
+                  start_date: string;
+                  end_date: string;
+                  image_url: string;
+                },
+                index: Key | null | undefined,
+              ) => (
+                <ContestCard
+                  key={index}
+                  name={contest.name}
+                  description={contest.description}
+                  image={contest.image_url}
+                  prize={contest.prize}
+                  participants={contest.participants}
+                  companyName={contest.company}
+                  startDate={contest.start_date}
+                  endDate={contest.end_date}
+                />
+              ),
+            )}
         </div>
       </div>
     </div>
