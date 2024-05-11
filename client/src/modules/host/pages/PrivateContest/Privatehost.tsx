@@ -1,5 +1,7 @@
 
 import image from "@/assets/images/publicImage.png";
+import image2 from "@/assets/images/fostering-innovation-removebg-preview.png";
+import image3 from "@/assets/images/1679561373413-removebg-preview.png";
 import React from 'react';
 
 const PrivateHost: React.FC = () => {
@@ -25,7 +27,7 @@ const PrivateHost: React.FC = () => {
       <section className="section" >
         <div className="section-container">
           <div className="section-left">
-            <img src="https://picsum.photos/id/237/200/300" alt="image" />
+            <img src={image2} alt="image" />
           </div>
           <div className="section-right">
             <h2>
@@ -45,10 +47,10 @@ const PrivateHost: React.FC = () => {
       <section className="section" style={{ backgroundColor: "white" }}>
         <div
           className="section-container"
-          style={{ flexDirection: "row-reverse" }}
+          
         >
           <div className="section-left">
-            <img src="https://picsum.photos/id/238/200/300" alt="image" />
+            <img src={image3} alt="image" />
           </div>
           <div className="section-right">
             <h2>
