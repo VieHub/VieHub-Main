@@ -87,3 +87,16 @@
     color: #777;
     font-weight: bold;
   }
+  @media screen and (max-width: 768px) {
+    .container1 {
+      width: 90%;
+      margin: 20% auto; /* Adjusted margin for smaller screens */
+      padding: 20px; /* Adjusted padding for smaller screens */
+      
+    }
+  
+    .login-button,
+    .google-button {
+      width: 70%; /* Adjusted button width to fill container */
+    }
+  }
