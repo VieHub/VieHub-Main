@@ -1,4 +1,3 @@
-// src/api/apiClient.ts
 import axios from "axios";
 
 const api = axios.create({
@@ -6,22 +5,32 @@ const api = axios.create({
 });
 
 function getToken() {
-    const data = localStorage.getItem(
-        "firebase:authUser:AIzaSyAiDbrNKNLcwKTdtH63tCy_3n-geNFO5OY:[DEFAULT]",
-    );
-    const user = JSON.parse(data || ""); // Provide a default value for data
+  // Attempt to retrieve the authentication data from local storage
+  const data = localStorage.getItem(
+    "firebase:authUser:AIzaSyAiDbrNKNLcwKTdtH63tCy_3n-geNFO5OY:[DEFAULT]",
+  );
+
+  if (!data) {
+    console.warn("No user data available in local storage.");
+    return null; // Return null if no data is found
+  }
+
+  const user = JSON.parse(data);
+  if (user?.stsTokenManager?.accessToken) {
     return user.stsTokenManager.accessToken;
-    
-//   return null; // Ensure you handle the null case appropriately
+  } else {
+    console.warn("No access token available.");
+    return null; // Return null if the token is not found in the parsed data
+  }
 }
+
 api.interceptors.request.use(
   (config) => {
     const token = getToken();
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
-    } else {
-      console.error("No token available");
     }
+    // If no token, the Authorization header is not set but the request still goes through
     return config;
   },
   (error) => {

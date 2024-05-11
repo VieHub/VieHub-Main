@@ -4,10 +4,8 @@ import image from "@/assets/images/publicImage.png";
 import React from "react";
 import { Link } from "react-router-dom";
 import worldImage from "@/assets/images/graphic global community.svg";
-import teamWork from "@/assets/images/teamwork-removebg-preview.png"
-
-
-
+import teamWork from "@/assets/images/teamwork-removebg-preview.png";
+import withAuth from "@/hoc/withAuth";
 
 const PublicHost: React.FC = () => {
   return (
@@ -81,5 +79,4 @@ const PublicHost: React.FC = () => {
     </div>
   );
 };
-
-export default PublicHost;
+export default withAuth(PublicHost, ["Host"]);

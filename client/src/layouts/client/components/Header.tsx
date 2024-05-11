@@ -3,24 +3,33 @@ import account from "@/assets/icons/account.png";
 import Dropdown from "@/components/Dropdown";
 import { NAV_ITEMS } from "@/constants";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import ProfileDropdown from "@/modules/host/components/profileDropDown";
 import { useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
-
-
 
 const Header: React.FC = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
   const auth = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
+  console.log(location.pathname);
   let isUserLoggedIn = auth?.isAuthInitialized && auth.user;
   // if (!auth?.isAuthInitialized) {
   //   return <div></div>; // Display a loading spinner or placeholder here
   // }
+
+  const handleNavigation = (item: { name: string; section: string }) => {
+    // Special handling for Home to navigate to '/'
+    if (item.name === "Home") {
+      navigate("/");
+    } else {
+      navigate("/" + item.section);
+    }
+  };
   return (
     <header className="flex items-center justify-between bg-white px-3 py-3 text-black md:px-20">
       {/* Flex container for logo and nav items */}
@@ -31,18 +40,16 @@ const Header: React.FC = () => {
         </div>
         {/* Navigation items, hidden on small screens, no margin needed */}
         <nav className="ml-10 hidden md:flex md:gap-10">
-          {" "}
           {/* Adjust margin-left as needed */}
           {NAV_ITEMS.map((item) => (
             <a
               key={item.name}
-              href={`${item.section}`}
-              onClick={() => {
-                if (item.name === "Home") {
-                  navigate("/");
-                }
+              href={item.name === "Home" ? "/" : "/" + item.section}
+              onClick={(e) => {
+                e.preventDefault();
+                handleNavigation(item);
               }}
-              className="nav-item hover:text-gray-300 cursor-pointer transition-colors duration-200 ease-in-out"
+              className={`nav-item ${location.pathname === (item.name === "Home" ? "/" : "/" + item.section) ? "active" : ""} hover:text-gray-300 cursor-pointer transition-colors duration-200 ease-in-out`}
             >
               {item.name}
             </a>

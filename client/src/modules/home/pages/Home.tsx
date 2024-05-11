@@ -1,14 +1,30 @@
 import Image from "../../../assets/image.jpeg";
 import SecondImage from "../../../assets/teamgoals.png";
 import ThridImage from "@/assets/images/image 5.jpg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import TypingAnimation from "../components/TypingAnimation";
 import FirstSectionCard from "../components/FirstSectionCard";
 import SecondSectionCard from "../components/SecondSectionCard";
-
+import { useAuth } from "@/contexts/AuthContext";
+import { useEffect } from "react";
 
 const Dashboard = () => {
+  const auth = useAuth();
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!auth?.isAuthInitialized) {
+      // Wait until auth is initialized and loading is done to make any decision
+      return;
+    }
+
+    if (auth.user) {
+      // If no user is logged in or there's an error in loading user data, redirect to login
+      console.log("Redirecting to login because no auth user or error");
+      // navigate("/contest");
+      return;
+    }
+  }, [auth, navigate]);
 
   return (
     <div className="h-full w-full">
@@ -20,21 +36,23 @@ const Dashboard = () => {
             skills. From Coding and Design to Writing and more, VieHub is your
             gateway to showcasing talent.
           </p>
-          <div className="buttons">
-            <Link
-              className="Host-btn px-4 py-2 text-sm font-medium text-white shadow-sm "
-              to="/Signupashost"
-            >
-              <button>Join as Host</button>
-            </Link>
+          {!auth?.user && auth?.isAuthInitialized && (
+            <div className="buttons">
+              <Link
+                className="Host-btn px-4 py-2 text-sm font-medium text-white shadow-sm "
+                to="/Signupashost"
+              >
+                <button>Join as Host</button>
+              </Link>
 
-            <Link
-              className="participant-btn px-4 py-2 text-sm font-medium text-white shadow-sm "
-              to="/Signupasparticipant"
-            >
-              <button>Join as Participant</button>
-            </Link>
-          </div>
+              <Link
+                className="participant-btn px-4 py-2 text-sm font-medium text-white shadow-sm "
+                to="/Signupasparticipant"
+              >
+                <button>Join as Participant</button>
+              </Link>
+            </div>
+          )}
         </div>
         <div className="right-content flex w-full items-center justify-end p-4 md:flex-1">
           <img src={Image} alt="image" className="image h-auto max-w-full" />
