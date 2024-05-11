@@ -118,3 +118,15 @@
     color: #777;
     font-weight: bold;
   }
+
+  @media screen and (max-width: 768px) {
+    .signup-form {
+      width: 90%;
+        padding: 20px; /* Adjusted padding for smaller screens */
+    }
+
+    .button-container button[type="submit"],
+    .custom-button {
+        width: 70%; /* Adjusted button width for smaller screens */
+    }
+}

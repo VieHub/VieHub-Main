@@ -7,6 +7,11 @@ const Dropdown = ({ children }: { children: React.ReactNode }) => {
   const navigate = useNavigate();
   const auth = useAuth();
   let isUserLoggedIn = auth?.isAuthInitialized && auth.user;
+  const logout = async () => {
+    console.log("Logging out...");
+    await auth?.logout();
+    await navigate("/login");
+  };
 
   return (
     <div className="dropdown dropdown-end dropdown-bottom">
@@ -25,6 +30,8 @@ const Dropdown = ({ children }: { children: React.ReactNode }) => {
               onClick={() => {
                 if (item.name === "Home") {
                   navigate("/");
+                }else {
+                  navigate("/" + item.section);
                 }
               }}
               className="text-black"
@@ -36,11 +43,14 @@ const Dropdown = ({ children }: { children: React.ReactNode }) => {
         <li>
           {auth?.isAuthInitialized ? (
             isUserLoggedIn ? (
-              <Link to="/Logout">
-                <button className=" text-sm font-medium text-black shadow-sm">
-                  Logout
-                </button>
-              </Link>
+              <a
+             // Example of hover animation
+            href="#"
+            className="text-gray-700 block px-4 py-2 text-sm"
+            onClick={logout}
+          >
+            Logout
+          </a>
             ) : (
               <Link to="/Signup">
                 <button className="signup-btn px-4 py-2 text-sm font-medium text-white shadow-sm">

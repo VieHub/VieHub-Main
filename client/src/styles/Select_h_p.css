@@ -125,3 +125,38 @@
     text-decoration: underline; /* Add underline on hover */
     /* Add any other styles you want to apply on hover */
   }
+  /* Existing styles */
+
+/* Media Query for screens smaller than 768px */
+@media screen and (max-width: 768px) {
+  .select-form {
+    max-width: 90%; /* Adjusted width for smaller screens */
+    height: auto; /* Change height to auto */
+    padding: 20px; /* Adjusted padding */
+  }
+
+  .options-container {
+    flex-direction: column; /* Change to column layout for smaller screens */
+    height: auto; /* Change height to auto */
+    align-items: center; /* Center align items */
+  }
+
+  .option-box {
+    width: 80%; /* Adjusted width for smaller screens */
+    margin: 10px; /* Adjusted margin */
+  }
+
+  .button-container {
+    margin-top: 20px; /* Adjusted margin */
+    margin-bottom: 20px; /* Adjusted margin */
+  }
+
+  .button-container button[type="submit"] {
+    padding: 10px 30px; /* Adjusted padding */
+    font-size: 14px; /* Adjusted font size */
+    
+  }
+  
+}
+
+/* Existing styles */
