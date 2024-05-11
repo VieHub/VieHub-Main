@@ -1,5 +1,3 @@
-import Header from "@/layouts/client/components/Header";
-import Footer from "@/layouts/client/components/Footer";
 // import icon from "@/assets/icons/icons8-sort-right-50 (1).png";
 import right from "@/assets/icons/icons8-right-arrow-48.png";
 // import left from "@/assets/icons/icons8-left-arrow-48.png";
@@ -166,8 +164,6 @@ const Host: React.FC = () => {
         </div>
         <img src={community} alt="" />
       </div>
-
-      <Footer />
     </div>
   );
 };
