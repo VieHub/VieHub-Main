@@ -1,11 +1,16 @@
 import React, { useState } from "react";
 
-const ContestForm2: React.FC<{
-  onNextStep: () => void;
-  onPrevStep: () => void;
-}> = ({ onNextStep, onPrevStep }) => {
+const ContestForm2: React.FC<{ onNextStep: () => void; onPrevStep: () => void; onFormData: (data: any) => void }> = ({ onNextStep, onPrevStep, onFormData }) => {
+
   const [file, setFile] = useState<File | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [formData, setFormData] = useState({
+    preferences: "",
+    criteria: "",
+    terms: "",
+    rules: "",
+    agreement: false
+  });
 
   // Handle file selection
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -21,16 +26,53 @@ const ContestForm2: React.FC<{
       }
     }
   };
+
+  // Handle form field change
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+  };
+  const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+  };
+  
+  
+
+  // Handle form submission
+  // Handle form submission
+const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+  const formDataWithFile = {
+    ...formData,
+    file,
+    error
+  };
+  onFormData(formDataWithFile); // Passing form data to parent component
+  onNextStep();
+};
+
+  
+
   return (
     <div className="bg-gray-100 flex h-full w-full items-center justify-center p-4">
       <div className="card w-96 w-full max-w-4xl rounded-lg bg-base-100 bg-white p-6 shadow-sm shadow-xl">
         <h2 className="mb-4 text-xl font-bold">Public Competition Form</h2>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <input
               className="text-gray-800 w-full appearance-none rounded border px-4 py-3 leading-tight shadow-sm focus:outline-none focus:ring-1 focus:ring-teal-100"
               type="text"
               placeholder="Preferences for Customizing Contest Templates"
+              name="preferences"
+              value={formData.preferences}
+              onChange={handleChange}
             />
           </div>
           <div className="mb-4">
@@ -40,6 +82,9 @@ const ContestForm2: React.FC<{
               rows={4}
               maxLength={1000} // Limits characters
               style={{ resize: "vertical", maxHeight: "200px" }} // Allows vertical resize only up to 200px
+              name="criteria"
+              value={formData.criteria}
+              onChange={handleTextareaChange}
             ></textarea>
           </div>
           <div className="mb-4">
@@ -49,6 +94,9 @@ const ContestForm2: React.FC<{
               rows={4}
               maxLength={2000} // Larger limit for more extensive text
               style={{ resize: "vertical", maxHeight: "300px" }}
+              name="terms"
+              value={formData.terms}
+              onChange={handleTextareaChange}
             ></textarea>
           </div>
           <div className="mb-4">
@@ -58,11 +106,19 @@ const ContestForm2: React.FC<{
               rows={6}
               maxLength={1500}
               style={{ resize: "vertical", maxHeight: "300px" }}
+              name="rules"
+              value={formData.rules}
+              onChange={handleTextareaChange}
             ></textarea>
           </div>
           <div className="mb-4">
             <label>
-              <input type="checkbox" />
+              <input
+                type="checkbox"
+                name="agreement"
+                checked={formData.agreement}
+                onChange={handleChange}
+              />
               <span className="text-gray-800 ml-2">
                 I agree to the platform's terms of service
               </span>
@@ -89,7 +145,7 @@ const ContestForm2: React.FC<{
             </button>
             <button
               className="button3"
-              onClick={onNextStep}
+              type="submit"
               style={{ backgroundColor: "#52AB98" }}
             >
               Next
