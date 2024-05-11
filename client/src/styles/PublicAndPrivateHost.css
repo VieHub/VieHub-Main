@@ -118,3 +118,31 @@ body {
 .section-right {
   flex: 1;
 }
+@media screen and (max-width: 768px) {
+  .header1 {
+    padding: 50px; /* Adjust padding for smaller screens */
+  }
+
+  .header1 p {
+    font-size: 1.2em; /* Decrease font size for smaller screens */
+  }
+  
+  .host-logo{
+    margin-left: 20px;
+  }
+
+  .section-container {
+    padding: 40px; /* Adjust padding for smaller screens */
+    flex-direction: column;
+  }
+
+  .section-left img {
+    margin-right: 30px; /* Adjust margin for smaller screens */
+    margin-left: 0;
+  }
+
+  .section-right, .section-left {
+    width: 100%; /* Make section-right and section-left full width for smaller screens */
+    margin-bottom: 20px; /* Add margin between sections for smaller screens */
+  }
+}

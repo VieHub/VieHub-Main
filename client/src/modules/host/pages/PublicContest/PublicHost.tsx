@@ -41,7 +41,7 @@ const PublicHost: React.FC = () => {
                 Stage. Welcome to our Public Competition Platform – Your Gateway
                 to Showcase Brilliance and Inspire!
               </p>
-              <Link to="/host/PublicHost/ContestForm">
+              <Link to="/host/PublicHost/multi-step-form">
                 <button className="host-button">
                   Host public competitions
                 </button>
@@ -53,7 +53,7 @@ const PublicHost: React.FC = () => {
         <section className="section" style={{ backgroundColor: "white" }}>
           <div
             className="section-container"
-            style={{ flexDirection: "row-reverse" }}
+            
           >
             <div className="section-left">
               <img src={teamWork} alt="image" />
@@ -66,7 +66,7 @@ const PublicHost: React.FC = () => {
                 managing, and marketing your competition, ensuring a path to
                 success like never before.
               </p>
-              <Link to="/host/PublicHost/ContestForm">
+              <Link to="/host/PublicHost/multi-step-form">
                 <button className="host-button">
                   Host public competitions
                 </button>
