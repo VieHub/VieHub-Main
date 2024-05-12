@@ -17,7 +17,7 @@ function withAuth<T extends JSX.IntrinsicAttributes>(
     } = useUserData(auth?.user?.uid ?? "default-user-id");
 
     useEffect(() => {
-      if (!auth?.user || isError) {
+      if (auth?.isAuthInitialized && !auth?.user) {
         // If no user is logged in or there's an error in loading user data, redirect to login
         console.log("Redirecting to login because no auth user or error");
         navigate("/login");
