@@ -26,12 +26,12 @@ const Dropdown = ({ children }: { children: React.ReactNode }) => {
           <li key={item.name}>
             {/* Ensure you add the href attribute to the <a> tag if you have URLs in your NAV_ITEMS */}
             <a
-              href={`#${item.section}`}
+              href={`${item.section}`}
               onClick={() => {
                 if (item.name === "Home") {
                   navigate("/");
-                }else {
-                  navigate("/" + item.section);
+                } else {
+                  navigate("/" + item.name);
                 }
               }}
               className="text-black"
@@ -44,13 +44,13 @@ const Dropdown = ({ children }: { children: React.ReactNode }) => {
           {auth?.isAuthInitialized ? (
             isUserLoggedIn ? (
               <a
-             // Example of hover animation
-            href="#"
-            className="text-gray-700 block px-4 py-2 text-sm"
-            onClick={logout}
-          >
-            Logout
-          </a>
+                // Example of hover animation
+                href=""
+                className="text-gray-700 block px-4 py-2 text-sm"
+                onClick={logout}
+              >
+                Logout
+              </a>
             ) : (
               <Link to="/Signup">
                 <button className="signup-btn px-4 py-2 text-sm font-medium text-white shadow-sm">

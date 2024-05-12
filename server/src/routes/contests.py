@@ -1,5 +1,5 @@
 import datetime
-from typing import Annotated, List
+from typing import Annotated, List, Optional
 from fastapi import APIRouter, Depends, File, Form, HTTPException, UploadFile
 from src.deps.models import Contest, ContestUpdateSchema, FeedbackSchema, LoginSchema, Participant,SignUpSchema, SubmissionSchema, UserModel, UserProfileUpdateSchema
 from fastapi.responses import JSONResponse
@@ -14,19 +14,25 @@ from src.middlewares.authentication import oauth2_authentication
 router = APIRouter(prefix="/contest", tags=["contests"])
 @router.post("/contest/create", response_model=Contest)
 async def create_contest(
-    uid: str = Form(...),
-    name: str = Form(...),
+    title: str = Form(...),
     description: str = Form(...),
-    start_date: str = Form(...),
-    prize: str = Form(...),
-    end_date: str = Form(...),
-    skill_level: str = Form(...),
+    type: str = Form(...),
+    host_uid: str = Form(...),
+
+    startDate: str = Form(...),
+    endDate: str = Form(...),
+    prizeDetails: str = Form(...),
+    maxParticipants: int = Form(...),
     rules: str = Form(...),
-    company: str = Form(...),
-    contest_image: UploadFile = File(...),
+    criteria: str = Form(...),
+    preferences: str = Form(...),
+    terms: str = Form(...),
+    agreement: bool = Form(...),
+    company: Optional[str] = Form(None),
+    image_url: UploadFile = File(...),
     current_user: dict = Depends(oauth2_authentication)
 ):
-    user_ref = db.collection('users').document(uid)
+    user_ref = db.collection('users').document(host_uid)
     user_doc = user_ref.get()
 
     if not user_doc.exists or user_doc.to_dict().get('role') != 'Host':
@@ -35,19 +41,24 @@ async def create_contest(
     unique_id = str(uuid.uuid4())
     # contest_data = contest.model_dump()
     contest_data = {
-        "name": name,
+        "title": title,
         "description": description,
-        "start_date": start_date,
-        "end_date": end_date,
-        "skill_level": skill_level,
-        "company": company,  # Add the company field to the contest model
-        "prize": prize,
+        "type": type,
+        "startDate": startDate,
+        "endDate": endDate,
+        "prizeDetails": prizeDetails,
+        "maxParticipants": maxParticipants,
         "rules": rules,
-        "host_uid": uid,  # Set the host UID based on the authenticated user
+        "criteria": criteria,
+        "preferences": preferences,
+        "terms": terms,
+        "agreement": agreement,
+        "company": company,
+        "host_uid": host_uid,
         "participants": []
     }
-    contest_data['host_uid'] = uid  # Set the host UID based on the authenticated user
-
+    contest_data['host_uid'] = host_uid  # Set the host UID based on the authenticated user
+    print(  contest_data)
     # Set the contest in the contests collection with a unique ID
     db.collection('contests').document(unique_id).set(contest_data)
 
@@ -58,8 +69,8 @@ async def create_contest(
     user_ref.update({'contests': existing_contests})
     # Upload the image to Firebase Storage
     bucket = storage.bucket(name='fastapiauth-d3407.appspot.com')
-    blob = bucket.blob(f'contests/{unique_id}/{contest_image.filename}')
-    blob.upload_from_string(contest_image.file.read(), content_type=contest_image.content_type)
+    blob = bucket.blob(f'contests/{unique_id}/{image_url.filename}')
+    blob.upload_from_string(image_url.file.read(), content_type=image_url.content_type)
     blob.make_public()  # Make the file publicly accessible
 
     contest_data['image_url'] = blob.public_url

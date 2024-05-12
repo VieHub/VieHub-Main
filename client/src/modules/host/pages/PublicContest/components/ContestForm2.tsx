@@ -1,15 +1,18 @@
 import React, { useState } from "react";
 
-const ContestForm2: React.FC<{ onNextStep: () => void; onPrevStep: () => void; onFormData: (data: any) => void }> = ({ onNextStep, onPrevStep, onFormData }) => {
-
-  const [file, setFile] = useState<File | null>(null);
+const ContestForm2: React.FC<{
+  onNextStep: () => void;
+  onPrevStep: () => void;
+  onFormData: (data: any) => void;
+}> = ({ onNextStep, onPrevStep, onFormData }) => {
+  const [image_url, setimage_url] = useState<File | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     preferences: "",
     criteria: "",
     terms: "",
     rules: "",
-    agreement: false
+    agreement: false,
   });
 
   // Handle file selection
@@ -18,47 +21,45 @@ const ContestForm2: React.FC<{ onNextStep: () => void; onPrevStep: () => void; o
     if (files && files.length > 0) {
       const selectedFile = files[0];
       if (selectedFile.type.startsWith("image/")) {
-        setFile(selectedFile);
+        setimage_url(selectedFile);
         setError(null); // Clear any previous error
       } else {
         setError("Please upload an image file.");
-        setFile(null); // Clear the file selection
+        setimage_url(null); // Clear the file selection
       }
     }
   };
 
   // Handle form field change
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+  ) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]: value
+      [name]: value,
     });
   };
   const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]: value
+      [name]: value,
     });
   };
-  
-  
 
   // Handle form submission
   // Handle form submission
-const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-  e.preventDefault();
-  const formDataWithFile = {
-    ...formData,
-    file,
-    error
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formDataWithFile = {
+      ...formData,
+      image_url,
+      error,
+    };
+    onFormData(formDataWithFile); // Passing form data to parent component
+    onNextStep();
   };
-  onFormData(formDataWithFile); // Passing form data to parent component
-  onNextStep();
-};
-
-  
 
   return (
     <div className="bg-gray-100 flex h-full w-full items-center justify-center p-4">
@@ -132,7 +133,7 @@ const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
               className="file-input"
               style={{ display: "block", width: "100%", padding: "10px" }}
             />
-            {file && <p>File selected: {file.name}</p>}
+            {image_url && <p>File selected: {image_url.name}</p>}
             {error && <p className="text-red-500">{error}</p>}
           </div>
           <div className="flex justify-between">

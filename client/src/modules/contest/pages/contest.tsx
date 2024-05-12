@@ -1,7 +1,7 @@
 // import Sort from "@mui/icons-material/Sort"; // Import the Sort icon
 import ContestCard from "../components/CreateCard";
 // import image from "@/assets/images/image 2.png";
-import { getContestData } from "@/hooks/getContestData";
+import { getContestData } from "@/hooks/useGetContest";
 import { Key } from "react";
 const Contest = () => {
   // const [isDropdownOpen, setIsDropdownOpen] = useState(false);
