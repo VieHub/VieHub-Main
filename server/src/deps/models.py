@@ -1,8 +1,9 @@
-from pydantic import BaseModel, Field, EmailStr
-from typing import List, Optional,Literal
+from pydantic import BaseModel, Field, EmailStr, field_validator, validator
+from typing import Annotated, List, Optional,Literal
 from datetime import date, datetime
 from pydantic import BaseModel, EmailStr
 from typing import Literal
+from fastapi import File, UploadFile
 
 class SignUpSchema(BaseModel):
     email: EmailStr
@@ -56,19 +57,61 @@ class LoginSchema(BaseModel):
                "password": "samplepass123"
             }
         }
-class Contest(BaseModel):
-    name: str = Field(..., example="Art Competition")
-    description: str = Field(..., example="Monthly art competition.")
-    start_date: str = Field(..., example="2024-01-01")
-    end_date: str = Field(..., example="2024-01-31")
-    skill_level: str = Field(..., example="Intermediate")
-    host_uid: Optional[str] = None
-    rules: str = Field(..., example="No plagiarism allowed.")
-    participants: List[str] = []
-    prize: str = Field(..., example="1000 USD")
-    image_url: Optional[str] = None
-    company: str = Field(..., example="Acme Inc.")
+class CreateContestInput(BaseModel):
+    title: Annotated[str, Field(..., example="Coding Challenge")] 
+    description: Annotated[str, Field(..., example="A challenge for coding enthusiasts.")]
+    type: Annotated[str, Field(..., example="Coding")]
+    startDate: Annotated[str, Field(..., example="2024-05-12T16:03:52+0300")] 
+    endDate: Annotated[str, Field(..., example="2024-05-12T16:03:52+0300")] 
+    prizeDetails: Annotated[str, Field(..., example="200 USD")]
+    maxParticipants: Annotated[int, Field(..., example=3)]
+    rules: Annotated[str, Field(..., example="Follow the code of conduct.")] 
+    criteria: Annotated[str, Field(..., example="Completion, Creativity")] 
+    preferences: Annotated[str, Field(..., example="Fastest, Most Efficient")]
+    terms: Annotated[str, Field(..., example="Standard competition terms.")] 
+    agreement: Annotated[bool, Field(..., description="User has agreed to the terms.")] 
+    company: Annotated[Optional[str], Field(None, example="Acme Inc.")] 
+    host_uid: Annotated[Optional[str], Field(None)] 
+    participants: Annotated[List[str], Field(...)] = Field([])
 
+
+
+class Contest(BaseModel):
+    title: str = Field(..., example="Coding Challenge")
+    description: str = Field(..., example="A challenge for coding enthusiasts.")
+    type: str = Field(..., example="Coding")
+    startDate: str = Field(..., example="2024-05-12T16:03:52+0300")
+    endDate: str = Field(..., example="2024-05-12T16:03:52+0300")
+    prizeDetails: str = Field(..., example="200 USD")
+    maxParticipants: int = Field(..., example=3)
+    rules: str = Field(..., example="Follow the code of conduct.")
+    criteria: str = Field(..., example="Completion, Creativity")
+    preferences: str = Field(..., example="Fastest, Most Efficient")
+    terms: str = Field(..., example="Standard competition terms.")
+    agreement: bool = Field(..., description="User has agreed to the terms.")
+    company: Optional[str] = Field(None, example="Acme Inc.")
+    host_uid: Optional[str] = None
+    participants: List[str] = []
+    image_url: Optional[str] = None  # Change to a string type for URLs
+
+    @field_validator('title', 'description', 'rules', 'criteria', 'preferences', 'terms')
+    def must_not_be_empty(cls, v):
+        if not v or v.strip() == "":
+            raise ValueError('This field must not be empty or just whitespace.')
+        return v
+
+
+    @field_validator('maxParticipants')
+    def validate_max_participants(cls, v):
+        if v < 1:
+            raise ValueError('Maximum participants must be at least 1')
+        return v
+
+    @field_validator('agreement')
+    def validate_agreement(cls, v):
+        if not v:
+            raise ValueError('Agreement must be true to proceed')
+        return v
 class ContestModel(BaseModel):
     title: str
     description: str

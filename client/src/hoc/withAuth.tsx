@@ -17,17 +17,17 @@ function withAuth<T extends JSX.IntrinsicAttributes>(
     } = useUserData(auth?.user?.uid ?? "default-user-id");
 
     useEffect(() => {
-      if (!auth?.isAuthInitialized || isLoading) {
-        // Wait until auth is initialized and loading is done to make any decision
-        return;
-      }
-
-      if (!auth.user || isError) {
+      if (!auth?.user || isError) {
         // If no user is logged in or there's an error in loading user data, redirect to login
         console.log("Redirecting to login because no auth user or error");
         navigate("/login");
         return;
       }
+      if (!auth?.isAuthInitialized || isLoading) {
+        // Wait until auth is initialized and loading is done to make any decision
+        return;
+      }
+
       console.log("ROLE", user.role);
 
       if (user && !allowedRoles.includes(user.role)) {
