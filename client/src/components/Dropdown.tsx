@@ -26,14 +26,7 @@ const Dropdown = ({ children }: { children: React.ReactNode }) => {
           <li key={item.name}>
             {/* Ensure you add the href attribute to the <a> tag if you have URLs in your NAV_ITEMS */}
             <a
-              href={`${item.section}`}
-              onClick={() => {
-                if (item.name === "Home") {
-                  navigate("/");
-                } else {
-                  navigate("/" + item.name);
-                }
-              }}
+              href={item.name === "Home" ? "/" : "/" + item.section}
               className="text-black"
             >
               {item.name}
