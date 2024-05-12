@@ -2,17 +2,13 @@ import React, { useState } from "react";
 import ContestForm from "./components/ContestForm";
 import ContestForm2 from "./components/ContestForm2";
 import Payment from "./components/payment";
-import { useCreateContest } from "@/hooks/useCreateContest";
-import { CreateContestData } from "@/types/apiSchemas";
+
 const MultiStepForm: React.FC = () => {
   const [step, setStep] = useState<number>(1);
   const [formDataStep1, setFormDataStep1] = useState<{ [key: string]: any }>(
     {},
   );
-  const [formDataStep2, setFormDataStep2] = useState<{ [key: string]: any }>(
-    {},
-  );
-  const createContest = useCreateContest(); // Call the useCreateContest hook
+  // const [formDataStep2, setFormDataStep2] = useState<{ [key: string]: any }>({});
 
   const nextStep = () => {
     setStep((prevStep) => prevStep + 1);
@@ -27,24 +23,15 @@ const MultiStepForm: React.FC = () => {
   };
 
   const handleFormData2 = (data: any) => {
-    setFormDataStep2(data);
+    // setFormDataStep2(data);
     handleSubmit({ ...formDataStep1, ...data }); // Merge form data from both steps
   };
-  const handleSubmit = (mergedData: CreateContestData) => {
+
+  const handleSubmit = (mergedData: any) => {
     console.log(mergedData); // Log the merged form data
-    // Use the mutation function to submit the data
-    createContest.mutate(mergedData, {
-      onSuccess: (data) => {
-        console.log("Contest created successfully", data);
-        // Optionally move to the next step or handle the response further
-        // nextStep(); // For example, move to the payment step or a success message
-      },
-      onError: (error) => {
-        console.error("Failed to create contest", error);
-        // Handle errors, maybe show an error message to the user
-      },
-    });
+    // Perform any further actions such as submitting the data to a server
   };
+
   return (
     <div className="h-full w-full">
       <div>
