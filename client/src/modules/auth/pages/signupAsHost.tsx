@@ -30,6 +30,8 @@ const SignupAsHost: React.FC = () => {
       [name]: value,
     }));
   };
+
+
   const handleSignUpWithGoogle = async () => {
     try {
       setIsLoading(true);
@@ -75,6 +77,8 @@ const SignupAsHost: React.FC = () => {
       setFeedback({ message: friendlyMessage, type: "error" });
     }
   };
+
+  
   return (
     <div className="h-full w-full">
       <div className="signup-container">

@@ -49,7 +49,6 @@ const ContestForm2: React.FC<{
   };
 
   // Handle form submission
-  // Handle form submission
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formDataWithFile = {
