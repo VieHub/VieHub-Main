@@ -5,6 +5,7 @@ import HostRoutes from "@/modules/host/routes";
 import ContestRoutes from "@/modules/contest/routes";
 import PublicForm from "@/modules/host/pages/PublicContest/routes";
 import AuthRoutes from "./AuthRoutes";
+import ContestDetailsRoutes from "@/modules/contest/pages/ContestDetails/routes"
 import PrivateRoutes from "./PrivateRoutes";
 import ClientLayout from "@/layouts/client/index";
 const router = createBrowserRouter([
@@ -24,9 +25,14 @@ const router = createBrowserRouter([
     children: [...HostRoutes],
   },
   {
-    path: "/host/PublicHost",
+    path: "/host/publichost",
     element: <ClientLayout />,
     children: [...PublicForm],
+  },
+  {
+    path: "/contest",
+    element: <ClientLayout />,
+    children: [...ContestDetailsRoutes],
   },
 ]);
 export default router;
