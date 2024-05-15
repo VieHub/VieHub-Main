@@ -173,6 +173,7 @@ const Contest = () => {
             listOfcontests.map(
               (
                 contest: {
+                  id: string;
                   name: string;
                   description: string;
                   image: string;
@@ -187,6 +188,7 @@ const Contest = () => {
               ) => (
                 <ContestCard
                   key={index}
+                  id={contest.id} // Add id here
                   name={contest.name}
                   description={contest.description}
                   image={contest.image_url}
