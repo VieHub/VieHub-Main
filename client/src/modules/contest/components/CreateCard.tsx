@@ -1,6 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 interface ContestCardProps {
+  id: string; // Add the id property
   name: string;
   description: string;
   image: string;
@@ -12,6 +14,7 @@ interface ContestCardProps {
 }
 
 const ContestCard: React.FC<ContestCardProps> = ({
+  id,
   name,
   description,
   image,
@@ -21,8 +24,17 @@ const ContestCard: React.FC<ContestCardProps> = ({
   startDate,
   endDate,
 }) => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/contest/${id}`);
+  };
+
   return (
-    <div className=" contest-card mx-4 my-4 flex w-full max-w-4xl overflow-hidden rounded-lg shadow-lg ">
+    <div
+      onClick={handleClick}
+      className=" contest-card mx-4 my-4 flex w-full max-w-4xl overflow-hidden rounded-lg shadow-lg "
+    >
       <img className="h-50 w-1/4 object-cover" src={image} alt={name} />
       <div
         className="flex w-3/4 flex-col px-6 py-4"

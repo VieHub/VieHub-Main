@@ -75,7 +75,6 @@ class CreateContestInput(BaseModel):
     participants: Annotated[List[str], Field(...)] = Field([])
 
 
-
 class Contest(BaseModel):
     title: str = Field(..., example="Coding Challenge")
     description: str = Field(..., example="A challenge for coding enthusiasts.")
@@ -92,7 +91,9 @@ class Contest(BaseModel):
     company: Optional[str] = Field(None, example="Acme Inc.")
     host_uid: Optional[str] = None
     participants: List[str] = []
-    image_url: Optional[str] = None  # Change to a string type for URLs
+    image_url: Optional[str] = None
+    id: Optional[str] = Field(None, example="unique-contest-id")
+
 
     @field_validator('title', 'description', 'rules', 'criteria', 'preferences', 'terms')
     def must_not_be_empty(cls, v):
