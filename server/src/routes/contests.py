@@ -1,37 +1,40 @@
 import datetime
-from typing import Annotated, List, Optional
+from typing import List, Optional
 from fastapi import APIRouter, Depends, File, Form, HTTPException, UploadFile
-from src.deps.models import Contest, ContestUpdateSchema, FeedbackSchema, LoginSchema, Participant,SignUpSchema, SubmissionSchema, UserModel, UserProfileUpdateSchema
+from pydantic import BaseModel
+from src.deps.auth import auth, firebase, db
+from src.deps.models import Contest, ContestUpdateSchema, FeedbackSchema, Participant, SubmissionSchema, UserModel
 from fastapi.responses import JSONResponse
-from fastapi.exceptions import HTTPException
 from fastapi.requests import Request
-from src.deps.auth import   auth , firebase ,db
+from fastapi import Security
+from src.middlewares.authentication import oauth2_authentication
 import uuid
 from firebase_admin import storage
 
-from fastapi import Security
-from src.middlewares.authentication import oauth2_authentication
 router = APIRouter(prefix="/contest", tags=["contests"])
+
+class ContestCreateSchema(BaseModel):
+    title: str
+    description: str
+    type: str
+    startDate: str
+    endDate: str
+    prizeDetails: str
+    maxParticipants: int
+    rules: str
+    criteria: str
+    preferences: str
+    terms: str
+    agreement: bool
+    company: Optional[str] = None
+
 @router.post("/contest/create", response_model=Contest)
 async def create_contest(
-    title: str = Form(...),
-    description: str = Form(...),
-    type: str = Form(...),
-    host_uid: str = Form(...),
-
-    startDate: str = Form(...),
-    endDate: str = Form(...),
-    prizeDetails: str = Form(...),
-    maxParticipants: int = Form(...),
-    rules: str = Form(...),
-    criteria: str = Form(...),
-    preferences: str = Form(...),
-    terms: str = Form(...),
-    agreement: bool = Form(...),
-    company: Optional[str] = Form(None),
+    contest: ContestCreateSchema = Depends(),
     image_url: UploadFile = File(...),
     current_user: dict = Depends(oauth2_authentication)
 ):
+    host_uid = current_user['uid']
     user_ref = db.collection('users').document(host_uid)
     user_doc = user_ref.get()
 
@@ -39,42 +42,18 @@ async def create_contest(
         raise HTTPException(status_code=403, detail="Only hosts can create contests")
 
     unique_id = str(uuid.uuid4())
-    # contest_data = contest.model_dump()
-    contest_data = {
-        "title": title,
-        "description": description,
-        "type": type,
-        "startDate": startDate,
-        "endDate": endDate,
-        "prizeDetails": prizeDetails,
-        "maxParticipants": maxParticipants,
-        "rules": rules,
-        "criteria": criteria,
-        "preferences": preferences,
-        "terms": terms,
-        "agreement": agreement,
-        "company": company,
-        "host_uid": host_uid,
-        "participants": []
-    }
-    contest_data['host_uid'] = host_uid  # Set the host UID based on the authenticated user
-    print(  contest_data)
-    # Set the contest in the contests collection with a unique ID
-    db.collection('contests').document(unique_id).set(contest_data)
+    contest_data = contest.dict()
+    contest_data['host_uid'] = host_uid
+    contest_data['participants'] = []
 
-    # Update the user's document to include this contest ID
-    # Fetch existing contest IDs, append the new one, and update the document
-    existing_contests = user_doc.to_dict().get('contests', [])
-    existing_contests.append(unique_id)
-    user_ref.update({'contests': existing_contests})
     # Upload the image to Firebase Storage
     bucket = storage.bucket(name='fastapiauth-d3407.appspot.com')
     blob = bucket.blob(f'contests/{unique_id}/{image_url.filename}')
     blob.upload_from_string(image_url.file.read(), content_type=image_url.content_type)
-    blob.make_public()  # Make the file publicly accessible
-
+    blob.make_public()
     contest_data['image_url'] = blob.public_url
 
+    # Set the contest in the contests collection with a unique ID
     db.collection('contests').document(unique_id).set(contest_data)
 
     # Update the user's document to include this contest ID
@@ -82,120 +61,112 @@ async def create_contest(
     existing_contests.append(unique_id)
     user_ref.update({'contests': existing_contests})
 
-
     # Return the contest data, including the generated ID
-    return {**contest_data, "id": unique_id}
+    return Contest(**contest_data, id=unique_id)
 
 @router.get('/contests', response_model=List[Contest])
 async def get_contests():
     contests = []
     for contest in db.collection('contests').stream():
-        contests.append(Contest(**contest.to_dict()))
+        contest_data = contest.to_dict()
+        contest_data['id'] = contest.id  # Include the contest ID
+        contests.append(Contest(**contest_data))
     return contests
 
-@router.get('/contests/{uid}' ,response_model=List[Contest])
-async def get_contests_by_id( uid: str , current_user: dict = Depends(oauth2_authentication)):
+@router.get('/contests/by_user/{uid}', response_model=List[Contest])
+async def get_contests_by_user_id(uid: str):
     contests_query = db.collection('contests').where('host_uid', '==', uid).stream()
-
     contests = []
     for contest in contests_query:
-        contest_dict = contest.to_dict()
-        contest_data = Contest(
-            id=contest.id,
-            name=contest_dict['name'],
-            description=contest_dict['description'],
-            skill_level=contest_dict['skill_level'],
-            start_date=(contest_dict['start_date']),
-            end_date=(contest_dict['end_date']),
-            host_uid=contest_dict['host_uid']
-        )
-        contests.append(contest_data)
+        contest_data = contest.to_dict()
+        contest_data['id'] = contest.id  # Include the contest ID
+        contests.append(Contest(**contest_data))
 
     if not contests:
         raise HTTPException(status_code=404, detail="No contests found for this user")
 
     return contests
 
-@router.patch("/contest/{contest_id}/update")
-async def update_contest(contest_id: str, contest_update: ContestUpdateSchema, request: Request , current_user: dict = Depends(oauth2_authentication)):
-    """
-    Updates an existing contest's details. Only the host who created the contest can update it.
-    Contest ID is passed as a path parameter, and updated fields are provided in the request body as a ContestUpdateSchema model.
-    Returns a success message upon updating the contest details.
-    """
-    jwt = request.headers.get('authorization')
-    decoded_token = auth.verify_id_token(jwt)
-    uid = decoded_token['uid']
-
+@router.get('/contests/{contest_id}', response_model=Contest)
+async def get_contest_by_id(contest_id: str):
     contest_ref = db.collection('contests').document(contest_id)
     contest = contest_ref.get()
+    
+    if not contest.exists:
+        raise HTTPException(status_code=404, detail="Contest not found")
+    
+    contest_data = contest.to_dict()
+    contest_data['id'] = contest.id  # Include the contest ID
+    
+    return Contest(**contest_data)
+
+@router.patch("/contest/{contest_id}/update")
+async def update_contest(
+    contest_id: str, 
+    contest_update: ContestUpdateSchema, 
+    request: Request, 
+    current_user: dict = Depends(oauth2_authentication)
+):
+    uid = current_user['uid']
+    contest_ref = db.collection('contests').document(contest_id)
+    contest = contest_ref.get()
+    
     if not contest.exists:
         raise HTTPException(status_code=404, detail="Contest not found")
     if contest.to_dict()['host_uid'] != uid:
         raise HTTPException(status_code=403, detail="Only the host can update the contest")
     
-    contest_ref.update(contest_update.model_dump(exclude_unset=True))
+    contest_ref.update(contest_update.dict(exclude_unset=True))
     return {"message": "Contest updated successfully"}
+
 @router.post("/contest/{contest_id}/enroll")
-async def enroll_in_contest(participant_uid:str,contest_id: str , current_user: dict = Depends(oauth2_authentication)):
- 
-    # Fetch participant details from the users collection
+async def enroll_in_contest(
+    participant_uid: str, 
+    contest_id: str, 
+    current_user: dict = Depends(oauth2_authentication)
+):
     user_ref = db.collection('users').document(participant_uid)
     user_doc = user_ref.get()
+
     if not user_doc.exists:
         raise HTTPException(status_code=404, detail="User not found")
-
-    user_data = user_doc.to_dict()
-    if user_data.get('role') != 'Participant':
+    if user_doc.to_dict().get('role') != 'Participant':
         raise HTTPException(status_code=403, detail="Only participants can enroll in contests")
 
-    # Create a Participant object
-    participant = Participant(
-        user_id=participant_uid,
-       
-    )
-
-    # Add participant to the contest
+    participant = Participant(user_id=participant_uid)
     contest_ref = db.collection('contests').document(contest_id)
     contest_doc = contest_ref.get()
+
     if not contest_doc.exists:
         raise HTTPException(status_code=404, detail="Contest not found")
 
     contest_data = contest_doc.to_dict()
     participants = contest_data.get('participants', [])
     participants.append(participant.dict())
-
     contest_ref.update({"participants": participants})
 
     return {"message": "Enrollment successful"}
 
-
 @router.post("/contest/{contest_id}/submit")
-async def submit_to_contest(contest_id: str, submission: SubmissionSchema, request: Request , current_user: dict = Depends(oauth2_authentication)):
-    """
-    Allows participants to submit their work for a contest they are enrolled in.
-    The contest ID is passed as a path parameter, and submission details are provided in the request body as a SubmissionSchema model.
-    Returns a success message upon successful submission.
-    """
-    jwt = request.headers.get('authorization')
-    decoded_token = auth.verify_id_token(jwt)
-    participant_uid = decoded_token['uid']
-
-    # Logic to submit to the contest
-    submission_data = submission.model_dump()
+async def submit_to_contest(
+    contest_id: str, 
+    submission: SubmissionSchema, 
+    request: Request, 
+    current_user: dict = Depends(oauth2_authentication)
+):
+    participant_uid = current_user['uid']
+    submission_data = submission.dict()
     submission_data['participant_uid'] = participant_uid
     db.collection('submissions').add(submission_data)
     
     return {"message": "Submission successful"}
 
-
 @router.post("/feedback/{contest_id}")
-async def submit_feedback(contest_id: str, feedback: FeedbackSchema, request: Request , current_user: dict = Depends(oauth2_authentication)):
-    """
-    Allows users to submit feedback for a specific contest.
-    The contest ID is passed as a path parameter, and feedback details are provided in the request body as a FeedbackSchema model.
-    Returns a success message upon successful feedback submission.
-    """
-    # FeedbackSchema includes fields like uid, rating, comments
-    db.collection('feedback').add(feedback.model_dump())
+async def submit_feedback(
+    contest_id: str, 
+    feedback: FeedbackSchema, 
+    request: Request, 
+    current_user: dict = Depends(oauth2_authentication)
+):
+    db.collection('feedback').add(feedback.dict())
     return {"message": "Feedback submitted successfully"}
