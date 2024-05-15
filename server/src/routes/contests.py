@@ -10,9 +10,6 @@ from fastapi import Security
 from src.middlewares.authentication import oauth2_authentication
 import uuid
 from firebase_admin import storage
-
-router = APIRouter(prefix="/contest", tags=["contests"])
-
 class ContestCreateSchema(BaseModel):
     title: str
     description: str
@@ -28,9 +25,22 @@ class ContestCreateSchema(BaseModel):
     agreement: bool
     company: Optional[str] = None
 
+router = APIRouter(prefix="/contest", tags=["contests"])
 @router.post("/contest/create", response_model=Contest)
 async def create_contest(
-    contest: ContestCreateSchema = Depends(),
+    title: str = Form(...),
+    description: str = Form(...),
+    type: str = Form(...),
+    startDate: str = Form(...),
+    endDate: str = Form(...),
+    prizeDetails: str = Form(...),
+    maxParticipants: int = Form(...),
+    rules: str = Form(...),
+    criteria: str = Form(...),
+    preferences: str = Form(...),
+    terms: str = Form(...),
+    agreement: bool = Form(...),
+    company: Optional[str] = Form(None),
     image_url: UploadFile = File(...),
     current_user: dict = Depends(oauth2_authentication)
 ):
@@ -42,9 +52,23 @@ async def create_contest(
         raise HTTPException(status_code=403, detail="Only hosts can create contests")
 
     unique_id = str(uuid.uuid4())
-    contest_data = contest.dict()
-    contest_data['host_uid'] = host_uid
-    contest_data['participants'] = []
+    contest_data = {
+        "title": title,
+        "description": description,
+        "type": type,
+        "startDate": startDate,
+        "endDate": endDate,
+        "prizeDetails": prizeDetails,
+        "maxParticipants": maxParticipants,
+        "rules": rules,
+        "criteria": criteria,
+        "preferences": preferences,
+        "terms": terms,
+        "agreement": agreement,
+        "company": company,
+        "host_uid": host_uid,
+        "participants": []
+    }
 
     # Upload the image to Firebase Storage
     bucket = storage.bucket(name='fastapiauth-d3407.appspot.com')
