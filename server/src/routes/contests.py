@@ -91,10 +91,11 @@ async def create_contest(
 
 
 
-@router.post("/contest/generateai")
-async def create_contest_ai(type: str, details: str):
+@router.post("/contest/generateai"  ,tags=["contests"])
+async def create_contest_ai(type: str, details: str) :
     
     response = get_formatted_response(type=type,details=details)
+    print(response)
     return {"message": response}
 
 
