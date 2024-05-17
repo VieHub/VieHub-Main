@@ -10,6 +10,7 @@ from fastapi import Security
 from src.middlewares.authentication import oauth2_authentication
 import uuid
 from firebase_admin import storage
+from src.services.Agent import get_formatted_response
 class ContestCreateSchema(BaseModel):
     title: str
     description: str
@@ -50,7 +51,6 @@ async def create_contest(
 
     if not user_doc.exists or user_doc.to_dict().get('role') != 'Host':
         raise HTTPException(status_code=403, detail="Only hosts can create contests")
-
     unique_id = str(uuid.uuid4())
     contest_data = {
         "title": title,
@@ -87,6 +87,18 @@ async def create_contest(
 
     # Return the contest data, including the generated ID
     return Contest(**contest_data, id=unique_id)
+
+
+
+
+@router.post("/contest/generateai")
+async def create_contest_ai(type: str, details: str):
+    
+    response = get_formatted_response(type=type,details=details)
+    return {"message": response}
+
+
+
 
 @router.get('/contests', response_model=List[Contest])
 async def get_contests():
