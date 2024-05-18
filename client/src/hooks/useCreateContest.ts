@@ -17,6 +17,7 @@ export function useCreateContest() {
       console.log("CONTEST DATA", contestData);
       const formData = new FormData();
       formData.append("title", contestData.title);
+      formData.append("subTitle", contestData.subTitle);
       formData.append("description", contestData.description);
       formData.append("type", contestData.type);
       formData.append(
@@ -30,9 +31,10 @@ export function useCreateContest() {
         contestData.maxParticipants.toString(),
       );
       formData.append("rules", contestData.rules);
+      formData.append("requirements", contestData.requirements);
       formData.append("criteria", contestData.criteria);
-      formData.append("preferences", contestData.preferences);
-      formData.append("terms", contestData.terms);
+      // formData.append("preferences", contestData.preferences);
+      // formData.append("terms", contestData.terms);
       formData.append("agreement", contestData.agreement.toString());
       formData.append("host_uid", user?.user?.uid ?? ""); // Add the user's UID to the form data with a default value of ""
 

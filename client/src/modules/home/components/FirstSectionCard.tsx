@@ -10,7 +10,7 @@ import competition from "@/assets/icons/competition.png";
 const FirstSectionCard: React.FC = () => {
   return (
     <div className="cards-container flex flex-wrap justify-between">
-      <div className="body card w-96 bg-base-100 shadow-xl mb-8">
+      <div className="card-ani card w-96 bg-base-100 shadow-xl mb-8">
         <figure className="px-10 pt-10">
           <img src={target} alt="Shoes" className="rounded-xl card_img" />
         </figure>
@@ -21,7 +21,7 @@ const FirstSectionCard: React.FC = () => {
         </div>
       </div>
       {/* Repeat this card four more times */}
-      <div className="body1 card w-96 bg-base-100 shadow-xl mb-8">
+      <div className="card-ani card w-96 bg-base-100 shadow-xl mb-8">
         <figure className="px-10 pt-10">
           <img src={running} alt="Shoes" className="rounded-xl card_img" />
         </figure>
@@ -31,7 +31,7 @@ const FirstSectionCard: React.FC = () => {
          
         </div>
       </div>
-      <div className="card w-96 bg-base-100 shadow-xl mb-8">
+      <div className="card-ani card w-96 bg-base-100 shadow-xl mb-8">
         <figure className="px-10 pt-10">
           <img src={portfolio} alt="Shoes" className="rounded-xl card_img" />
         </figure>
@@ -41,7 +41,7 @@ const FirstSectionCard: React.FC = () => {
           
         </div>
       </div>
-      <div className="card w-96 bg-base-100 shadow-xl mb-8">
+      <div className="card-ani card w-96 bg-base-100 shadow-xl mb-8">
         <figure className="px-10 pt-10">
           <img src={book} alt="Shoes" className="rounded-xl card_img" />
         </figure>
@@ -51,7 +51,7 @@ const FirstSectionCard: React.FC = () => {
           
         </div>
       </div>
-      <div className="card w-96 bg-base-100 shadow-xl mb-8">
+      <div className="card-ani card w-96 bg-base-100 shadow-xl mb-8">
         <figure className="px-10 pt-10">
           <img src={competition} alt="Shoes" className="rounded-xl card_img" />
         </figure>
@@ -61,7 +61,7 @@ const FirstSectionCard: React.FC = () => {
          
         </div>
       </div>
-      <div className="card w-96 bg-base-100 shadow-xl mb-8">
+      <div className="card-ani card w-96 bg-base-100 shadow-xl mb-8">
         <figure className="px-10 pt-10">
           <img src={solution} alt="Shoes" className="rounded-xl card_img" />
         </figure>

@@ -20,7 +20,7 @@ const ContestDetails = () => {
           <NavLink
             to="overview"
             className={({ isActive }) =>
-              `pl-4 pr-4 text-xl text-white ${
+              `pl-4 pr-4 text-xl text-white mt-2 ${
                 isActive ? "font-bold underline" : "hover:underline"
               }`
             }
@@ -31,7 +31,7 @@ const ContestDetails = () => {
           <NavLink
             to="rules"
             className={({ isActive }) =>
-              `pl-4 pr-4 text-xl text-white ${
+              `pl-4 pr-4 text-xl text-white mt-2 ${
                 isActive ? "font-bold underline" : "hover:underline"
               }`
             }
@@ -42,7 +42,7 @@ const ContestDetails = () => {
           <NavLink
             to="schedule"
             className={({ isActive }) =>
-              `pl-4 pr-4 text-xl text-white ${
+              `pl-4 pr-4 text-xl text-white mt-2 ${
                 isActive ? "font-bold underline" : "hover:underline"
               }`
             }
