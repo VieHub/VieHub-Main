@@ -13,6 +13,7 @@ from firebase_admin import storage
 from src.services.Agent import get_formatted_response
 class ContestCreateSchema(BaseModel):
     title: str
+    subTitle: str
     description: str
     type: str
     startDate: str
@@ -20,16 +21,19 @@ class ContestCreateSchema(BaseModel):
     prizeDetails: str
     maxParticipants: int
     rules: str
+    requirements: str
     criteria: str
-    preferences: str
-    terms: str
+    whatToBuild: str
     agreement: bool
     company: Optional[str] = None
+    image_url: UploadFile
 
 router = APIRouter(prefix="/contest", tags=["contests"])
+
 @router.post("/contest/create", response_model=Contest)
 async def create_contest(
     title: str = Form(...),
+    subTitle: str = Form(...),
     description: str = Form(...),
     type: str = Form(...),
     startDate: str = Form(...),
@@ -37,9 +41,9 @@ async def create_contest(
     prizeDetails: str = Form(...),
     maxParticipants: int = Form(...),
     rules: str = Form(...),
+    requirements: str = Form(...),
     criteria: str = Form(...),
-    preferences: str = Form(...),
-    terms: str = Form(...),
+    whatToBuild: str = Form(...),
     agreement: bool = Form(...),
     company: Optional[str] = Form(None),
     image_url: UploadFile = File(...),
@@ -51,9 +55,11 @@ async def create_contest(
 
     if not user_doc.exists or user_doc.to_dict().get('role') != 'Host':
         raise HTTPException(status_code=403, detail="Only hosts can create contests")
+
     unique_id = str(uuid.uuid4())
     contest_data = {
         "title": title,
+        "subTitle": subTitle,
         "description": description,
         "type": type,
         "startDate": startDate,
@@ -61,9 +67,9 @@ async def create_contest(
         "prizeDetails": prizeDetails,
         "maxParticipants": maxParticipants,
         "rules": rules,
+        "requirements": requirements,
         "criteria": criteria,
-        "preferences": preferences,
-        "terms": terms,
+        "whatToBuild": whatToBuild,
         "agreement": agreement,
         "company": company,
         "host_uid": host_uid,
@@ -87,7 +93,6 @@ async def create_contest(
 
     # Return the contest data, including the generated ID
     return Contest(**contest_data, id=unique_id)
-
 
 
 

@@ -5,7 +5,7 @@ const ContestDetails = () => {
   const { id } = useParams<{ id: string }>();
   const { data, error, isLoading } = contestDetailsData(id || "");
 
-  if (isLoading) return <div></div>;
+  if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error loading contest data.</div>;
 
   return (
@@ -20,7 +20,7 @@ const ContestDetails = () => {
           <NavLink
             to="overview"
             className={({ isActive }) =>
-              `pl-4 pr-4 text-xl text-white mt-2 ${
+              `mt-2 pl-4 pr-4 text-xl text-white ${
                 isActive ? "font-bold underline" : "hover:underline"
               }`
             }
@@ -31,7 +31,7 @@ const ContestDetails = () => {
           <NavLink
             to="rules"
             className={({ isActive }) =>
-              `pl-4 pr-4 text-xl text-white mt-2 ${
+              `mt-2 pl-4 pr-4 text-xl text-white ${
                 isActive ? "font-bold underline" : "hover:underline"
               }`
             }
@@ -42,7 +42,7 @@ const ContestDetails = () => {
           <NavLink
             to="schedule"
             className={({ isActive }) =>
-              `pl-4 pr-4 text-xl text-white mt-2 ${
+              `mt-2 pl-4 pr-4 text-xl text-white ${
                 isActive ? "font-bold underline" : "hover:underline"
               }`
             }

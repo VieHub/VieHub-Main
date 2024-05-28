@@ -1,7 +1,6 @@
 import { useOutletContext } from "react-router-dom";
 
 const Schedule = () => {
-  //   const data = useOutletContext();
   const data: { startDate?: string; endDate?: string } = useOutletContext();
 
   return (
@@ -9,37 +8,36 @@ const Schedule = () => {
       <h1 className="Schedule-text mb-8 mt-8 text-3xl font-bold text-black">
         Schedule
       </h1>
-      <h1 className="my-4 text-2xl font-bold text-white">Schedule</h1>
-      <div className="Fifth-details-section grid grid-cols-1 gap-4 border border-black p-4 sm:grid-cols-3">
-        <h3 className="Schedule break-words text-center font-bold text-black sm:text-left">
-          Schedule
-        </h3>
-        <h3 className="BEGINS break-words text-center font-bold text-black">
-          BEGINS
-        </h3>
-        <h3 className="ENDS break-words text-center font-bold text-black sm:text-right">
-          ENDS
-        </h3>
-      </div>
-      <div className="Fifth-details-section grid grid-cols-1 gap-4 border border-black p-4 sm:grid-cols-3">
-        <h3 className="Schedule break-words text-center font-bold text-black sm:text-left">
-          Submissions
-        </h3>
-        <h3 className="BEGINS break-words text-center font-bold text-black">
-          {data?.startDate}
-        </h3>
-        <h3 className="ENDS break-words text-center font-bold text-black sm:text-right">
-          {data?.endDate || ""}
-        </h3>
-      </div>
-      <div className="Fifth-details-section mb-12 grid grid-cols-1 gap-4 border border-black p-4 sm:grid-cols-3">
-        <h3 className="Schedule break-words text-center font-bold text-black sm:text-left">
-          Winners Announced
-        </h3>
-        <h3 className="BEGINS break-words text-center font-bold text-black"></h3>
-        <h3 className="ENDS break-words text-center font-bold text-black sm:text-right">
-          {/* {data?.winnersAnnouncementDate} */}
-        </h3>
+      <div className="overflow-x-auto">
+        <table className="table w-full">
+          <thead>
+            <tr>
+              <th className="text-center text-xl font-bold">Schedule</th>
+              <th className="text-center text-xl font-bold">BEGINS</th>
+              <th className="text-center text-xl font-bold">ENDS</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td className="text-center text-lg font-bold">Submissions</td>
+              <td className="text-center text-lg font-bold">
+                {new Date(data?.startDate ?? "").toLocaleDateString()}
+              </td>
+              <td className="text-center text-lg font-bold">
+                {new Date(data?.endDate ?? "").toLocaleDateString()}
+              </td>
+            </tr>
+            <tr>
+              <td className="text-center text-lg font-bold">
+                Winners Announced
+              </td>
+              <td className="text-center text-lg font-bold"></td>
+              <td className="text-center text-lg font-bold">
+                {/* {data?.winnersAnnouncementDate} */}
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   );

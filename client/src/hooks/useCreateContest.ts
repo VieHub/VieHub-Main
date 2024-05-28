@@ -1,4 +1,3 @@
-// src/hooks/useCreateContest.ts
 import { useMutation } from "@tanstack/react-query";
 import api from "@/api/apiClient"; // Ensure the path is correct based on your folder structure
 import { CreateContestData } from "@/types/apiSchemas"; // Ensure the path is correct based on your folder structure
@@ -33,8 +32,8 @@ export function useCreateContest() {
       formData.append("rules", contestData.rules);
       formData.append("requirements", contestData.requirements);
       formData.append("criteria", contestData.criteria);
-      // formData.append("preferences", contestData.preferences);
-      // formData.append("terms", contestData.terms);
+      formData.append("judgeCriteria", contestData.judgeCriteria);
+      formData.append("whatToBuild", contestData.whatToBuild);
       formData.append("agreement", contestData.agreement.toString());
       formData.append("host_uid", user?.user?.uid ?? ""); // Add the user's UID to the form data with a default value of ""
 

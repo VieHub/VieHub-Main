@@ -6,6 +6,7 @@ import { Key } from "react";
 interface Contest {
   id: string;
   title: string;
+  subTitle: string;
   description: string;
   image_url: string;
   prizeDetails: string;
@@ -14,6 +15,11 @@ interface Contest {
   startDate: string;
   endDate: string;
   type: string;
+  requirements: string;
+  rules: string;
+  criteria: string;
+  whatToBuild: string;
+  agreement: boolean;
 }
 
 interface Filters {
@@ -22,7 +28,7 @@ interface Filters {
   openTo: string[];
 }
 
-const Contest: React.FC = () => {
+const ContestPage: React.FC = () => {
   const { data: listOfcontests, isLoading, isError } = getContestData();
   const [filters, setFilters] = useState<Filters>({
     type: [],
@@ -311,4 +317,4 @@ const Contest: React.FC = () => {
   );
 };
 
-export default Contest;
+export default ContestPage;

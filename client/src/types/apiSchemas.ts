@@ -1,21 +1,20 @@
-interface CreateContestData {
+export interface CreateContestData {
   title: string;
-  description: string;
   subTitle: string;
+  description: string;
   type: string;
   startDate: string;
   endDate: string;
   prizeDetails: string;
   maxParticipants: number;
   rules: string;
-  criteria: string;
   requirements: string;
-  // preferences: string;
-  host_uid: string;
-  // terms: string;
+  criteria: string;
+  judgeCriteria: string;
+  whatToBuild: string;
   agreement: boolean;
-  company?: string; // Optional company field
-  image_url: File; // Assume this is a File object containing the image
+  company?: string;
+  image_url: File;
 }
 
-export type { CreateContestData };
+
