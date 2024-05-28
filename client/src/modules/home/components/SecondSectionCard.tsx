@@ -11,7 +11,7 @@ import cup from "@/assets/icons/cup.svg";
 const SecondSectionCard: React.FC = () => {
   return (
     <div className="cards-container flex flex-wrap justify-between">
-      <div className="body card w-96 bg-base-100 shadow-xl mb-8">
+      <div className="card-ani card w-96 bg-base-100 shadow-xl mb-8">
         <figure className="px-10 pt-10">
           <img src={efficiency} alt="Shoes" className="rounded-xl card_img" />
         </figure>
@@ -22,7 +22,7 @@ const SecondSectionCard: React.FC = () => {
         </div>
       </div>
       {/* Repeat this card four more times */}
-      <div className="body1 card w-96 bg-base-100 shadow-xl mb-8">
+      <div className="card-ani card w-96 bg-base-100 shadow-xl mb-8">
         <figure className="px-10 pt-10">
           <img src={puzzle} alt="Shoes" className="rounded-xl card_img" />
         </figure>
@@ -32,7 +32,7 @@ const SecondSectionCard: React.FC = () => {
          
         </div>
       </div>
-      <div className="card w-96 bg-base-100 shadow-xl mb-8">
+      <div className="card-ani card w-96 bg-base-100 shadow-xl mb-8">
         <figure className="px-10 pt-10">
           <img src={inspiration} alt="Shoes" className="rounded-xl card_img" />
         </figure>
@@ -42,7 +42,7 @@ const SecondSectionCard: React.FC = () => {
           
         </div>
       </div>
-      <div className="card w-96 bg-base-100 shadow-xl mb-8">
+      <div className="card-ani card w-96 bg-base-100 shadow-xl mb-8">
         <figure className="px-10 pt-10">
           <img src={email} alt="Shoes" className="rounded-xl card_img" />
         </figure>
@@ -52,7 +52,7 @@ const SecondSectionCard: React.FC = () => {
           
         </div>
       </div>
-      <div className="card w-96 bg-base-100 shadow-xl mb-8">
+      <div className="card-ani card w-96 bg-base-100 shadow-xl mb-8">
         <figure className="px-10 pt-10">
           <img src={cup} alt="Shoes" className="rounded-xl card_img" />
         </figure>
@@ -62,7 +62,7 @@ const SecondSectionCard: React.FC = () => {
          
         </div>
       </div>
-      <div className="card w-96 bg-base-100 shadow-xl mb-8">
+      <div className="card-ani card w-96 bg-base-100 shadow-xl mb-8">
         <figure className="px-10 pt-10">
           <img src={solution} alt="Shoes" className="rounded-xl card_img" />
         </figure>

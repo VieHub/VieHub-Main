@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+// import StarIcon from "@/assets/star.svg";
 
 const ContestForm2: React.FC<{
   onNextStep: () => void;
@@ -8,10 +9,11 @@ const ContestForm2: React.FC<{
   const [image_url, setimage_url] = useState<File | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [formData, setFormData] = useState({
-    preferences: "",
+    // preferences: "",
     criteria: "",
-    terms: "",
+    requirements: "",
     rules: "",
+    prizeDetails: "",
     agreement: false,
   });
 
@@ -65,7 +67,7 @@ const ContestForm2: React.FC<{
       <div className="card w-96 w-full max-w-4xl rounded-lg bg-base-100 bg-white p-6 shadow-sm shadow-xl">
         <h2 className="mb-4 text-xl font-bold">Public Competition Form</h2>
         <form onSubmit={handleSubmit}>
-          <div className="mb-4">
+          {/* <div className="mb-4">
             <input
               className="text-gray-800 w-full appearance-none rounded border px-4 py-3 leading-tight shadow-sm focus:outline-none focus:ring-1 focus:ring-teal-100"
               type="text"
@@ -74,8 +76,64 @@ const ContestForm2: React.FC<{
               value={formData.preferences}
               onChange={handleChange}
             />
+          </div> */}
+          <div className="mb-4">
+          {/* <div className="flex"> */}
+          <label className="text-gray-800 mb-2 block text-sm font-semibold">
+              Requirements of the Competition
+            </label>
+            {/* <img
+              src={StarIcon}
+              alt="AI generator"
+              title="Customize your text using AI" // Adding a title attribute for tooltip
+              className="star-icon ml-4 mb-2"
+            />
+            </div> */}
+            
+            <textarea
+              className="text-gray-800 w-full appearance-none rounded border px-4 py-3 leading-tight shadow-sm focus:outline-none focus:ring-1 focus:ring-teal-100"
+              placeholder="Terms and Conditions of the competition"
+              rows={4}
+              maxLength={2000} // Larger limit for more extensive text
+              style={{ resize: "vertical", maxHeight: "300px" }}
+              name="requirements"
+              value={formData.requirements}
+              onChange={handleTextareaChange}
+              required 
+            ></textarea>
+            
+            
           </div>
           <div className="mb-4">
+            <label className="text-gray-800 mb-2 block text-sm font-semibold">
+              Details of Prizes or Recognition for Winners
+            </label>
+            {/* <div className="flex"> */}
+            <textarea
+              className="text-gray-800 w-full appearance-none rounded border px-4 py-3 leading-tight shadow-sm focus:outline-none focus:ring-1 focus:ring-teal-100"
+              rows={4}
+              name="prizeDetails"
+              maxLength={1000} // Limits characters
+              value={formData.prizeDetails}
+              onChange={handleTextareaChange}
+              placeholder="Details of Prizes or Recognition for Winners"
+              required >
+              // required
+
+              </textarea>
+              {/* <img
+              src={StarIcon}
+              alt="AI generator"
+              title="Customize your text using AI" // Adding a title attribute for tooltip
+              className="star-icon"
+            />
+            </div> */}
+          </div>
+          <div className="mb-4">
+          <label className="text-gray-800 mb-2 block text-sm font-semibold">
+            Judge criteria
+            </label>
+            {/* <div className="flex"> */}
             <textarea
               className="text-gray-800 w-full appearance-none rounded border px-4 py-3 leading-tight shadow-sm focus:outline-none focus:ring-1 focus:ring-teal-100"
               placeholder="Criteria for Evaluating Submissions"
@@ -85,9 +143,17 @@ const ContestForm2: React.FC<{
               name="criteria"
               value={formData.criteria}
               onChange={handleTextareaChange}
+              required 
             ></textarea>
+            {/* <img
+              src={StarIcon}
+              alt="AI generator"
+              title="Customize your text using AI" // Adding a title attribute for tooltip
+              className="star-icon"
+            />
+            </div> */}
           </div>
-          <div className="mb-4">
+          {/* <div className="mb-4">
             <textarea
               className="text-gray-800 w-full appearance-none rounded border px-4 py-3 leading-tight shadow-sm focus:outline-none focus:ring-1 focus:ring-teal-100"
               placeholder="Terms and Conditions of the competition"
@@ -98,18 +164,30 @@ const ContestForm2: React.FC<{
               value={formData.terms}
               onChange={handleTextareaChange}
             ></textarea>
-          </div>
+          </div> */}
           <div className="mb-4">
+          <label className="text-gray-800 mb-2 block text-sm font-semibold">
+            What to bulid
+            </label>
+            {/* <div className="flex"> */}
             <textarea
               className="text-gray-800 w-full appearance-none rounded border px-4 py-3 leading-tight shadow-sm focus:outline-none focus:ring-1 focus:ring-teal-100"
-              placeholder="Rules of the Competition"
+              placeholder="What to bulid in the Competition"
               rows={6}
               maxLength={1500}
               style={{ resize: "vertical", maxHeight: "300px" }}
               name="rules"
               value={formData.rules}
               onChange={handleTextareaChange}
+              required 
             ></textarea>
+            {/* <img
+              src={StarIcon}
+              alt="AI generator"
+              title="Customize your text using AI" // Adding a title attribute for tooltip
+              className="star-icon"
+            />
+            </div> */}
           </div>
           <div className="mb-4">
             <label>

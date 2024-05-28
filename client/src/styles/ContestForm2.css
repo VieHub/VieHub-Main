@@ -83,3 +83,30 @@
   .file-msg {
     color: #888;
   }
+
+
+/* Add this CSS to your stylesheet */
+.star-icon {
+  /* Your existing styles for the image */
+  position: relative; /* Ensure the parent is positioned */
+}
+
+.star-icon::after {
+  content: "Customize your text using AI"; /* Message content */
+  position: absolute;
+  background-color: #333;
+  color: #fff;
+  padding: 5px;
+  border-radius: 10px;
+  font-size: 20px;
+  bottom: 100%; /* Position above the icon */
+  left: 50%; /* Center horizontally */
+  transform: translateX(-50%); /* Center horizontally */
+  white-space: nowrap;
+  opacity: 0; /* Initially hide the message */
+  transition: opacity 0.1s; /* Add a transition for smooth appearance */
+}
+
+.star-icon:hover::after {
+  opacity: 1; /* Show the message on hover */
+}

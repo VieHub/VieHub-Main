@@ -9,11 +9,13 @@ const ContestForm: React.FC<{ onNextStep: () => void; onFormData: (data: any) =>
   const [formData, setFormData] = useState({
     type: "",
     title: "",
-    description: "",
+    subTitle: "",
     startDate: startDate,
     endDate: endDate,
     maxParticipants: "",
-    prizeDetails: ""
+    description: "",
+    company:""
+    // prizeDetails: ""
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -21,6 +23,13 @@ const ContestForm: React.FC<{ onNextStep: () => void; onFormData: (data: any) =>
     setFormData({
       ...formData,
       [name]: value
+    });
+  };
+  const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
     });
   };
 
@@ -62,6 +71,21 @@ const ContestForm: React.FC<{ onNextStep: () => void; onFormData: (data: any) =>
 
           <div className="mb-4">
             <label className="text-gray-800 mb-2 block text-sm font-semibold">
+              Company Name
+            </label>
+            <input
+              className="text-gray-800 w-full appearance-none rounded border px-4 py-3 leading-tight shadow-sm focus:outline-none focus:ring-1 focus:ring-teal-100"
+              type="text"
+              name="company"
+              value={formData.company}
+              onChange={handleChange}
+              placeholder="Company Name"
+              required
+            />
+          </div>
+
+          <div className="mb-4">
+            <label className="text-gray-800 mb-2 block text-sm font-semibold">
               Title of the Competition
             </label>
             <input
@@ -77,15 +101,15 @@ const ContestForm: React.FC<{ onNextStep: () => void; onFormData: (data: any) =>
 
           <div className="mb-4">
             <label className="text-gray-800 mb-2 block text-sm font-semibold">
-              Description of the Competition
+              Sub Title of the Competition
             </label>
             <input
               className="text-gray-800 w-full appearance-none rounded border px-4 py-3 leading-tight shadow-sm focus:outline-none focus:ring-1 focus:ring-teal-100"
               type="text"
-              name="description"
-              value={formData.description}
+              name="subTitle"
+              value={formData.subTitle}
               onChange={handleChange}
-              placeholder="Description of the competition"
+              placeholder="Sub title of the Competition"
               required
 
             />
@@ -144,18 +168,22 @@ const ContestForm: React.FC<{ onNextStep: () => void; onFormData: (data: any) =>
 
           <div className="mb-4">
             <label className="text-gray-800 mb-2 block text-sm font-semibold">
-              Details of Prizes or Recognition for Winners
+              Description of the Competition
             </label>
-            <input
+            <textarea
               className="text-gray-800 w-full appearance-none rounded border px-4 py-3 leading-tight shadow-sm focus:outline-none focus:ring-1 focus:ring-teal-100"
-              type="text"
-              name="prizeDetails"
-              value={formData.prizeDetails}
-              onChange={handleChange}
+              rows={4}
+              maxLength={2000} // Larger limit for more extensive text
+              style={{ resize: "vertical", maxHeight: "300px" }}
+              name="description"
+              value={formData.description}
+              onChange={handleTextareaChange}
               placeholder="Details of Prizes or Recognition for Winners"
-              required
+              required >
+              </textarea>
+              
 
-            />
+            
           </div>
 
           <div className="flex justify-end">
