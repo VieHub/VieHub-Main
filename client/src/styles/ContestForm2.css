@@ -110,3 +110,6 @@
 .star-icon:hover::after {
   opacity: 1; /* Show the message on hover */
 }
+.blur-sm {
+  filter: blur(5px);
+}
