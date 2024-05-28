@@ -77,6 +77,7 @@ class CreateContestInput(BaseModel):
 
 class Contest(BaseModel):
     title: str = Field(..., example="Coding Challenge")
+    subTitle: str = Field(..., example="A challenge for coding enthusiasts.")
     description: str = Field(..., example="A challenge for coding enthusiasts.")
     type: str = Field(..., example="Coding")
     startDate: str = Field(..., example="2024-05-12T16:03:52+0300")
@@ -84,9 +85,9 @@ class Contest(BaseModel):
     prizeDetails: str = Field(..., example="200 USD")
     maxParticipants: int = Field(..., example=3)
     rules: str = Field(..., example="Follow the code of conduct.")
+    requirements: str = Field(..., example="Terms and conditions of the competition.")
     criteria: str = Field(..., example="Completion, Creativity")
-    preferences: str = Field(..., example="Fastest, Most Efficient")
-    terms: str = Field(..., example="Standard competition terms.")
+    whatToBuild: str = Field(..., example="Build a web app.")
     agreement: bool = Field(..., description="User has agreed to the terms.")
     company: Optional[str] = Field(None, example="Acme Inc.")
     host_uid: Optional[str] = None
@@ -94,13 +95,11 @@ class Contest(BaseModel):
     image_url: Optional[str] = None
     id: Optional[str] = Field(None, example="unique-contest-id")
 
-
-    @field_validator('title', 'description', 'rules', 'criteria', 'preferences', 'terms')
+    @field_validator('title', 'description', 'rules', 'criteria', 'requirements', 'whatToBuild')
     def must_not_be_empty(cls, v):
         if not v or v.strip() == "":
             raise ValueError('This field must not be empty or just whitespace.')
         return v
-
 
     @field_validator('maxParticipants')
     def validate_max_participants(cls, v):
@@ -113,12 +112,13 @@ class Contest(BaseModel):
         if not v:
             raise ValueError('Agreement must be true to proceed')
         return v
-class ContestModel(BaseModel):
-    title: str
-    description: str
-    start_date: datetime
-    end_date: datetime
-    user_id: str  # Reference to the user who created the contest
+
+# class ContestModel(BaseModel):
+#     title: str
+#     description: str
+#     start_date: datetime
+#     end_date: datetime
+#     user_id: str  # Reference to the user who created the contest
 
 class Submission(BaseModel):
     contest_id: str

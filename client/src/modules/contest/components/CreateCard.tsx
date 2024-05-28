@@ -7,7 +7,7 @@ interface ContestCardProps {
   description: string;
   image: string;
   prize: string;
-  participants: any;
+  participants: any[];
   companyName: string;
   startDate: string;
   endDate: string;
@@ -33,7 +33,7 @@ const ContestCard: React.FC<ContestCardProps> = ({
   return (
     <div
       onClick={handleClick}
-      className=" contest-card mx-4 my-4 flex w-full max-w-4xl overflow-hidden rounded-lg shadow-lg "
+      className="contest-card mx-4 my-4 flex w-full max-w-4xl overflow-hidden rounded-lg shadow-lg"
     >
       <img className="h-50 w-1/4 object-cover" src={image} alt={name} />
       <div
@@ -58,10 +58,12 @@ const ContestCard: React.FC<ContestCardProps> = ({
               <span className="font-bold">Company:</span> {companyName}
             </p>
             <p>
-              <span className="font-bold">Start Date:</span> {startDate}
+              <span className="font-bold">Start Date:</span>{" "}
+              {new Date(startDate).toLocaleDateString()}
             </p>
             <p>
-              <span className="font-bold">End Date:</span> {endDate}
+              <span className="font-bold">End Date:</span>{" "}
+              {new Date(endDate).toLocaleDateString()}
             </p>
           </div>
         </div>
