@@ -18,6 +18,7 @@ email-validator = "^2.1.1"
 python-multipart = "^0.0.9"
 openai = "^1.30.1"
 langchain = "^0.2.1"
+langchain-openai = "^0.1.7"
 
 
 [tool.pyright]
