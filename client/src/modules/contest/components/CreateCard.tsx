@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 interface ContestCardProps {
-  id: string; // Add the id property
+  id: string;
   name: string;
   description: string;
   image: string;
@@ -12,6 +12,22 @@ interface ContestCardProps {
   startDate: string;
   endDate: string;
 }
+
+const truncateText = (text: string, maxLength: number) => {
+  if (text.length > maxLength) {
+    return text.substring(0, maxLength) + "...";
+  }
+  return text;
+};
+
+const formatDate = (dateString: string) => {
+  const options: Intl.DateTimeFormatOptions = {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  };
+  return new Date(dateString).toLocaleDateString("en-GB", options);
+};
 
 const ContestCard: React.FC<ContestCardProps> = ({
   id,
@@ -35,18 +51,21 @@ const ContestCard: React.FC<ContestCardProps> = ({
       onClick={handleClick}
       className="contest-card mx-4 my-4 flex w-full max-w-4xl overflow-hidden rounded-lg shadow-lg"
     >
-      <img className="h-50 w-1/4 object-cover" src={image} alt={name} />
+      <img className="h-full w-1/4 object-cover" src={image} alt={name} />
       <div
         className="flex w-3/4 flex-col px-6 py-4"
         style={{ backgroundColor: "#2B6777" }}
       >
         <div className="mb-2 text-xl font-bold text-white">{name}</div>
-        <p className="text-gray-700 text-base text-white">{description}</p>
+        <p className="text-gray-700 text-base text-white">
+          {truncateText(description, 188)}
+        </p>
         <hr className="my-4 border-white" />
         <div className="flex justify-between text-white">
           <div>
             <p>
-              <span className="font-bold">Prize:</span> {prize}
+              <span className="font-bold">Prize:</span>{" "}
+              {truncateText(prize, 50)}
             </p>
             <p>
               <span className="font-bold">Participants:</span>{" "}
@@ -59,11 +78,10 @@ const ContestCard: React.FC<ContestCardProps> = ({
             </p>
             <p>
               <span className="font-bold">Start Date:</span>{" "}
-              {new Date(startDate).toLocaleDateString()}
+              {formatDate(startDate)}
             </p>
             <p>
-              <span className="font-bold">End Date:</span>{" "}
-              {new Date(endDate).toLocaleDateString()}
+              <span className="font-bold">End Date:</span> {formatDate(endDate)}
             </p>
           </div>
         </div>

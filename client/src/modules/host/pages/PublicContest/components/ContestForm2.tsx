@@ -12,7 +12,7 @@ const ContestForm2: React.FC<{
     // preferences: "",
     criteria: "",
     requirements: "",
-    rules: "",
+    whatToBuild: "",
     prizeDetails: "",
     agreement: false,
   });
@@ -78,8 +78,8 @@ const ContestForm2: React.FC<{
             />
           </div> */}
           <div className="mb-4">
-          {/* <div className="flex"> */}
-          <label className="text-gray-800 mb-2 block text-sm font-semibold">
+            {/* <div className="flex"> */}
+            <label className="text-gray-800 mb-2 block text-sm font-semibold">
               Requirements of the Competition
             </label>
             {/* <img
@@ -89,7 +89,7 @@ const ContestForm2: React.FC<{
               className="star-icon ml-4 mb-2"
             />
             </div> */}
-            
+
             <textarea
               className="text-gray-800 w-full appearance-none rounded border px-4 py-3 leading-tight shadow-sm focus:outline-none focus:ring-1 focus:ring-teal-100"
               placeholder="Terms and Conditions of the competition"
@@ -99,10 +99,8 @@ const ContestForm2: React.FC<{
               name="requirements"
               value={formData.requirements}
               onChange={handleTextareaChange}
-              required 
+              required
             ></textarea>
-            
-            
           </div>
           <div className="mb-4">
             <label className="text-gray-800 mb-2 block text-sm font-semibold">
@@ -117,11 +115,11 @@ const ContestForm2: React.FC<{
               value={formData.prizeDetails}
               onChange={handleTextareaChange}
               placeholder="Details of Prizes or Recognition for Winners"
-              required >
+              required
+            >
               // required
-
-              </textarea>
-              {/* <img
+            </textarea>
+            {/* <img
               src={StarIcon}
               alt="AI generator"
               title="Customize your text using AI" // Adding a title attribute for tooltip
@@ -130,8 +128,8 @@ const ContestForm2: React.FC<{
             </div> */}
           </div>
           <div className="mb-4">
-          <label className="text-gray-800 mb-2 block text-sm font-semibold">
-            Judge criteria
+            <label className="text-gray-800 mb-2 block text-sm font-semibold">
+              Judge criteria
             </label>
             {/* <div className="flex"> */}
             <textarea
@@ -143,7 +141,7 @@ const ContestForm2: React.FC<{
               name="criteria"
               value={formData.criteria}
               onChange={handleTextareaChange}
-              required 
+              required
             ></textarea>
             {/* <img
               src={StarIcon}
@@ -166,8 +164,8 @@ const ContestForm2: React.FC<{
             ></textarea>
           </div> */}
           <div className="mb-4">
-          <label className="text-gray-800 mb-2 block text-sm font-semibold">
-            What to bulid
+            <label className="text-gray-800 mb-2 block text-sm font-semibold">
+              What to bulid
             </label>
             {/* <div className="flex"> */}
             <textarea
@@ -176,10 +174,10 @@ const ContestForm2: React.FC<{
               rows={6}
               maxLength={1500}
               style={{ resize: "vertical", maxHeight: "300px" }}
-              name="rules"
-              value={formData.rules}
+              name="whatToBuild"
+              value={formData.whatToBuild}
               onChange={handleTextareaChange}
-              required 
+              required
             ></textarea>
             {/* <img
               src={StarIcon}
