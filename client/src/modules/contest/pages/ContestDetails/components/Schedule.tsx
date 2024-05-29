@@ -1,6 +1,10 @@
 import { useOutletContext } from "react-router-dom";
+import { CreateContestData } from "@/types/apiSchemas";
 
-const Schedule = () => {
+
+const Schedule: React.FC<{ contestData: CreateContestData }> = ({
+  contestData,
+}) => {
   const data: { startDate?: string; endDate?: string } = useOutletContext();
 
   return (
@@ -21,10 +25,10 @@ const Schedule = () => {
             <tr>
               <td className="text-center text-lg font-bold">Submissions</td>
               <td className="text-center text-lg font-bold">
-                {new Date(data?.startDate ?? "").toLocaleDateString()}
+              {contestData.startDate}
               </td>
               <td className="text-center text-lg font-bold">
-                {new Date(data?.endDate ?? "").toLocaleDateString()}
+              {contestData.endDate}
               </td>
             </tr>
             <tr>
