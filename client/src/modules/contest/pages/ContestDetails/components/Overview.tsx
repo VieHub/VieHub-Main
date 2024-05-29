@@ -8,7 +8,7 @@ const Overview: React.FC<{ contestData: CreateContestData }> = ({
 }) => {
   return (
     <div className="flex h-full w-full flex-col">
-      <div className="third-details-section flex justify-center">
+      <div className="third-details-section flex justify-center ">
         <div className="contest-heading mt-12">
           <h1 className="mb-8 text-3xl font-bold text-black">
             {contestData.title}
@@ -33,7 +33,7 @@ const Overview: React.FC<{ contestData: CreateContestData }> = ({
                 className="py-1/3 text-l mt-12 px-4 text-white"
                 style={{ backgroundColor: "#52AB98" }}
               >
-                {contestData.prizeDetails.split("\n")[0]}
+                {contestData.prizeDetails.split("\n")[0].replace("-", "")}
               </button>
               <Link to="/contest">
                 <p

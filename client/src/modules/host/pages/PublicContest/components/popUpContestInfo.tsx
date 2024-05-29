@@ -68,8 +68,8 @@ const PopUpContestInfo: React.FC<{
           {activeComponent === "overview" && (
             <Overview contestData={contestData ?? ({} as CreateContestData)} /> // Ensure contestData is of type CreateContestData
           )}
-          {activeComponent === "rules" && <Rules />}
-          {activeComponent === "schedule" && <Schedule />}
+          {activeComponent === "rules" && <Rules contestData={contestData ?? ({} as CreateContestData)} />}
+          {activeComponent === "schedule" && <Schedule contestData={contestData ?? ({} as CreateContestData)} />}
         </div>
         {loading ? (
           <div className="flex justify-center p-4">
