@@ -31,6 +31,7 @@ def get_formatted_response(type: str, details: str) -> any:    # Define the syst
         print(f"An error occurred: {e}")
         return e
 
+
     
     # Print the response content
 

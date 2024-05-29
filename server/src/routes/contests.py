@@ -10,7 +10,8 @@ from fastapi import Security
 from src.middlewares.authentication import oauth2_authentication
 import uuid
 from firebase_admin import storage
-from src.services.Agent import get_formatted_response
+from src.services.SummaryAgent import get_formatted_response
+from src.services.PreviewAgent import get_ai_preview 
 class ContestCreateSchema(BaseModel):
     title: str
     subTitle: str
@@ -95,6 +96,64 @@ async def create_contest(
     return Contest(**contest_data, id=unique_id)
 
 
+@router.post("/contest/preview", response_model=Contest)
+async def preview_contest(
+    title: str = Form(...),
+    subTitle: str = Form(...),
+    description: str = Form(...),
+    type: str = Form(...),
+    startDate: str = Form(...),
+    endDate: str = Form(...),
+    prizeDetails: str = Form(...),
+    maxParticipants: int = Form(...),
+    rules: str = Form(...),
+    requirements: str = Form(...),
+    criteria: str = Form(...),
+    whatToBuild: str = Form(...),
+    agreement: bool = Form(...),
+    company: Optional[str] = Form(None),
+    image_url: UploadFile = File(...),
+    current_user: dict = Depends(oauth2_authentication)
+):
+    host_uid = current_user['uid']
+    user_ref = db.collection('users').document(host_uid)
+    user_doc = user_ref.get()
+
+    if not user_doc.exists or user_doc.to_dict().get('role') != 'Host':
+        raise HTTPException(status_code=403, detail="Only hosts can create contests")
+
+    unique_id = str(uuid.uuid4())
+    contest_data = {
+        "title": title,
+        "subTitle": subTitle,
+        "description": description,
+        "type": type,
+        "startDate": startDate,
+        "endDate": endDate,
+        "prizeDetails": prizeDetails,
+        "maxParticipants": maxParticipants,
+        "rules": rules,
+        "requirements": requirements,
+        "criteria": criteria,
+        "whatToBuild": whatToBuild,
+        "agreement": agreement,
+        "company": company,
+        "host_uid": host_uid,
+        "participants": []
+    }
+
+    # Upload the image to Firebase Storage
+    bucket = storage.bucket(name='fastapiauth-d3407.appspot.com')
+    blob = bucket.blob(f'contests/{unique_id}/{image_url.filename}')
+    blob.upload_from_string(image_url.file.read(), content_type=image_url.content_type)
+    blob.make_public()
+    contest_data['image_url'] = blob.public_url
+
+    # Call the create_contest_ai method with the contest data
+    ai_response = get_ai_preview(contest_data)
+
+    # Return the AI response instead of storing the contest data
+    return ai_response
 
 @router.post("/contest/generateai"  ,tags=["contests"])
 async def create_contest_ai(type: str, details: str) :
