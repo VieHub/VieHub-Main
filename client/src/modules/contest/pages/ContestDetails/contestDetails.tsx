@@ -5,6 +5,7 @@ const ContestDetails = () => {
   const { id } = useParams<{ id: string }>();
   const { data, error, isLoading } = contestDetailsData(id || "");
 
+  console.log(data);
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error loading contest data.</div>;
 

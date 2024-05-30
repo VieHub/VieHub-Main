@@ -2,8 +2,8 @@ import { useMutation } from "@tanstack/react-query";
 import api from "@/api/apiClient"; // Ensure the path is correct based on your folder structure
 // import { CreateContestData } from "@/types/apiSchemas"; // Ensure the path is correct based on your folder structure
 import { useAuth } from "@/contexts/AuthContext"; // Import the useAuth hook
-import { CreateContestData } from "@/types/apiSchemas";
-function transformContestData(data: any): CreateContestData {
+import { CreateContestData, CreateContestDataWithAI } from "@/types/apiSchemas";
+function transformContestData(data: CreateContestData): CreateContestData {
   return {
     title: data.title,
     subTitle: data.subTitle,
@@ -19,9 +19,11 @@ function transformContestData(data: any): CreateContestData {
     whatToBuild: data.whatToBuild,
     agreement: data.agreement,
     company: data.company || "", // Provide empty string if undefined
-    image_url: data.image_url, // Assume this is a File object
+    image_url: data.image_url,
+    image_file: data.image_file, // Assume this is a File object
   };
 }
+
 export function useCreateContest() {
   const user = useAuth(); // Use the useAuth hook to access the current user
 
@@ -60,7 +62,13 @@ export function useCreateContest() {
       if (contestData.company) {
         formData.append("company", contestData.company);
       }
-      formData.append("image_url", contestData.image_url);
+
+      // Append either the image URL or the image file, but not both
+      if (contestData.image_url) {
+        formData.append("image_url", contestData.image_url);
+      } else if (contestData.image_file) {
+        formData.append("image_file", contestData.image_file);
+      }
 
       // Log each key and value in FormData
       for (var pair of formData.entries()) {
@@ -78,6 +86,7 @@ export function useCreateContest() {
     },
   });
 }
+
 export function useCreateContestWithAI() {
   const user = useAuth(); // Use the useAuth hook to access the current user
 
@@ -85,7 +94,7 @@ export function useCreateContestWithAI() {
     mutationKey: ["createContestWithAI"],
 
     // Function to perform the actual API call
-    mutationFn: async (contestData: CreateContestData) => {
+    mutationFn: async (contestData: CreateContestDataWithAI) => {
       // Use FormData to handle content type 'multipart/form-data' required for file upload
       console.log("CONTEST DATA", contestData);
       const formData = new FormData();

@@ -1,5 +1,5 @@
 import datetime
-from typing import List, Optional
+from typing import List, Optional, Union
 from fastapi import APIRouter, Depends, File, Form, HTTPException, UploadFile
 from pydantic import BaseModel
 from src.deps.auth import auth, firebase, db
@@ -12,6 +12,7 @@ import uuid
 from firebase_admin import storage
 from src.services.SummaryAgent import get_formatted_response
 from src.services.PreviewAgent import get_ai_preview 
+
 class ContestCreateSchema(BaseModel):
     title: str
     subTitle: str
@@ -27,7 +28,9 @@ class ContestCreateSchema(BaseModel):
     whatToBuild: str
     agreement: bool
     company: Optional[str] = None
-    image_url: UploadFile
+    image_url: Optional[str] = None
+    image_file: Optional[UploadFile] = None
+
 
 router = APIRouter(prefix="/contest", tags=["contests"])
 
@@ -47,7 +50,8 @@ async def create_contest(
     whatToBuild: str = Form(...),
     agreement: bool = Form(...),
     company: Optional[str] = Form(None),
-    image_url: UploadFile = File(...),
+    image_url: Optional[str] = Form(None),
+    image_file: Optional[UploadFile] = File(None),
     current_user: dict = Depends(oauth2_authentication)
 ):
     host_uid = current_user['uid']
@@ -77,12 +81,17 @@ async def create_contest(
         "participants": []
     }
 
-    # Upload the image to Firebase Storage
-    bucket = storage.bucket(name='fastapiauth-d3407.appspot.com')
-    blob = bucket.blob(f'contests/{unique_id}/{image_url.filename}')
-    blob.upload_from_string(image_url.file.read(), content_type=image_url.content_type)
-    blob.make_public()
-    contest_data['image_url'] = blob.public_url
+    # Handle image URL or file upload
+    if image_url:
+        contest_data['image_url'] = image_url
+    elif image_file:
+        bucket = storage.bucket(name='fastapiauth-d3407.appspot.com')
+        blob = bucket.blob(f'contests/{unique_id}/{image_file.filename}')
+        blob.upload_from_string(image_file.file.read(), content_type=image_file.content_type)
+        blob.make_public()
+        contest_data['image_url'] = blob.public_url
+    else:
+        raise HTTPException(status_code=400, detail="Image URL or file is required")
 
     # Set the contest in the contests collection with a unique ID
     db.collection('contests').document(unique_id).set(contest_data)
