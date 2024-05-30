@@ -45,7 +45,7 @@ const ContestCard: React.FC<ContestCardProps> = ({
   const handleClick = () => {
     navigate(`/contest/${id}`);
   };
-
+  const prizes = prize.split("\n")[0].replace("-", "");
   return (
     <div
       onClick={handleClick}
@@ -65,7 +65,7 @@ const ContestCard: React.FC<ContestCardProps> = ({
           <div>
             <p>
               <span className="font-bold">Prize:</span>{" "}
-              {truncateText(prize, 50)}
+              {truncateText(prizes, 50)}
             </p>
             <p>
               <span className="font-bold">Participants:</span>{" "}

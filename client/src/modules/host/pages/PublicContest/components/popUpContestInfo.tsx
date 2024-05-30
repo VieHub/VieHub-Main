@@ -6,10 +6,9 @@ import { CreateContestData } from "@/types/apiSchemas";
 
 const PopUpContestInfo: React.FC<{
   onClose: () => void;
-  onConfirm: () => void;
   contestData: CreateContestData | null; // Accept contest data as a prop
   loading: boolean; // Accept loading state as a prop
-}> = ({ onClose, onConfirm, contestData, loading }) => {
+}> = ({ onClose, contestData, loading }) => {
   const [activeComponent, setActiveComponent] = useState("overview");
 
   const handleComponentChange = (component: string) => {
@@ -68,8 +67,12 @@ const PopUpContestInfo: React.FC<{
           {activeComponent === "overview" && (
             <Overview contestData={contestData ?? ({} as CreateContestData)} /> // Ensure contestData is of type CreateContestData
           )}
-          {activeComponent === "rules" && <Rules contestData={contestData ?? ({} as CreateContestData)} />}
-          {activeComponent === "schedule" && <Schedule contestData={contestData ?? ({} as CreateContestData)} />}
+          {activeComponent === "rules" && (
+            <Rules contestData={contestData ?? ({} as CreateContestData)} />
+          )}
+          {activeComponent === "schedule" && (
+            <Schedule contestData={contestData ?? ({} as CreateContestData)} />
+          )}
         </div>
         {loading ? (
           <div className="flex justify-center p-4">
@@ -80,7 +83,7 @@ const PopUpContestInfo: React.FC<{
         ) : null}
         <div className="flex justify-end p-4">
           <button
-            onClick={onConfirm}
+            onClick={onClose}
             className="rounded bg-blue-500 px-4 py-2 text-white"
             disabled={loading}
           >
