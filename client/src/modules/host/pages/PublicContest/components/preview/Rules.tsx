@@ -2,10 +2,12 @@ import React from "react";
 import { CreateContestData } from "@/types/apiSchemas";
 import { useOutletContext } from "react-router-dom";
 
-const Rules: React.FC<{}> = () => {
+const Rules: React.FC<{ contestData: CreateContestData }> = ({
+  contestData,
+}) => {
   const contextData = useOutletContext<CreateContestData>();
-  const data = contextData;
-  
+  const data = contextData || contestData;
+
   return (
     <div className="flex h-full w-full flex-col">
       <div className="forth-details-section mb-8 mt-12">

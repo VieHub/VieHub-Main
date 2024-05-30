@@ -5,19 +5,17 @@ import { CreateContestData } from "@/types/apiSchemas";
 import { formatDate } from "@/utils/dateUtils";
 
 
-const Overview: React.FC<{ contestData: CreateContestData }> = ({
-  contestData,
-}) => {
+const Overview: React.FC<{}> = () => {
   const contextData = useOutletContext<CreateContestData>();
-  const data = contextData || contestData;
+  const data = contextData ;
 
-  console.log(contestData);
+  // console.log(contestData);
   return (
     <div className="flex h-full w-full flex-col">
       <div className="third-details-section flex justify-center ">
-        <div className="contest-heading mt-12">
+        <div className="contest-heading mt-12  md:w-1/2">
           <h1 className="mb-8 text-3xl font-bold text-black">{data.title}</h1>
-          <h3 className="mb-8 text-xl text-black">{contestData.subTitle}</h3>
+          <h3 className="mb-8 text-xl text-black">{data.subTitle}</h3>
           <button
             className="text-l mt-8 rounded px-8 py-2 text-white"
             style={{ backgroundColor: "#52AB98" }}
@@ -25,7 +23,7 @@ const Overview: React.FC<{ contestData: CreateContestData }> = ({
             Join competition
           </button>
         </div>
-        <div className="contest-heading-card bg-gray-100 card mt-12 p-8">
+        <div className="contest-heading-card md:w-1/4 bg-gray-100 card mt-12 p-8">
           <p className="mb-16 text-black" style={{ fontSize: "1.1rem" }}>
             Deadline: <br /> {formatDate(data.endDate)}
           </p>
@@ -64,8 +62,8 @@ const Overview: React.FC<{ contestData: CreateContestData }> = ({
           </div>
         </div>
       </div>
-      <div className="forth-details-section mb-8 mt-12">
-        <p>{contestData.description}</p>
+      <div className="forth-details-section mb-8 mt-12 ">
+        <p>{data.description}</p>
         <div className="mt-12 flex flex-row items-center">
           <h1 className="requirement">REQUIREMENTS</h1>
           <hr className="border-gray-400 section-line opacity-3 ml-6 border-t" />

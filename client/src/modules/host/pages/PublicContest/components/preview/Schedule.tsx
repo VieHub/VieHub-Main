@@ -2,9 +2,11 @@ import { useOutletContext } from "react-router-dom";
 import { CreateContestData } from "@/types/apiSchemas";
 import { formatDate } from "@/utils/dateUtils";
 
-const Schedule: React.FC<{ }> = ({}) => {
+const Schedule: React.FC<{ contestData: CreateContestData }> = ({
+  contestData,
+}) => {
   const contextData = useOutletContext<CreateContestData>();
-  const data = contextData ;
+  const data = contextData || contestData;
   // Utility function to format the date
 
   return (

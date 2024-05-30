@@ -1,8 +1,13 @@
 import React, { useState } from "react";
-import Overview from "@/modules/contest/pages/ContestDetails/components/Overview";
-import Rules from "@/modules/contest/pages/ContestDetails/components/rules";
-import Schedule from "@/modules/contest/pages/ContestDetails/components/Schedule";
+// import Overview from "@/modules/contest/pages/ContestDetails/components/Overview";
+// import Rules from "@/modules/contest/pages/ContestDetails/components/rules";
+// import Schedule from "@/modules/contest/pages/ContestDetails/components/Schedule";
+import Overview from "./preview/Overview";
+import Rules from "./preview/Rules";
+import Schedule from "./preview/Schedule";
 import { CreateContestData } from "@/types/apiSchemas";
+import {  useOutletContext } from "react-router-dom";
+
 
 const PopUpContestInfo: React.FC<{
   onClose: () => void;
@@ -10,6 +15,10 @@ const PopUpContestInfo: React.FC<{
   loading: boolean; // Accept loading state as a prop
 }> = ({ onClose, contestData, loading }) => {
   const [activeComponent, setActiveComponent] = useState("overview");
+  const contextData = useOutletContext<CreateContestData>();
+  const data = contextData || contestData;
+
+
 
   const handleComponentChange = (component: string) => {
     setActiveComponent(component);
@@ -20,11 +29,7 @@ const PopUpContestInfo: React.FC<{
       <div className="max-h-3/4 w-11/12 overflow-y-auto rounded-lg bg-white shadow-lg md:w-3/4">
         <div className="details-section flex w-full items-center justify-center p-4">
           <h1 className="text-center text-3xl font-bold text-white">
-            {activeComponent === "overview"
-              ? "Contest Overview"
-              : activeComponent === "rules"
-                ? "Contest Rules"
-                : "Contest Schedule"}
+            {data.title}
           </h1>
         </div>
         <div className="second-details-section bg-gray-800 flex flex-row justify-center ">
