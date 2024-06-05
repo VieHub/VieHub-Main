@@ -65,7 +65,17 @@
 
 
 @media (max-width: 768px) {
-  .section-title{
-   margin: 10px ;
+  .section-title {
+      margin: 10px auto; /* Center and adjust margin */
   }
- }
+
+  .card {
+      width: 90%; /* Make cards take up most of the screen width */
+      margin: 10px auto; /* Center cards and add margin */
+  }
+
+  .cards-container {
+      flex-direction: column; /* Stack cards vertically on small screens */
+      align-items: center; /* Center cards in the container */
+  }
+}

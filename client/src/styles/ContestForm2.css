@@ -113,3 +113,24 @@
 .blur-sm {
   filter: blur(5px);
 }
+
+@media (max-width: 768px) {
+  .form3-row {
+    flex-direction: column; /* Stack elements vertically on smaller screens */
+  }
+
+  .form3-group {
+    margin-right: 0; /* Remove right margin */
+    width: 100%; /* Full width for form groups on smaller screens */
+  }
+
+  .button3-row {
+    flex-direction: column; /* Stack buttons vertically on smaller screens */
+    align-items: center; /* Center align buttons */
+  }
+
+  .button3 {
+    width: 100%; /* Full width for buttons on smaller screens */
+    margin: 10px 0; /* Margin for spacing between buttons */
+  }
+}
