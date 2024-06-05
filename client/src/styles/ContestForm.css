@@ -98,3 +98,22 @@
   color: #777;
   font-weight: bold;
 }
+
+@media (max-width: 768px) {
+  .signupc-form {
+    padding: 20px; /* Adjust padding for smaller screens */
+  }
+
+  .formc-row {
+    flex-direction: column; /* Stack form elements vertically on smaller screens */
+  }
+
+  .formc-group {
+    margin-right: 0; /* Remove right margin */
+    width: 100%; /* Full width for form groups on smaller screens */
+  }
+
+  .buttonc-container {
+    margin-left: 0; /* Center the button container */
+  }
+}

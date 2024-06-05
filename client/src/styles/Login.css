@@ -90,13 +90,26 @@
   @media screen and (max-width: 768px) {
     .container1 {
       width: 90%;
-      margin: 20% auto; /* Adjusted margin for smaller screens */
-      padding: 20px; /* Adjusted padding for smaller screens */
-      
+      margin: 10vh auto;
+      padding: 5vh 2vw;
     }
   
     .login-button,
     .google-button {
-      width: 70%; /* Adjusted button width to fill container */
+      width: 70%;
+    }
+  
+    .title {
+      font-size: 1.5rem;
+    }
+  
+    .input-box input {
+      width: 90%;
+    }
+  
+    .login-button,
+    .google-button {
+      padding: 1.5vh 3vw;
+      font-size: 1rem;
     }
   }

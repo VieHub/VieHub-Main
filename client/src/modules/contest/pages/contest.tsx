@@ -36,6 +36,7 @@ const ContestPage: React.FC = () => {
     openTo: [],
   });
   const [sortOption, setSortOption] = useState<string>("Most Relevant");
+  const [searchTerm, setSearchTerm] = useState<string>("");
 
   const handleTypeFilterChange = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -67,12 +68,17 @@ const ContestPage: React.FC = () => {
     setSortOption(sort);
   };
 
+  const handleSearchInputChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    setSearchTerm(event.target.value);
+  };
+
   const filterContests = (contests: Contest[]) => {
-    console.log("Applying filters:", filters);
+    console.log("Applying filters:", filters, "Search term:", searchTerm);
     let filtered = contests.filter((contest) => {
       const contestDuration =
-        (new Date(contest.endDate).getTime() -
-          new Date(contest.startDate).getTime()) /
+        (new Date(contest.endDate).getTime() - new Date(contest.startDate).getTime()) /
         (1000 * 60 * 60 * 24);
       const matchesType =
         filters.type.length === 0 ||
@@ -86,8 +92,11 @@ const ContestPage: React.FC = () => {
           contestDuration > 7 &&
           contestDuration <= 28) ||
         (filters.duration.includes("1month") && contestDuration > 28);
+      const matchesSearchTerm =
+        contest.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        contest.description.toLowerCase().includes(searchTerm.toLowerCase());
 
-      return matchesType && matchesDuration;
+      return matchesType && matchesDuration && matchesSearchTerm;
     });
 
     if (sortOption === "Most Relevant") {
@@ -115,8 +124,7 @@ const ContestPage: React.FC = () => {
       <div className="content flex max-w-full flex-wrap">
         <div className="w-full p-12 md:flex-1">
           <p className="desc p-6 text-center text-2xl opacity-100">
-            Elevate your game, join the competition. Your victory story starts
-            now!
+            Elevate your game, join the competition. Your victory story starts now!
           </p>
         </div>
       </div>
@@ -127,6 +135,8 @@ const ContestPage: React.FC = () => {
               type="text"
               className="border-gray-300 search-input mr-2 rounded-md border px-8 py-2"
               placeholder="Search..."
+              value={searchTerm}
+              onChange={handleSearchInputChange}
             />
           </div>
           <button

@@ -1,0 +1,139 @@
+.submission-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .submission-form {
+    width: 40%; /* Adjusted width */
+    max-width: 500px; /* Added max-width */
+    padding: 40px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    background-color: #fff;
+    text-align: center; /* Center align the content */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Added box shadow for a professional look */
+  }
+  
+  .submission-form h2 {
+    margin-bottom: 20px;
+  }
+  
+  .submission-form-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px; /* Added margin bottom for spacing */
+  }
+  
+  .submission-form-group {
+    width: 100%;
+    margin-right: 30px;
+  }
+  
+  .submission-form-group input,
+  .submission-form-group label {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    letter-spacing: 1px;
+  }
+  
+  .submission-checkbox-label {
+    display: flex;
+    align-items: center;
+  }
+  
+  .submission-checkbox-label input {
+    margin-right: 10px;
+  }
+  
+  .submission-teammate-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 50%;
+    background-color: #ccc;
+    cursor: pointer;
+    margin-left: 10px;
+    margin-bottom: 40px;
+  }
+  
+  .submission-teammate-button.active {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  .submission-file-drop-zone {
+    margin-top: 20px; /* Adjust margin as needed */
+  }
+  
+  .submission-button-row {
+    display: flex;
+    margin-left: 350px;
+  }
+  
+  .submission-button {
+    padding: 10px 40px;
+    border: none;
+    border-radius: 60px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    margin-right: 10px;
+    margin-top: 20px;
+  }
+  
+  .submission-file-drop-area {
+    border: 2px dashed #ccc; /* Dotted rectangle */
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .submission-file-msg {
+    color: #888;
+  }
+  
+
+@media screen and (max-width: 768px) {
+    .signup-form {
+        width: 90%; /* Adjusted width for smaller screens */
+        padding: 20px; /* Adjusted padding */
+    }
+  
+    .form-row {
+        flex-direction: column; /* Stack items vertically */
+        align-items: stretch; /* Stretch items to full width */
+    }
+  
+    .form-group {
+        width: 100%; /* Full width */
+    }
+  
+    .button-container button[type="submit"],
+    .custom-button {
+        width: 70%; /* Adjusted button width for smaller screens */
+    }
+  }
+  
+  @media screen and (max-width: 768px) {
+      .submission-form {
+          width: 90%; /* Adjusted width for smaller screens */
+          padding: 20px; /* Adjusted padding for smaller screens */
+      }
+  
+      .submission-form-row {
+          flex-direction: column; /* Stack items vertically */
+          align-items: stretch; /* Stretch items to full width */
+      }
+  
+      .submission-button {
+          width: 70%; /* Adjusted button width for smaller screens */
+          padding: 10px 30px; /* Adjusted padding for smaller screens */
+          font-size: 14px; /* Adjusted font size for smaller screens */
+      }
+  }
+  
+  

@@ -59,3 +59,37 @@
     cursor: pointer;
     margin-right: 10px;
   }
+
+  @media screen and (max-width: 768px) {
+    .container-pay {
+      width: 90%;
+      margin: 5vh auto; /* Adjusted margin for smaller screens */
+      padding: 5vh 2vw; /* Adjusted padding for smaller screens */
+    }
+  
+    .title {
+      font-size: 1.5rem; /* Adjusted font size for smaller screens */
+    }
+  
+    .input-pay-box input {
+      width: 100%; /* Full width on small screens */
+    }
+  
+    .button-pay {
+      width: 90%; /* Full width on small screens */
+      padding: 1.5vh 3vw; /* Adjusted padding for touch devices */
+      font-size: 1rem; /* Adjusted font size for readability */
+    }
+  
+    .input-pay-row {
+      flex-direction: column; /* Ensure rows stack vertically */
+      margin: 1vh 0; /* Adjusted margin for consistency */
+    }
+  
+    .button-pay-row {
+      flex-direction: column; /* Stack buttons vertically */
+      align-items: center; /* Center align buttons */
+      margin: 2vh 0; /* Adjusted margin */
+    }
+  }
+  

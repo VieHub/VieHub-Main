@@ -120,13 +120,70 @@
   }
 
   @media screen and (max-width: 768px) {
-    .signup-form {
-      width: 90%;
-        padding: 20px; /* Adjusted padding for smaller screens */
+    .select-form {
+      max-width: 90%;
+      height: auto;
+      padding: 20px;
     }
-
-    .button-container button[type="submit"],
-    .custom-button {
-        width: 70%; /* Adjusted button width for smaller screens */
+  
+    .options-container {
+      flex-direction: column;
+      height: auto;
+      align-items: center;
     }
-}
+  
+    .option-box {
+      width: 80%;
+      margin: 10px;
+    }
+  
+    .button-container {
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+  
+    .button-container button[type="submit"] {
+      padding: 10px 30px;
+      font-size: 14px;
+    }
+  
+    .header1 {
+      padding: 50px;
+    }
+  
+    .header1 p {
+      font-size: 1.2em;
+    }
+  
+    .host-logo {
+      margin-left: 20px;
+    }
+  
+    .section-container {
+      padding: 40px;
+      flex-direction: column;
+    }
+  
+    .section-left img {
+      margin-right: 30px;
+      margin-left: 0;
+    }
+  
+    .section-right,
+    .section-left {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+  
+    .host-button {
+      width: 80%;
+      padding: 1vh 2vw;
+      font-size: 1em;
+    }
+  
+    .section h2 {
+      font-size: 1.8rem;
+    }
+  }
+  
+  
