@@ -1,27 +1,26 @@
 import React, { useState } from "react";
-// import Overview from "@/modules/contest/pages/ContestDetails/components/Overview";
-// import Rules from "@/modules/contest/pages/ContestDetails/components/rules";
-// import Schedule from "@/modules/contest/pages/ContestDetails/components/Schedule";
 import Overview from "./preview/Overview";
 import Rules from "./preview/Rules";
 import Schedule from "./preview/Schedule";
 import { CreateContestData } from "@/types/apiSchemas";
-import {  useOutletContext } from "react-router-dom";
-
+import { useOutletContext } from "react-router-dom";
 
 const PopUpContestInfo: React.FC<{
   onClose: () => void;
-  contestData: CreateContestData | null; // Accept contest data as a prop
-  loading: boolean; // Accept loading state as a prop
-}> = ({ onClose, contestData, loading }) => {
+  contestData: CreateContestData | null;
+  loading: boolean;
+  onSave: (updatedData: CreateContestData) => void;
+}> = ({ onClose, contestData, loading, onSave }) => {
   const [activeComponent, setActiveComponent] = useState("overview");
   const contextData = useOutletContext<CreateContestData>();
   const data = contextData || contestData;
 
-
-
   const handleComponentChange = (component: string) => {
     setActiveComponent(component);
+  };
+
+  const handleEdit = (updatedData: CreateContestData) => {
+    onSave(updatedData);
   };
 
   return (
@@ -70,13 +69,19 @@ const PopUpContestInfo: React.FC<{
         </div>
         <div className="max-h-[calc(75vh-12rem)] overflow-y-auto p-4">
           {activeComponent === "overview" && (
-            <Overview contestData={contestData ?? ({} as CreateContestData)} /> // Ensure contestData is of type CreateContestData
+            <Overview
+              contestData={contestData ?? ({} as CreateContestData)}
+              onEdit={handleEdit}
+            />
           )}
           {activeComponent === "rules" && (
             <Rules contestData={contestData ?? ({} as CreateContestData)} />
           )}
           {activeComponent === "schedule" && (
-            <Schedule contestData={contestData ?? ({} as CreateContestData)} />
+            <Schedule
+              contestData={contestData ?? ({} as CreateContestData)}
+              onSave={handleEdit} // Pass the onSave function to the Schedule component
+            />
           )}
         </div>
         {loading ? (

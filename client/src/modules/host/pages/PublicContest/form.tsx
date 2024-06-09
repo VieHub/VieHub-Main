@@ -2,33 +2,23 @@ import React, { useState } from "react";
 import ContestForm from "./components/ContestForm";
 import ContestForm2 from "./components/ContestForm2";
 import Payment from "./components/payment";
-import PopUpContestInfo from "./components/popUpContestInfo"; // Import your pop-up component
+import PopUpContestInfo from "./components/popUpContestInfo";
 import { CreateContestData, CreateContestDataWithAI } from "@/types/apiSchemas";
-import {
-  useCreateContestWithAI,
-  useCreateContest,
-} from "@/hooks/useCreateContest";
+import { useCreateContestWithAI, useCreateContest } from "@/hooks/useCreateContest";
 
 const MultiStepForm: React.FC = () => {
   const [step, setStep] = useState<number>(1);
-  const [formDataStep1, setFormDataStep1] = useState<{ [key: string]: any }>(
-    {},
-  );
-  const [formDataStep2, setFormDataStep2] = useState<{ [key: string]: any }>(
-    {},
-  );
-  const [loading, setLoading] = useState<boolean>(false); // State to manage loading indicator
-  const [contestData, setContestData] = useState<CreateContestData | null>(
-    null,
-  ); // State to store contest data
+  const [formDataStep1, setFormDataStep1] = useState<{ [key: string]: any }>({});
+  const [formDataStep2, setFormDataStep2] = useState<{ [key: string]: any }>({});
+  const [loading, setLoading] = useState<boolean>(false);
+  const [contestData, setContestData] = useState<CreateContestData | null>(null);
 
   const previewContest = useCreateContestWithAI();
   const createContest = useCreateContest();
-  const [isPopUpVisible, setIsPopUpVisible] = useState<boolean>(false); // State to manage pop-up visibility
+  const [isPopUpVisible, setIsPopUpVisible] = useState<boolean>(false);
 
   const nextStep = () => {
     if (step === 2) {
-      // Start loading and call handleSubmit when moving to step 2
       setLoading(true);
       handleSubmit({
         ...formDataStep1,
@@ -55,9 +45,8 @@ const MultiStepForm: React.FC = () => {
     previewContest.mutate(mergedData, {
       onSuccess: (data) => {
         setLoading(false);
-        setContestData(data); // Set the contest data to be displayed in the pop-up
-        setIsPopUpVisible(true); // Show the pop-up
-
+        setContestData(data);
+        setIsPopUpVisible(true);
         setStep((prevStep) => prevStep + 1);
       },
       onError: (error) => {
@@ -74,9 +63,8 @@ const MultiStepForm: React.FC = () => {
       createContest.mutate(contestData, {
         onSuccess: (data) => {
           setLoading(false);
-          setContestData(null); // Close the pop-up
+          setContestData(null);
           alert("Contest confirmed successfully!");
-          // You can add any additional logic here after the contest is confirmed
         },
         onError: (error) => {
           setLoading(false);
@@ -87,8 +75,11 @@ const MultiStepForm: React.FC = () => {
   };
 
   const closePopUp = () => {
-    // setContestData(null);
-    setIsPopUpVisible(false); // Show the pop-up
+    setIsPopUpVisible(false);
+  };
+
+  const handleSave = (updatedData: CreateContestData) => {
+    setContestData(updatedData);
   };
 
   return (
@@ -99,7 +90,7 @@ const MultiStepForm: React.FC = () => {
         )}
         {step === 2 && (
           <ContestForm2
-            onNextStep={nextStep} // Call nextStep directly
+            onNextStep={nextStep}
             onPrevStep={prevStep}
             onFormData={handleFormData2}
           />
@@ -117,8 +108,9 @@ const MultiStepForm: React.FC = () => {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75">
           <PopUpContestInfo
             onClose={closePopUp}
-            contestData={contestData} // Pass contest data to the pop-up
-            loading={loading} // Pass loading state to the pop-up
+            contestData={contestData}
+            loading={loading}
+            onSave={handleSave}
           />
         </div>
       )}
