@@ -1,16 +1,15 @@
 // import Host from "./pages/host";
 import PublicHost from "./pages/PublicContest/PublicHost";
-import Privatehost from "./pages/PrivateContest/Privatehost";
+import PrivateHost from "./pages/PrivateContest/PrivateHost";
 export default [
-  
   {
     path: "PublicHost",
     element: <PublicHost />,
     name: "VieHub",
   },
   {
-    path: "Privatehost",
-    element: <Privatehost />,
+    path: "PrivateHost",
+    element: <PrivateHost />,
     name: "VieHub",
   },
 ];

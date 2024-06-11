@@ -31,7 +31,6 @@ class ContestCreateSchema(BaseModel):
     image_url: Optional[str] = None
     image_file: Optional[UploadFile] = None
 
-
 router = APIRouter(prefix="/contest", tags=["contests"])
 
 @router.post("/contest/create", response_model=Contest)

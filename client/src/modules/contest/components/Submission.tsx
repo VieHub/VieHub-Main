@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent, FormEvent } from "react";
+import React, { useState, FormEvent } from "react";
 import "./Submission.css"; // Import your CSS file
 
 const Submission: React.FC = () => {
