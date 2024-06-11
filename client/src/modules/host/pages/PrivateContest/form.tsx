@@ -4,10 +4,9 @@ import ContestForm2 from "./components/ContestForm2";
 import Payment from "./components/payment";
 import PopUpContestInfo from "./components/popUpContestInfo";
 import { CreateContestData, CreateContestDataWithAI } from "@/types/apiSchemas";
-import {
-  useCreateContestWithAI,
-  useCreateContest,
-} from "@/hooks/contests/useCreateContest";
+import { useCreatePrivateContest } from "@/hooks/private-contests/useCreatePrivateContest";
+
+import { useCreateContestWithAI } from "@/hooks/contests/useCreateContest";
 
 const MultiStepForm: React.FC = () => {
   const [step, setStep] = useState<number>(1);
@@ -23,7 +22,7 @@ const MultiStepForm: React.FC = () => {
   );
 
   const previewContest = useCreateContestWithAI();
-  const createContest = useCreateContest();
+  const createContest = useCreatePrivateContest();
   const [isPopUpVisible, setIsPopUpVisible] = useState<boolean>(false);
 
   const nextStep = () => {
@@ -64,9 +63,7 @@ const MultiStepForm: React.FC = () => {
       },
     });
   };
-
   const handleConfirm = () => {
-    console.log(contestData);
     if (contestData) {
       setLoading(true);
       createContest.mutate(contestData, {
@@ -74,7 +71,10 @@ const MultiStepForm: React.FC = () => {
           console.log(data);
           setLoading(false);
           setContestData(null);
-          alert("Contest confirmed successfully!");
+          const accessLink = `${window.location.origin}/access-contest?contest_id=${data.id}&access_key=${data.access_key}`;
+          alert(
+            `Contest confirmed successfully! Here is your access link: ${accessLink}`,
+          );
         },
         onError: (error) => {
           setLoading(false);

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
-import { useUserData } from "@/hooks/useUserData";
+import { useUserData } from "@/hooks/users/useUserData";
 
 function withAuth<T extends JSX.IntrinsicAttributes>(
   Component: React.ComponentType<T>,

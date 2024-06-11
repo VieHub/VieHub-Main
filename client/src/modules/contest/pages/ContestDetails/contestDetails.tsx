@@ -1,5 +1,5 @@
 import { useParams, NavLink, Outlet } from "react-router-dom";
-import { contestDetailsData } from "@/hooks/useGetContestDetails";
+import { contestDetailsData } from "@/hooks/contests/useGetContestDetails";
 
 const ContestDetails = () => {
   const { id } = useParams<{ id: string }>();

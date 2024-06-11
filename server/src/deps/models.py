@@ -94,6 +94,8 @@ class Contest(BaseModel):
     participants: List[str] = []
     image_url: Optional[str] = None
     id: Optional[str] = Field(None, example="unique-contest-id")
+    access_key: Optional[str] = Field(None, example="1234")  # Add this line
+
 
     @field_validator('title', 'description', 'rules', 'criteria', 'requirements', 'whatToBuild')
     def must_not_be_empty(cls, v):

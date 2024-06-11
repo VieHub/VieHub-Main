@@ -9,6 +9,6 @@ export const NAV_ITEMS = [
   },
   {
     name: "Host Contest",
-    section: "host/PublicHost",
+    section: "host",
   },
 ];
