@@ -1,12 +1,16 @@
 import { useParams, NavLink, Outlet } from "react-router-dom";
+import { usePrivateContestDetails } from "@/hooks/private-contests/useGetPrivateContestDetails";
 import { contestDetailsData } from "@/hooks/contests/useGetContestDetails";
 
 const ContestDetails = () => {
-  const { id } = useParams<{ id: string }>();
-  const { data, error, isLoading } = contestDetailsData(id || "");
+  const { id, access_key } = useParams<{ id: string; access_key: string }>();
+
+  const { data, error, isLoading } = access_key
+    ? usePrivateContestDetails(id || "", access_key || "")
+    : contestDetailsData(id || "");
 
   console.log(data);
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <div></div>;
   if (error) return <div>Error loading contest data.</div>;
 
   return (
@@ -52,7 +56,7 @@ const ContestDetails = () => {
           </NavLink>
         </div>
       </div>
-      <Outlet context={data} />
+      <Outlet context={{ data, access_key }} />
     </div>
   );
 };

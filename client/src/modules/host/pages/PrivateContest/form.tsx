@@ -71,7 +71,7 @@ const MultiStepForm: React.FC = () => {
           console.log(data);
           setLoading(false);
           setContestData(null);
-          const accessLink = `${window.location.origin}/access-contest?contest_id=${data.id}&access_key=${data.access_key}`;
+          const accessLink = `${window.location.origin}/contest/${data.id}/${data.access_key}`;
           alert(
             `Contest confirmed successfully! Here is your access link: ${accessLink}`,
           );
