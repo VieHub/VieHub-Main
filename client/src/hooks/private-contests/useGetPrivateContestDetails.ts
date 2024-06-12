@@ -8,7 +8,15 @@ export function usePrivateContestDetails(contest_id: string, key: string) {
     queryKey: ["privateContestDetails", contest_id, key], // Include contest_id and key in the query key for uniqueness
     queryFn: () =>
       api
-        .post(`/api/private-contest/access`, { contest_id, key })
+        .post(
+          `/api/private-contest/access`,
+          new URLSearchParams({ contest_id, key }),
+          {
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+          },
+        )
         .then((res) => res.data),
     // Add error handling or other query options if needed
   });

@@ -4,16 +4,17 @@ import { Link, useOutletContext } from "react-router-dom";
 import { CreateContestData } from "@/types/apiSchemas";
 import { formatDate } from "@/utils/dateUtils";
 
-
 const Overview: React.FC<{}> = () => {
-  const contextData = useOutletContext<CreateContestData>();
-  const data = contextData ;
+  const contextData = useOutletContext<{
+    data: CreateContestData;
+    access_key?: string;
+  }>();
+  const { data, access_key } = contextData;
 
-  // console.log(contestData);
   return (
     <div className="flex h-full w-full flex-col">
       <div className="third-details-section flex justify-center ">
-        <div className="contest-heading mt-12  md:w-1/2">
+        <div className="contest-heading mt-12 md:w-1/2">
           <h1 className="mb-8 text-3xl font-bold text-black">{data.title}</h1>
           <h3 className="mb-8 text-xl text-black">{data.subTitle}</h3>
           <button
@@ -23,7 +24,7 @@ const Overview: React.FC<{}> = () => {
             Join competition
           </button>
         </div>
-        <div className="contest-heading-card md:w-1/4 bg-gray-100 card mt-12 p-8">
+        <div className="contest-heading-card bg-gray-100 card mt-12 p-8 md:w-1/4">
           <p className="mb-16 text-black" style={{ fontSize: "1.1rem" }}>
             Deadline: <br /> {formatDate(data.endDate)}
           </p>
@@ -53,7 +54,9 @@ const Overview: React.FC<{}> = () => {
             <div className="ml-2 flex flex-col">
               <div className="flex flex-row">
                 <img className="mr-2 w-4" src={iconpublic} alt="" />
-                <p style={{ fontSize: "1.1rem" }}>Public</p>
+                <p style={{ fontSize: "1.1rem" }}>
+                  {access_key ? "Private" : "Public"}
+                </p>
               </div>
               <p style={{ fontSize: "1.1rem" }} className="mt-12">
                 {data.company}
