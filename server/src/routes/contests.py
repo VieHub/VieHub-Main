@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime, timezone
 from typing import List, Optional, Union
 from fastapi import APIRouter, Depends, File, Form, HTTPException, UploadFile
 from pydantic import BaseModel
@@ -12,6 +12,7 @@ import uuid
 from firebase_admin import storage
 from src.services.SummaryAgent import get_formatted_response
 from src.services.PreviewAgent import get_ai_preview 
+import logging
 
 class ContestCreateSchema(BaseModel):
     title: str
@@ -173,15 +174,25 @@ async def create_contest_ai(type: str, details: str) :
 
 
 
+
 @router.get('/contests', response_model=List[Contest])
 async def get_contests():
     contests = []
+    current_date = datetime.now(timezone.utc)
     for contest in db.collection('contests').stream():
         contest_data = contest.to_dict()
         contest_data['id'] = contest.id  # Include the contest ID
-        contests.append(Contest(**contest_data))
+        
+        # Parse the endDate to a datetime object
+        try:
+            end_date = datetime.fromisoformat(contest_data['endDate'].replace('Z', '+00:00')).replace(tzinfo=timezone.utc)
+        except ValueError:
+            # If parsing fails, skip this contest
+            continue
+        
+        if end_date >= current_date:
+            contests.append(Contest(**contest_data))
     return contests
-
 @router.get('/contests/by_user/{uid}', response_model=List[Contest])
 async def get_contests_by_user_id(uid: str):
     contests_query = db.collection('contests').where('host_uid', '==', uid).stream()
