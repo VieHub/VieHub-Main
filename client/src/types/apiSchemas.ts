@@ -34,3 +34,11 @@ export interface CreateContestDataWithAI {
   company?: string;
   image_url: File;
 }
+export interface SubmissionContestData {
+  teamemail: string;
+  linkedin: string;
+  github: string;
+  youtube: string;
+  agreement: boolean;
+  image_url: File;
+}

@@ -6,6 +6,7 @@ const Schedule: React.FC<{ }> = ({}) => {
   const contextData = useOutletContext<CreateContestData>();
   const data = contextData ;
   // Utility function to format the date
+  console.log(data);
 
   return (
     <div className="px-4 sm:px-6 lg:px-8">
@@ -27,6 +28,7 @@ const Schedule: React.FC<{ }> = ({}) => {
               <td className="text-center text-lg font-bold">
                 {formatDate(data.startDate)}
               </td>
+            
               <td className="text-center text-lg font-bold">
                 {formatDate(data.endDate)}
               </td>
