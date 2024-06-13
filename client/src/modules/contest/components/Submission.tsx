@@ -1,5 +1,5 @@
 import React, { useState, FormEvent } from "react";
-import "./Submission.css"; // Import your CSS file
+// import "./Submission.css"; // Import your CSS file
 
 const Submission: React.FC = () => {
   const [hasTeammates, setHasTeammates] = useState<boolean | null>(null);
@@ -59,6 +59,11 @@ const Submission: React.FC = () => {
           <div className="submission-form-row">
             <div className="submission-form-group">
               <input type="text" placeholder="Github" />
+            </div>
+          </div>
+          <div className="submission-form-row">
+            <div className="submission-form-group">
+              <input type="text" placeholder="Youtube video linke" />
             </div>
           </div>
           <div>

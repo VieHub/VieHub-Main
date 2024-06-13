@@ -3,9 +3,12 @@ import { CreateContestData } from "@/types/apiSchemas";
 import { useOutletContext } from "react-router-dom";
 
 const Rules: React.FC<{}> = () => {
-  const contextData = useOutletContext<CreateContestData>();
-  const data = contextData;
-  
+  const contextData = useOutletContext<{
+    data: CreateContestData;
+    access_key?: string;
+  }>();
+  const { data } = contextData;
+
   return (
     <div className="flex h-full w-full flex-col">
       <div className="forth-details-section mb-8 mt-12">
