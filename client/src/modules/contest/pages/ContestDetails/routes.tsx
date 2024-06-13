@@ -4,6 +4,7 @@ import ContestDetails from "./contestDetails";
 import Rules from "./components/rules";
 import Overview from "./components/Overview";
 import Schedule from "./components/Schedule";
+import Submission from "../../components/Submission";
 
 export default [
   {
@@ -25,6 +26,11 @@ export default [
         path: "schedule",
         element: <Schedule />,
         name: "Schedule",
+      },
+      {
+        path: "submission",
+        element: <Submission />,
+        name: "Submission",
       },
       {
         path: "",

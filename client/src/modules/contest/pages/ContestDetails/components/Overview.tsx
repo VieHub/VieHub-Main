@@ -1,6 +1,6 @@
 import React from "react";
 import iconpublic from "@/assets/icons/institution-svgrepo-com (1).svg";
-import { Link, useOutletContext } from "react-router-dom";
+import { Link, useOutletContext, useParams } from "react-router-dom";
 import { CreateContestData } from "@/types/apiSchemas";
 import { formatDate } from "@/utils/dateUtils";
 
@@ -8,8 +8,11 @@ const Overview: React.FC<{}> = () => {
   const contextData = useOutletContext<{
     data: CreateContestData;
     access_key?: string;
+    // id?:string;
   }>();
   const { data, access_key } = contextData;
+  const { id} = useParams<{ id: string }>();
+
 
   return (
     <div className="flex h-full w-full flex-col">
@@ -17,12 +20,15 @@ const Overview: React.FC<{}> = () => {
         <div className="contest-heading mt-12 md:w-1/2">
           <h1 className="mb-8 text-3xl font-bold text-black">{data.title}</h1>
           <h3 className="mb-8 text-xl text-black">{data.subTitle}</h3>
-          <button
-            className="text-l mt-8 rounded px-8 py-2 text-white"
-            style={{ backgroundColor: "#52AB98" }}
-          >
-            Join competition
-          </button>
+          <Link to={`/contest/${id}/submission`}>
+            <button
+              className="text-l mt-8 rounded px-8 py-2 text-white"
+              style={{ backgroundColor: "#52AB98" }}
+            >
+              Join competition
+            </button>
+          </Link>
+          
         </div>
         <div className="contest-heading-card bg-gray-100 card mt-12 p-8 md:w-1/4">
           <p className="mb-16 text-black" style={{ fontSize: "1.1rem" }}>
