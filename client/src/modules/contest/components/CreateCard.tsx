@@ -49,11 +49,11 @@ const ContestCard: React.FC<ContestCardProps> = ({
   return (
     <div
       onClick={handleClick}
-      className="contest-card mx-4 my-4 flex w-full max-w-4xl overflow-hidden rounded-lg shadow-lg"
+      className="contest-card mx-4 my-4 flex w-full max-w-4xl overflow-hidden md:rounded-lg  shadow-lg"
     >
-      <img className="h-full w-1/4 object-cover" src={image} alt={name} />
+      <img className="md:h-full md:w-1/4 object-cover" src={image} alt={name} />
       <div
-        className="flex w-3/4 flex-col px-6 py-4"
+        className="flex md:w-3/4 w-full flex-col px-6 py-4"
         style={{ backgroundColor: "#2B6777" }}
       >
         <div className="mb-2 text-xl font-bold text-white">{name}</div>
