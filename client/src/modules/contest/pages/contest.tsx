@@ -37,6 +37,8 @@ const ContestPage: React.FC = () => {
   });
   const [sortOption, setSortOption] = useState<string>("Most Relevant");
   const [searchTerm, setSearchTerm] = useState<string>("");
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const contestsPerPage = 10;
 
   const handleTypeFilterChange = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -120,6 +122,39 @@ const ContestPage: React.FC = () => {
 
   const filteredContests = listOfcontests ? filterContests(listOfcontests) : [];
 
+  // Pagination logic
+  const indexOfLastContest = currentPage * contestsPerPage;
+  const indexOfFirstContest = indexOfLastContest - contestsPerPage;
+  const currentContests = filteredContests.slice(
+    indexOfFirstContest,
+    indexOfLastContest,
+  );
+  const totalPages = Math.ceil(filteredContests.length / contestsPerPage);
+
+  const handlePageChange = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const renderPageNumbers = () => {
+    const pageNumbers = [];
+    for (let i = 1; i <= totalPages; i++) {
+      pageNumbers.push(
+        <button
+          key={i}
+          className={`mx-1 rounded px-3 py-1 ${
+            currentPage === i
+              ? "bg-blue-500 text-white"
+              : "bg-gray-300 text-black"
+          }`}
+          onClick={() => handlePageChange(i)}
+        >
+          {i}
+        </button>,
+      );
+    }
+    return pageNumbers;
+  };
+
   return (
     <div className="flex h-full w-full flex-col">
       <div className="content flex max-w-full flex-wrap">
@@ -151,7 +186,7 @@ const ContestPage: React.FC = () => {
       </div>
       <div className="sorting-container mt-4 flex justify-center">
         <span className="sorting-label mr-20">
-          Showing {filteredContests.length} Contests
+          Showing {currentContests.length} Contests
         </span>
         <span className="sorting-label">Sort:</span>
         <div className="sorting-bar">
@@ -304,10 +339,10 @@ const ContestPage: React.FC = () => {
           </div>
         </div>
         <div className="mt-4 flex flex-col items-center md:ml-8 md:mr-24 md:flex-1 ">
-          {filteredContests &&
+          {currentContests &&
             !isError &&
             !isLoading &&
-            filteredContests.map(
+            currentContests.map(
               (contest: Contest, index: Key | null | undefined) => (
                 <ContestCard
                   key={index}
@@ -323,6 +358,9 @@ const ContestPage: React.FC = () => {
                 />
               ),
             )}
+          <div className="pagination-controls mt-4 mb-8">
+            {renderPageNumbers()}
+          </div>
         </div>
       </div>
     </div>

@@ -75,6 +75,10 @@
   ); /* Specify the color with opacity */
   transition: right 0.3s ease; /* Add a smooth transition */
 }
+.pagination-controls{
+  color: #c2c2c2;
+  font-size: 1.4rem;
+}
 
 @media (max-width: 767px) {
   .search-container {
@@ -104,44 +108,34 @@
   .sorting-label {
     display: none; /* Hide sorting container on small screens */
   }
-  /* .filter-card{
-        width: 70%;
-      }
-      .card-cont{
-        max-width: 100%;
-      } */
-  /* .sorting-container {
-        flex-direction: row;
-        align-items: center;
-      }
-    
-      .sorting-bar {
-        position: relative;
-        width: 35%;
-        text-align: center;
-        margin: 10px;
-      }
-    
-      .sorting-options {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        background-color: #fff;
-        border: 1px solid #707070; 
-        border-top: none;
-        border-radius: 0 0 4px 4px;
-        padding: 10px;
-      }
-    
-      .sorting-bar:hover .sorting-options {
-        display:grid;
-      }
-    
-      .sorting-option {
-        display: block;
-        margin: 0.5rem 0;
-        text-align: center;
-      } */
 }
+  @media (max-width: 767px) {
+    .contest-card {
+      width: 90%;
+      margin: 0 auto;
+      flex-direction: column;
+      background-color: #2b6777;
+      margin-bottom: 1rem; /* Adjust margin bottom for spacing */
+       /* Optional: adds rounded corners */
+      padding: 1rem; /* Adjust padding */
+    }
+  
+    .contest-card img {
+      width: 60%; /* Make image full width */
+      margin-bottom: 8px; /* Add space below image */
+      margin-left: 18%;
+      border: 2px; /* Adds a 2px solid black border */
+      border-radius: 5px; /* Optional: adds a slight rounding to the corners */
+    }
+  
+    .contest-card .flex-col {
+      background-color: #2b6777;
+      min-height: 150px;
+      padding: 1rem; /* Adjust padding as needed */
+    }
+  }
+
+
+
+
+

@@ -8,6 +8,7 @@ const ContestForm2: React.FC<{
 }> = ({ onNextStep, onPrevStep, onFormData }) => {
   const [image_url, setimage_url] = useState<File | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [isImageValid, setIsImageValid] = useState<boolean>(true); // New state to track image validity
   const [formData, setFormData] = useState({
     // preferences: "",
     criteria: "",
@@ -17,17 +18,43 @@ const ContestForm2: React.FC<{
     agreement: false,
   });
 
+  // Utility function to validate image dimensions
+  const validateImageSize = (file: File): Promise<boolean> => {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => {
+        const { width, height } = img;
+        if (width <= 400 && height <= 400) {
+          resolve(true);
+        } else {
+          resolve(false);
+        }
+      };
+      img.onerror = reject;
+      img.src = URL.createObjectURL(file);
+    });
+  };
+
   // Handle file selection
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
     if (files && files.length > 0) {
       const selectedFile = files[0];
       if (selectedFile.type.startsWith("image/")) {
-        setimage_url(selectedFile);
-        setError(null); // Clear any previous error
+        const isValidSize = await validateImageSize(selectedFile);
+        if (isValidSize) {
+          setimage_url(selectedFile);
+          setIsImageValid(true);
+          setError(null); // Clear any previous error
+        } else {
+          setError("Please upload an image with dimensions 400x400 pixels (1:1 aspect ratio).");
+          setimage_url(null); // Clear the file selection
+          setIsImageValid(false);
+        }
       } else {
         setError("Please upload an image file.");
         setimage_url(null); // Clear the file selection
+        setIsImageValid(false);
       }
     }
   };
@@ -53,6 +80,10 @@ const ContestForm2: React.FC<{
   // Handle form submission
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!isImageValid) {
+      setError("Please upload a valid image before proceeding.");
+      return;
+    }
     const formDataWithFile = {
       ...formData,
       image_url,
@@ -67,34 +98,15 @@ const ContestForm2: React.FC<{
       <div className="card w-96 w-full max-w-4xl rounded-lg bg-base-100 bg-white p-6 shadow-sm shadow-xl">
         <h2 className="mb-4 text-xl font-bold">Public Competition Form</h2>
         <form onSubmit={handleSubmit}>
-          {/* <div className="mb-4">
-            <input
-              className="text-gray-800 w-full appearance-none rounded border px-4 py-3 leading-tight shadow-sm focus:outline-none focus:ring-1 focus:ring-teal-100"
-              type="text"
-              placeholder="Preferences for Customizing Contest Templates"
-              name="preferences"
-              value={formData.preferences}
-              onChange={handleChange}
-            />
-          </div> */}
           <div className="mb-4">
-            {/* <div className="flex"> */}
             <label className="text-gray-800 mb-2 block text-sm font-semibold">
               Requirements of the Competition
             </label>
-            {/* <img
-              src={StarIcon}
-              alt="AI generator"
-              title="Customize your text using AI" // Adding a title attribute for tooltip
-              className="star-icon ml-4 mb-2"
-            />
-            </div> */}
-
             <textarea
               className="text-gray-800 w-full appearance-none rounded border px-4 py-3 leading-tight shadow-sm focus:outline-none focus:ring-1 focus:ring-teal-100"
               placeholder="Terms and Conditions of the competition"
               rows={4}
-              maxLength={2000} // Larger limit for more extensive text
+              maxLength={2000}
               style={{ resize: "vertical", maxHeight: "300px" }}
               name="requirements"
               value={formData.requirements}
@@ -106,71 +118,40 @@ const ContestForm2: React.FC<{
             <label className="text-gray-800 mb-2 block text-sm font-semibold">
               Details of Prizes or Recognition for Winners
             </label>
-            {/* <div className="flex"> */}
             <textarea
               className="text-gray-800 w-full appearance-none rounded border px-4 py-3 leading-tight shadow-sm focus:outline-none focus:ring-1 focus:ring-teal-100"
               rows={4}
               name="prizeDetails"
-              maxLength={1000} // Limits characters
+              maxLength={1000}
               value={formData.prizeDetails}
               onChange={handleTextareaChange}
               placeholder="Details of Prizes or Recognition for Winners"
               required
-            >
-              // required
-            </textarea>
-            {/* <img
-              src={StarIcon}
-              alt="AI generator"
-              title="Customize your text using AI" // Adding a title attribute for tooltip
-              className="star-icon"
-            />
-            </div> */}
+            ></textarea>
           </div>
           <div className="mb-4">
             <label className="text-gray-800 mb-2 block text-sm font-semibold">
               Judge criteria
             </label>
-            {/* <div className="flex"> */}
             <textarea
               className="text-gray-800 w-full appearance-none rounded border px-4 py-3 leading-tight shadow-sm focus:outline-none focus:ring-1 focus:ring-teal-100"
               placeholder="Criteria for Evaluating Submissions"
               rows={4}
-              maxLength={1000} // Limits characters
-              style={{ resize: "vertical", maxHeight: "200px" }} // Allows vertical resize only up to 200px
+              maxLength={1000}
+              style={{ resize: "vertical", maxHeight: "200px" }}
               name="criteria"
               value={formData.criteria}
               onChange={handleTextareaChange}
               required
             ></textarea>
-            {/* <img
-              src={StarIcon}
-              alt="AI generator"
-              title="Customize your text using AI" // Adding a title attribute for tooltip
-              className="star-icon"
-            />
-            </div> */}
           </div>
-          {/* <div className="mb-4">
-            <textarea
-              className="text-gray-800 w-full appearance-none rounded border px-4 py-3 leading-tight shadow-sm focus:outline-none focus:ring-1 focus:ring-teal-100"
-              placeholder="Terms and Conditions of the competition"
-              rows={4}
-              maxLength={2000} // Larger limit for more extensive text
-              style={{ resize: "vertical", maxHeight: "300px" }}
-              name="terms"
-              value={formData.terms}
-              onChange={handleTextareaChange}
-            ></textarea>
-          </div> */}
           <div className="mb-4">
             <label className="text-gray-800 mb-2 block text-sm font-semibold">
-              What to bulid
+              What to build
             </label>
-            {/* <div className="flex"> */}
             <textarea
               className="text-gray-800 w-full appearance-none rounded border px-4 py-3 leading-tight shadow-sm focus:outline-none focus:ring-1 focus:ring-teal-100"
-              placeholder="What to bulid in the Competition"
+              placeholder="What to build in the Competition"
               rows={6}
               maxLength={1500}
               style={{ resize: "vertical", maxHeight: "300px" }}
@@ -179,13 +160,6 @@ const ContestForm2: React.FC<{
               onChange={handleTextareaChange}
               required
             ></textarea>
-            {/* <img
-              src={StarIcon}
-              alt="AI generator"
-              title="Customize your text using AI" // Adding a title attribute for tooltip
-              className="star-icon"
-            />
-            </div> */}
           </div>
           <div className="mb-4">
             <label>
@@ -223,6 +197,7 @@ const ContestForm2: React.FC<{
               className="button3"
               type="submit"
               style={{ backgroundColor: "#52AB98" }}
+              disabled={!isImageValid} // Disable the button if the image is not valid
             >
               Next
             </button>
