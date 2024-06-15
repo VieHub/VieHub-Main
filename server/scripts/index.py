@@ -14,7 +14,7 @@ def start():
     import subprocess
 
     subprocess.run(
-        "uvicorn src.main:app --reload --host 0.0.0.0 --port 8000 --loop asyncio",
+        "uvicorn src.main:app --reload --host 0.0.0.0 --port 8080 --loop asyncio",
         shell=True,
     )
 
