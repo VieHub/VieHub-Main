@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field, EmailStr, HttpUrl, field_validator, validator
+from pydantic import BaseModel, Field, EmailStr,  field_validator, validator
 from typing import Annotated, List, Optional,Literal
 from datetime import date, datetime
 from pydantic import BaseModel, EmailStr
@@ -176,9 +176,9 @@ class SubmissionSchema(BaseModel):
     description: Optional[str] = None
     teammates: Optional[str] = None
     teammates_emails: Optional[List[EmailStr]] = None
-    linkedin: Optional[HttpUrl] = None
-    github: Optional[HttpUrl] = None
-    youtube_video_link: Optional[HttpUrl] = None
+    linkedin: Optional[str] = None
+    github: Optional[str] = None
+    youtube_video_link: Optional[str] = None
     agree_to_rules: bool
 class FeedbackSchema(BaseModel):
     contest_id: str
