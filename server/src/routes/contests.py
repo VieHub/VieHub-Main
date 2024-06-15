@@ -267,20 +267,51 @@ async def enroll_in_contest(
 
     return {"message": "Enrollment successful"}
 
+
+
 @router.post("/contest/{contest_id}/submit")
 async def submit_to_contest(
     contest_id: str, 
     submission: SubmissionSchema, 
-    request: Request, 
     current_user: dict = Depends(oauth2_authentication)
 ):
-    participant_uid = current_user['uid']
-    submission_data = submission.dict()
-    submission_data['participant_uid'] = participant_uid
-    db.collection('submissions').add(submission_data)
-    
-    return {"message": "Submission successful"}
+    user_ref = db.collection('users').document(submission.participant_uid)
+    user_doc = user_ref.get()
 
+    if not user_doc.exists:
+        raise HTTPException(status_code=404, detail="User not found")
+
+    contest_ref = db.collection('contests').document(contest_id)
+    contest_doc = contest_ref.get()
+
+    if not contest_doc.exists:
+        raise HTTPException(status_code=404, detail="Contest not found")
+
+    # Ensure the submissions field exists
+    contest_data = contest_doc.to_dict() or {}
+    submissions = contest_data.get('submissions', [])
+
+    # Ensure all values are properly formatted for Firestore
+    submission_dict = submission.dict()
+    if 'teammates_emails' in submission_dict and submission_dict['teammates_emails'] is not None:
+        submission_dict['teammates_emails'] = [str(email) for email in submission_dict['teammates_emails']]
+    
+    # Convert URLs to strings
+    if 'linkedin' in submission_dict and submission_dict['linkedin'] is not None:
+        submission_dict['linkedin'] = str(submission_dict['linkedin'])
+    if 'github' in submission_dict and submission_dict['github'] is not None:
+        submission_dict['github'] = str(submission_dict['github'])
+    if 'youtube_video_link' in submission_dict and submission_dict['youtube_video_link'] is not None:
+        submission_dict['youtube_video_link'] = str(submission_dict['youtube_video_link'])
+
+    submissions.append(submission_dict)
+    try:
+        # Update or create the submissions field in the contest document
+        contest_ref.set({"submissions": submissions}, merge=True)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error updating contest submissions: {e}")
+
+    return {"message": "Submission successful"}
 @router.post("/feedback/{contest_id}")
 async def submit_feedback(
     contest_id: str, 
