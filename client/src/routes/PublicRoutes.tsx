@@ -5,7 +5,7 @@ import HostRoutes from "@/modules/host/routes";
 import ContestRoutes from "@/modules/contest/routes";
 import PublicForm from "@/modules/host/pages/PublicContest/routes";
 import PrivateForm from "@/modules/host/pages/PrivateContest/routes";
-
+import ProfileRoutes from "@/modules/profile/routes"
 import AuthRoutes from "./AuthRoutes";
 import ContestDetailsRoutes from "@/modules/contest/pages/ContestDetails/routes";
 import PrivateRoutes from "./PrivateRoutes";
@@ -19,7 +19,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <ClientLayout />,
-    children: [...dashboardRoutes, ...loginRoutes, ...ContestRoutes],
+    children: [...dashboardRoutes, ...loginRoutes, ...ContestRoutes,...ProfileRoutes],
   },
   {
     path: "/host",

@@ -12,6 +12,7 @@
 @import "contest.css";
 @import "ContestDetails.css";
 @import "submission.css";
+@import "profile.css";
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
