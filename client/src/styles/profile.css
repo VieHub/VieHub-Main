@@ -1,0 +1,149 @@
+.body{
+    background-color: white;
+}
+.profile-first-div{
+    width: 100%;
+    height: 20vh;
+    display: flex;
+    align-items: center;
+    background-color: #2b6777;
+}
+.profile-image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 170px;
+    height: 170px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: white;
+    margin-left: 15%;
+    margin-top: 10%;
+  }
+  
+  .profile-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .profile-text {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+  
+  .profile-name {
+    color: white;
+    font-size: 2rem; /* Adjust as needed for larger size */
+    font-weight: 900;
+  }
+  
+  .profile-description {
+    color: white;
+    font-size: 1rem; /* Adjust as needed */
+    margin-left: 20px;
+    margin-top: 110px;
+    font-size: 1.2rem;
+    font-weight: 800;
+
+  }
+  .profile-details {
+    margin-left: 26.5%;
+    margin-top: 1%;
+  }
+  .location-image{
+    
+    width: 15px;
+    height: 15px;
+  }
+  .profile-location,
+  .profile-skills,
+  .profile-bio {
+    font-size: 1rem; /* Adjust as needed */
+    margin: 5px 0;
+  }
+  .profile-location{
+    text-decoration: underline;
+    color: #5B88D5;
+  }
+  .profile-skills {
+    margin-top: 10px;
+  }
+  
+  .skills-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .skill-rectangle {
+    background-color: #F2F2F2;
+    color: #2b6777;
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+  
+  .skill-input {
+    margin-top: 5px;
+  }
+  
+  .add-skill-button {
+    margin-top: 5px;
+    background-color: #52AB98;
+    width: 4%;
+    border-radius: 20px;
+    color: white;
+  }
+  
+  .profile-bio {
+    margin-top: 10px;
+  }
+  
+  .bio-textarea {
+    width: 100%;
+    height: 100px;
+    margin-top: 10px;
+  }
+  .edit-buttons{
+    position: relative;
+    top: -30px;
+  }
+  .edit-btn{
+    background-color: #2b6777;
+    margin-left: 16%;
+    color: white;
+    width: 8%;
+    border-radius: 10px;
+    font-size: large;
+
+    margin-bottom: 1%;
+  }
+  .Add-btn{
+    background-color: #52AB98;
+    margin-left: 16%;
+    color: white;
+    width: 7%;
+    margin-bottom: 1%;
+  }
+  .save-bio-button {
+    margin-top: 5px;
+    background-color: #52AB98;
+    width: 4%;
+    border-radius: 20px;
+    color: white;
+  }
+  
+  .bio-text {
+    cursor: pointer;
+  }
+  .bio{
+    color: #5B88D5;
+  }
+ .profile-third-div{
+     background-color: #F2F2F2;
+    width: 100%;
+    height: 5vh;
+ }
+ .profile-contest{
+  margin-left: 18%;
+ }
