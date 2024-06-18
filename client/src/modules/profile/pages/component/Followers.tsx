@@ -33,13 +33,13 @@ const Followers: React.FC = () => {
               key={follower.id}
               className="follower-card flex items-center rounded-lg bg-white p-4 shadow-lg"
             >
-              <img
+              {/* <img
                 src={follower.photoUrl}
                 alt={`Profile of ${follower.name}`}
                 className="mr-4 h-12 w-12 rounded-full"
-              />
+              /> */}
               <div>
-                <p className="text-lg font-semibold">{follower.name}</p>
+                {/* <p className="text-lg font-semibold">{follower.name}</p> */}
               </div>
             </div>
           ))}
