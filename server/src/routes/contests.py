@@ -267,8 +267,6 @@ async def enroll_in_contest(
 
     return {"message": "Enrollment successful"}
 
-
-
 @router.post("/contest/{contest_id}/submit")
 async def submit_to_contest(
     contest_id: str, 
@@ -287,8 +285,21 @@ async def submit_to_contest(
     if not contest_doc.exists:
         raise HTTPException(status_code=404, detail="Contest not found")
 
+    contest_data = contest_doc.to_dict()
+    
+    # Enroll the participant if not already enrolled
+    participants = contest_data.get('participants', [])
+    if not any(p['user_id'] == submission.participant_uid for p in participants):
+        participants.append({'user_id': submission.participant_uid})
+        contest_ref.update({"participants": participants})
+
+        # Update the user's document to include the contest ID
+        user_contests = user_doc.to_dict().get('contests', [])
+        if contest_id not in user_contests:
+            user_contests.append(contest_id)
+            user_ref.update({"contests": user_contests})
+
     # Ensure the submissions field exists
-    contest_data = contest_doc.to_dict() or {}
     submissions = contest_data.get('submissions', [])
 
     # Ensure all values are properly formatted for Firestore
@@ -311,7 +322,8 @@ async def submit_to_contest(
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error updating contest submissions: {e}")
 
-    return {"message": "Submission successful"}
+    return {"message": "Submission successful and enrollment complete"}
+
 @router.post("/feedback/{contest_id}")
 async def submit_feedback(
     contest_id: str, 

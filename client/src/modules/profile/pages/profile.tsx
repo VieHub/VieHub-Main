@@ -1,3 +1,10 @@
+import React, { useState } from "react";
+import account from "@/assets/icons/account.png";
+import location from "@/assets/icons/location2.svg";
+import { NavLink, Outlet } from "react-router-dom";
+import { useUserData } from "@/hooks/users/useUserData"; // Import the custom hook
+import { useAuth } from "@/contexts/AuthContext";
+
 function extractFirstName(email: string): string {
   const username = email.split("@")[0];
   const nameWithoutNumbers = username.replace(/[0-9]/g, "");
@@ -5,12 +12,6 @@ function extractFirstName(email: string): string {
     nameWithoutNumbers.charAt(0).toUpperCase() + nameWithoutNumbers.slice(1)
   );
 }
-import React, { useState } from "react";
-import account from "@/assets/icons/account.png";
-import location from "@/assets/icons/location2.svg";
-import { NavLink, Outlet } from "react-router-dom";
-import { useUserData } from "@/hooks/users/useUserData"; // Import the custom hook
-import { useAuth } from "@/contexts/AuthContext";
 
 const Profile: React.FC = () => {
   const [skills, setSkills] = useState(["React", "Node.js", "JavaScript"]);
@@ -49,7 +50,6 @@ const Profile: React.FC = () => {
 
         <div className="profile-text">
           <h1 className="profile-name ml-12 mt-24">
-            {" "}
             {isLoading ? "" : firstName}
           </h1>
           <p className="profile-description">Host</p>
@@ -132,7 +132,7 @@ const Profile: React.FC = () => {
           </NavLink>
         </div>
       </div>
-      <Outlet />
+      <Outlet context={{ contests: data?.contests }} />
     </div>
   );
 };

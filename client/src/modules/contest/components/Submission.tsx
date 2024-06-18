@@ -80,7 +80,7 @@ const Submission: React.FC = () => {
           <div className="submission-teammates-buttons">
             <button
               className={`submission-teammate-button ${hasTeammates === true ? "active" : ""}`}
-              onClick={() => handleTeammatesSelection(true)}
+              onClick={() => handleTeammatesSelection(false)}
             >
               Yes
             </button>

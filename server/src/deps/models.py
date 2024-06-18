@@ -74,6 +74,8 @@ class CreateContestInput(BaseModel):
     host_uid: Annotated[Optional[str], Field(None)] 
     participants: Annotated[List[str], Field(...)] = Field([])
 
+class Participant(BaseModel):
+    user_id: str
 
 class Contest(BaseModel):
     title: str = Field(..., example="Coding Challenge")
@@ -91,7 +93,7 @@ class Contest(BaseModel):
     agreement: bool = Field(..., description="User has agreed to the terms.")
     company: Optional[str] = Field(None, example="Acme Inc.")
     host_uid: Optional[str] = None
-    participants: List[str] = []
+    participants: List[Participant] = []
     image_url: Optional[str] = None
     id: Optional[str] = Field(None, example="unique-contest-id")
     access_key: Optional[str] = Field(None, example="1234")  # Add this line
