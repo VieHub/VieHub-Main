@@ -25,9 +25,9 @@ const ProfileDropdown = () => {
             whileHover={{ backgroundColor: "#F3F4F6", color: "#111827" }} // Example of hover animation
             href="#"
             className="text-gray-700 block px-4 py-2 text-sm"
-            onClick={() => console.log("Navigating to settings...")}
+            onClick={() => navigate("/profile")}
           >
-            Settings
+            Profile
           </motion.a>
           <motion.a
             whileHover={{ backgroundColor: "#F3F4F6", color: "#111827" }} // Example of hover animation

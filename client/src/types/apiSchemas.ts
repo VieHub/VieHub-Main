@@ -1,4 +1,5 @@
 export interface CreateContestData {
+  data: any;
   title: string;
   subTitle: string;
   description: string;

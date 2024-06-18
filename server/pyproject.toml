@@ -6,7 +6,7 @@ authors = ["Ahmed14z <ahmedeslam1582002@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "3.12.2"
+python = "^3.10.0"  
 fastapi = "^0.110.0"
 uvicorn = "^0.28.0"
 pydantic = "^2.6.4"
@@ -19,6 +19,7 @@ python-multipart = "^0.0.9"
 openai = "^1.30.1"
 langchain = "^0.2.1"
 langchain-openai = "^0.1.7"
+setuptools = "^70.0.0"
 
 
 [tool.pyright]

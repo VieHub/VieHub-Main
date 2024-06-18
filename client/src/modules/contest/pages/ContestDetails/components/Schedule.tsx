@@ -2,11 +2,9 @@ import { useOutletContext } from "react-router-dom";
 import { CreateContestData } from "@/types/apiSchemas";
 import { formatDate } from "@/utils/dateUtils";
 
-const Schedule: React.FC<{ }> = ({}) => {
+const Schedule: React.FC<{}> = ({}) => {
   const contextData = useOutletContext<CreateContestData>();
-  const data = contextData ;
-  // Utility function to format the date
-  console.log(data);
+  const data = contextData;
 
   return (
     <div className="px-4 sm:px-6 lg:px-8">
@@ -26,11 +24,11 @@ const Schedule: React.FC<{ }> = ({}) => {
             <tr>
               <td className="text-center text-lg font-bold">Submissions</td>
               <td className="text-center text-lg font-bold">
-                {formatDate(data.startDate)}
+                {formatDate(data.data.startDate)}
               </td>
-            
+
               <td className="text-center text-lg font-bold">
-                {formatDate(data.endDate)}
+                {formatDate(data.data.endDate)}
               </td>
             </tr>
             <tr>
