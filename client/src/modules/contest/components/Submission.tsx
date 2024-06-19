@@ -1,14 +1,14 @@
 import React, { useState, FormEvent } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useSubmitContest } from "@/hooks/contests/useSubmitContest"; // Ensure the path is correct based on your folder structure
 import { SubmissionSchema } from "@/types/apiSchemas"; // Ensure the path is correct based on your folder structure
 import { useAuth } from "@/contexts/AuthContext";
 
 const Submission: React.FC = () => {
   const { id: contestId } = useParams<{ id: string }>(); // Extract contestId from URL
-  console.log("Contest ID", contestId);
   const contestIdValue = contestId ?? "";
   const user = useAuth(); // Use the useAuth hook to access the current user
+  const navigate = useNavigate(); // For navigation after form submission
 
   const [hasTeammates, setHasTeammates] = useState<boolean | null>(null);
   const [formData, setFormData] = useState({
@@ -20,6 +20,7 @@ const Submission: React.FC = () => {
     youtube: "",
     agreement: false,
   });
+  const [isSubmitted, setIsSubmitted] = useState(false); // Manage submission state
 
   const { mutate: submitContest } = useSubmitContest(contestIdValue);
 
@@ -44,6 +45,10 @@ const Submission: React.FC = () => {
     submitContest(submissionData, {
       onSuccess: (data) => {
         console.log("Submission successful", data);
+        setIsSubmitted(true); // Set submission state to true
+        setTimeout(() => {
+          navigate("/contest"); // Navigate after 3 seconds
+        }, 3000);
       },
       onError: (error) => {
         console.error("Submission failed", error);
@@ -52,7 +57,7 @@ const Submission: React.FC = () => {
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
     setFormData({
@@ -69,6 +74,34 @@ const Submission: React.FC = () => {
     });
   };
 
+  if (isSubmitted) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+          color: "#113B46",
+          fontSize: "2rem",
+        }}
+      >
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="#113B46"
+            style={{ width: "2rem", height: "2rem", marginRight: "1rem" }}
+          >
+            <path d="M12 0C5.372 0 0 5.373 0 12s5.372 12 12 12 12-5.373 12-12S18.628 0 12 0zm-1.122 17.467l-4.595-4.597 1.419-1.416 3.176 3.174L18.278 6l1.417 1.416-8.817 10.05z" />
+          </svg>
+          <span>Thank you for submitting!</span>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="submission-container">
       <div className="submission-form">
@@ -79,13 +112,17 @@ const Submission: React.FC = () => {
           <p>Do you have teammates?</p>
           <div className="submission-teammates-buttons">
             <button
-              className={`submission-teammate-button ${hasTeammates === true ? "active" : ""}`}
-              onClick={() => handleTeammatesSelection(false)}
+              className={`submission-teammate-button ${
+                hasTeammates === true ? "active" : ""
+              }`}
+              onClick={() => handleTeammatesSelection(true)}
             >
               Yes
             </button>
             <button
-              className={`submission-teammate-button ${hasTeammates === false ? "active" : ""}`}
+              className={`submission-teammate-button ${
+                hasTeammates === false ? "active" : ""
+              }`}
               onClick={() => handleTeammatesSelection(false)}
             >
               No
