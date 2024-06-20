@@ -79,6 +79,31 @@
   color: #c2c2c2;
   font-size: 1.4rem;
 }
+.profile-contest img {
+  width: 35%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-contest {
+  display: flex;
+  flex-direction: row;
+  /* align-items: center; */
+  margin-top: 1rem;
+  width: 100%;
+  max-width: 100%;
+}
+
+@media (min-width: 768px) {
+  .profile-contest {
+    flex: 1;
+  }
+
+  .profile-contest img {
+    height: auto;
+    max-height: 100%;
+  }
+}
 
 @media (max-width: 767px) {
   .search-container {

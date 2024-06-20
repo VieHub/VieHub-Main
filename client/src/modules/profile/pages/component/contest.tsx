@@ -27,9 +27,10 @@ const SingleContest: React.FC<{ contestId: string }> = ({ contestId }) => {
       ) : (
         <div className="contest-card profile-contest mx-4 my-4 flex overflow-hidden shadow-lg md:rounded-lg">
           <img
-            className="object-cover md:h-full md:w-1/4"
+            className="object-cover w-full h-48 md:h-full md:w-1/4"
             src={data.image_url || image}
             alt="Contest Image"
+            style={{ objectFit: "cover" }}
           />
           <div
             className="flex w-full flex-col px-6 py-4 md:w-3/4"
